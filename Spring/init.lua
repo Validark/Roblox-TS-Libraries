@@ -4,24 +4,6 @@
 -- @rostrap Spring
 -- @author fractality
 
-------------------------------------------------------------------------
--- API:
---   Spring Spring.new(double damp, double freq, vector pos)
---   void Spring:SetGoal(vector goal)
---   void Spring:SetFrequency(double freq)
---   void Spring:SetDampingRatio(double damp)
---   vector Spring:GetPosition()
---   vector Spring:GetVelocity()
---   vector Spring:Update(double deltaTime)
---   void Spring:Reset(vector state)
---
--- Notes:
---   The state vector type must implement the following metamethods:
---     vector __mul(vector, double)
---     vector __add(vector, vector)
---     vector __sub(vector, vector)
-------------------------------------------------------------------------
-
 local Spring = {}
 Spring.__index = {}
 

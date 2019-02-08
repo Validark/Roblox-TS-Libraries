@@ -1,0 +1,26 @@
+{
+  "name": "rbx-extendable-resources",
+  "version": "0.0.1",
+  "description": "An extendable object retrieval system.",
+  "main": "init.lua",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Validark/Roblox-TS-Libraries.git"
+  },
+  "keywords": [
+    "resources",
+    "roblox-typescript",
+    "RemoteEvents",
+    "RemoteFunctions",
+    "Remotes"
+  ],
+  "author": "Validark",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
+  },
+  "homepage": "https://github.com/Validark/Roblox-TS-Libraries#readme"
+}
