@@ -81,7 +81,7 @@ function Metatable:__index(MethodName)
 		end
 	else
 		if InstanceType == "Folder" then
-			FolderGetter = function() return script end
+			FolderGetter = function() return GetFirstChild(game:GetService("ReplicatedStorage"), "Resources", "Folder") end
 		else
 			FolderGetter = Resources.GetFolder
 		end
