@@ -62,7 +62,7 @@ end
 
 function Metatable:__index(MethodName)
 	if type(MethodName) ~= "string" then error("[Resources] Attempt to index Resources with invalid key: string expected, got " .. typeof(MethodName), 2) end
-	if MethodName:sub(1, 3) ~= "get" then error("[Resources] Methods should begin with \"get\"", 2) end
+	if MethodName:sub(1, 3) ~= "get" then error("[Resources] Methods should begin with \"get\", got: " .. tostring(MethodName), 2) end
 	local InstanceType = MethodName:sub(4)
 
 	-- Set CacheName to ["RemoteEvent" .. "s"], or ["Librar" .. "ies"]
@@ -77,13 +77,13 @@ function Metatable:__index(MethodName)
 		if InstanceType == "Folder" then
 			FolderGetter = function() return GetFirstChild(LocalResourcesLocation, "Resources", "Folder") end
 		else
-			FolderGetter = Resources.GetLocalFolder
+			FolderGetter = Resources.getLocalFolder
 		end
 	else
 		if InstanceType == "Folder" then
 			FolderGetter = function() return GetFirstChild(game:GetService("ReplicatedStorage"), "Resources", "Folder") end
 		else
-			FolderGetter = Resources.GetFolder
+			FolderGetter = Resources.getFolder
 		end
 	end
 

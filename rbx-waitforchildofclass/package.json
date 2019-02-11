@@ -1,0 +1,23 @@
+{
+  "name": "rbx-waitforchildofclass",
+  "version": "0.0.1",
+  "description": "Yielding until a child of a particular className exists",
+  "main": "init.lua",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Validark/Roblox-TS-Libraries.git"
+  },
+  "keywords": [
+    "roblox",
+    "WaitForChildOfClass"
+  ],
+  "author": "Validark",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
+  },
+  "homepage": "https://github.com/Validark/Roblox-TS-Libraries#readme"
+}

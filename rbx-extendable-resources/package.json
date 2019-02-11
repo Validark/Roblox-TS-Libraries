@@ -1,6 +1,6 @@
 {
 	"name": "rbx-extendable-resources",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "An extendable object retrieval system.",
 	"main": "init.lua",
 	"scripts": {
