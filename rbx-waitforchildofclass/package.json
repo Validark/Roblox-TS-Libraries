@@ -1,6 +1,6 @@
 {
 	"name": "rbx-waitforchildofclass",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Yielding until a child of a particular className exists",
 	"main": "init.lua",
 	"scripts": {
