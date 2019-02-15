@@ -9,19 +9,19 @@ local coroutine_resume = coroutine.resume
 local coroutine_running = coroutine.running
 
 local Cue = {}
-Cue.__index = {}
+Cue.__index = Cue
 
 function Cue.new()
 	return setmetatable({}, Cue)
 end
 
-function Cue.__index:go(...)
+function Cue:go(...)
 	for i = 1, #self do
 		coroutine_wrap(self[i])(...)
 	end
 end
 
-function Cue.__index:waitFor()
+function Cue:waitFor()
 	local Thread = coroutine_running()
 
 	local function Yield(...)
@@ -33,11 +33,11 @@ function Cue.__index:waitFor()
 	return coroutine_yield()
 end
 
-function Cue.__index:bind(Function)
+function Cue:bind(Function)
 	self[#self + 1] = Function
 end
 
-function Cue.__index:unbind(Function)
+function Cue:unbind(Function)
 	local n = #self
 
 	for i = 1, n do
@@ -49,7 +49,7 @@ function Cue.__index:unbind(Function)
 	end
 end
 
-function Cue.__index:destroy()
+function Cue:destroy()
 	for i = 1, #self do
 		self[i] = nil
 	end
