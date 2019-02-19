@@ -1,9 +1,8 @@
 /**
  * Formats a string with tags relating to the time and date. Functions just like the vanilla Lua os.date function, except padding can be toggled by inserting a '#' in the middle of the tag. For example, `%#H` would be replaced by the hour without padding.
  *
- * @param formatString template string to format. Defaults to "%c"
- * @param time seconds past Jan 1, 1970. Defaults to now.
- * @reference The following patterns will be replaced by their tags below:
+ * @param formatString template string to format. Defaults to "%c". If you place a "!" at the beginning of the string, it will be removed from the return string and will make the function treat the time parameter as being in the UTC time zone.
+ * The following patterns will be replaced by their tags below:
  * ```json
 %c : "%a %b %e %X %Y"
 %D : "%m/%d/%y"
@@ -44,13 +43,24 @@
 %y : two-digit year (98) [00, 99]
 %Y : full year (1998)
 %z : Time zone offset in the form [+-]%H%M, e.g. +0500```
+ * @param time Seconds past Jan 1, 1970. Defaults to now.
 */
 declare function date(formatString?: string, time?: number): string;
 
 /**
  * Returns a table with information about the time and date
- * @param formatString "*t" | "!*t"
- * @param time seconds past Jan 1, 1970. Defaults to now.
+ * @param formatString "*t" | "!*t" If you place a "!" at the beginning of the string, it will be removed from the return string and will make the function treat the time parameter as being in the UTC time zone.
+ * @param time Seconds past Jan 1, 1970. Defaults to now.
+ * @returns
+ * sec (0 to 59)
+ * min (0 to 59)
+ * hour (0 to 23)
+ * day (1 to 31)
+ * month (1 to 12)
+ * year (1900 onwards)
+ * wday (Sunday is 1, Monday is 2 etc.)
+ * yday (January 1st is 1, etc.)
+ * isdst (true if Daylight Savings Time)
  */
 declare function date(
   formatString: "*t" | "!*t",
