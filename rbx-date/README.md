@@ -1,4 +1,4 @@
-# [Date](https://github.com/RoStrap/Time/blob/master/Date.lua)
+# [Date](https://github.com/Validark/Roblox-TS-Libraries/tree/master/rbx-date)
 A reimplementation of the vanilla Lua os.date function built upon the one exposed by RobloxLua
 
 ```lua
