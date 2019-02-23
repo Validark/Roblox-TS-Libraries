@@ -1,0 +1,4 @@
+**/node_modules/**
+./node_modules/**
+**/.{git,svn,hg,lua}/**
+./.{git,svn,hg,lua}/**

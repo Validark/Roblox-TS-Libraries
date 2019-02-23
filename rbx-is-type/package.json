@@ -1,6 +1,6 @@
 {
   "name": "rbx-is-type",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple library for two-step type-narrowing",
   "main": "init.lua",
   "scripts": {
@@ -23,5 +23,5 @@
   "bugs": {
     "url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
   },
-  "homepage": "https://github.com/Validark/Roblox-TS-Libraries#readme"
+  "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/rbx-is-type/README.md"
 }

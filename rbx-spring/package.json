@@ -1,6 +1,6 @@
 {
 	"name": "rbx-spring",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Simulates the motion of a critically damped spring",
 	"main": "init.lua",
 	"scripts": {
@@ -19,5 +19,5 @@
 	"bugs": {
 		"url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
 	},
-	"homepage": "https://github.com/Validark/Roblox-TS-Libraries#readme"
+	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/rbx-spring/README.md"
 }

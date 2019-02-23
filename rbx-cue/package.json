@@ -1,6 +1,6 @@
 {
 	"name": "rbx-cue",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "The fastest and lightest Event object ever made",
 	"main": "init.lua",
 	"types": "index.d.ts",
@@ -24,5 +24,5 @@
 	"bugs": {
 		"url": "https://github.com/Validark/Cue/issues"
 	},
-	"homepage": "https://github.com/Validark/Cue#readme"
+	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/rbx-cue/README.md"
 }

@@ -1,13 +1,11 @@
 -- Simulates the motion of a critically damped spring
--- @documentation https://rostrap.github.io/Libraries/Math/Spring/
--- @source https://raw.githubusercontent.com/RoStrap/Math/master/Spring.lua
--- @rostrap Spring
--- @author fractality
+-- @original fractality
+-- @editor Validark
 
 local Spring = {}
-Spring.__index = {}
+Spring.__index = Spring
 
-local pi = math.pi
+local tau = math.pi * 2
 local exp = math.exp
 local sin = math.sin
 local cos = math.cos
@@ -15,33 +13,30 @@ local sqrt = math.sqrt
 
 local EPSILON = 1e-4
 
-function Spring.new(position, goal, dampingRatio, angularFrequency)
-	goal = goal or position
-	dampingRatio = dampingRatio or 1
+function Spring.new(position, angularFrequency, goal, dampingRatio)
 	angularFrequency = angularFrequency or 10
-	assert(dampingRatio * angularFrequency >= 0, "Spring does not converge")
+	dampingRatio = dampingRatio or 1
 
-	return setmetatable(
-		{
-			dampingRatio = dampingRatio,
-			angularFrequency = angularFrequency,
-			goal = goal,
-			position = position,
-			velocity = position * 0 -- Match the original vector type
-		},
-		Spring
-	)
+	if dampingRatio * angularFrequency < 0 then
+		error("Spring does not converge", 2)
+	end
+
+	return setmetatable({
+		goal = goal or position,
+		dampingRatio = dampingRatio,
+		angularFrequency = angularFrequency,
+	}, Spring):resetToPosition(position)
 end
 
-function Spring.__index:reset(position)
+function Spring:resetToPosition(position)
 	self.position = position
 	self.velocity = position * 0 -- Match the original vector type
 	return self
 end
 
-function Spring.__index:update(deltaTime)
+function Spring:update(deltaTime)
 	local dampingRatio = self.dampingRatio
-	local angularFrequency = self.angularFrequency * 2 * pi
+	local angularFrequency = self.angularFrequency * tau
 	local goal = self.goal
 	local p0 = self.position
 	local v0 = self.velocity
@@ -49,14 +44,11 @@ function Spring.__index:update(deltaTime)
 	local offset = p0 - goal
 	local decay = exp(-dampingRatio * angularFrequency * deltaTime)
 
-	local p1, v1
-
 	if dampingRatio == 1 then -- Critically damped
 		self.position = (offset * (1 + angularFrequency * deltaTime) + v0 * deltaTime) * decay + goal
 		self.velocity = (v0 * (1 - angularFrequency * deltaTime) - offset * (angularFrequency * angularFrequency * deltaTime)) * decay
 	elseif dampingRatio < 1 then -- Underdamped
 		local c = sqrt(1 - dampingRatio * dampingRatio)
-
 		local i = cos(angularFrequency * c * deltaTime)
 		local j = sin(angularFrequency * c * deltaTime)
 
