@@ -1,26 +1,26 @@
-# [Date](https://github.com/Validark/Roblox-TS-Libraries/tree/master/rbx-date)
+# Date
 
 A reimplementation of the vanilla Lua os.date function built upon the one exposed by RobloxLua
 
 Demo:
 
-```lua
--- ISO 8601:
-print(Date("%FT%T"))              -- 2020-01-01T01:03:05
-print(Date("%Y-%m-%dT%H:%M:%S"))  -- 2020-01-01T01:03:05
-print(Date("%FT%T%#z"))           -- 2020-01-01T01:03:05-05:00
+```ts
+// ISO 8601:
+print(Date("%FT%T")); // 2020-01-01T01:03:05
+print(Date("%Y-%m-%dT%H:%M:%S")); // 2020-01-01T01:03:05
+print(Date("%FT%T%#z")); // 2020-01-01T01:03:05-05:00
 
--- Time:
-print(Date("%T")) -- 08:37:43
+// Time:
+print(Date("%T")); // 08:37:43
 
--- Date:
-print(Date("%D")) -- 01/12/20
+// Date:
+print(Date("%D")); // 01/12/20
 ```
 
 `Date` functions just like the vanilla Lua `os.date` function, except padding can be toggled by inserting a '#' like so:
 
-```lua
-print(Date("%#x", os.time()))
+```ts
+print(Date("%#x", os.time()));
 ```
 
 Note that placing a `!` at the beginning of the string will make it consider the time input to be in the UTC time zone.
@@ -80,7 +80,7 @@ The following tags will be replaced as follows:
 
 Example:
 
-```lua
-print(Date("It is currently %#r"))
---> It is currently 11:41:20 am
+```ts
+print(Date("It is currently %#r"));
+// > It is currently 11:41:20 am
 ```
