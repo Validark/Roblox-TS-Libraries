@@ -1,6 +1,6 @@
 {
 	"name": "rbx-date",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"description": "A re-implementation of vanilla Lua's os.date function.",
 	"main": "init.lua",
 	"types": "index.d.ts",
