@@ -1,6 +1,6 @@
 {
 	"name": "rbx-extendable-resources",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "An extendable object retrieval system for defining folders.",
 	"main": "init.lua",
 	"typings": "init.d.ts",
@@ -25,5 +25,5 @@
 	"bugs": {
 		"url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
 	},
-	"homepage": "https://github.com/Validark/Roblox-TS-Libraries#readme"
+	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/rbx-extendable-resources/README.md"
 }
