@@ -1,8 +1,4 @@
 -- Time and Date formatter mimicking the vanilla os.date function
--- @readme https://github.com/RoStrap/Time/blob/master/README.md
--- @documentation https://rostrap.github.io/Libraries/Time/Date/
--- @source https://raw.githubusercontent.com/RoStrap/Time/master/Date.lua
--- @rostrap Date
 -- @author Validark
 
 local Suffixes = {"st", "nd", "rd"}

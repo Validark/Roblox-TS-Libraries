@@ -1,9 +1,6 @@
 # [Date](https://github.com/Validark/Roblox-TS-Libraries/tree/master/rbx-date)
-A reimplementation of the vanilla Lua os.date function built upon the one exposed by RobloxLua
 
-```lua
-local Date = Resources:LoadLibrary("Date")
-```
+A reimplementation of the vanilla Lua os.date function built upon the one exposed by RobloxLua
 
 Demo:
 
@@ -27,7 +24,8 @@ print(Date("%#x", os.time()))
 ```
 
 Note that placing a `!` at the beginning of the string will make it consider the time input to be in the UTC time zone.
-String reference:
+
+## String reference:
 
 ```
 The following patterns will be replaced by their tags below:
@@ -84,5 +82,5 @@ Example:
 
 ```lua
 print(Date("It is currently %#r"))
---> It is currently 1:41:20 am
+--> It is currently 11:41:20 am
 ```
