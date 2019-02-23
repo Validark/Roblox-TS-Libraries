@@ -15,15 +15,7 @@ local sort = table.sort
 local insert = table.insert
 
 local SortedArray = {}
-local Comparisons = setmetatable({}, {__mode = "k"})
-
 SortedArray.__index = {}
-
-for FunctionName, Function in next, TS do
-	if FunctionName:find("array_", 1, true) == 1 then
-		SortedArray.__index[FunctionName] = Function
-	end
-end
 
 SortedArray.__index.removeIndex = table.remove
 SortedArray.__index.forEach = TS.array_forEach
@@ -161,7 +153,7 @@ function SortedArray.__index:clone()
 		New[i] = self[i]
 	end
 
-	Comparisons[New] = self.Comparison
+	New.Comparison = self.Comparison
 	return setmetatable(New, SortedArray)
 end
 
