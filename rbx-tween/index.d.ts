@@ -29,6 +29,16 @@ type LerpableTypes =
  */
 interface PseudoTween {
 	/**
+	 * Whether the Tween is currenly interpolating
+	 */
+	readonly Running: boolean;
+
+	/**
+	 * How much time has elapsed on the Tween
+	 */
+	readonly ElapsedTime: number;
+
+	/**
 	 * The Play function starts the playback of its Tween.
 	 * Note: if a tween has already begun calling Play,
 	 * this will have no effect unless the tween has finished or has been stopped
