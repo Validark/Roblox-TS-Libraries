@@ -21,12 +21,12 @@ Here is the generalized form:
  * @param callback The function to call each tick
  * @param initialValue The starting value to interpolate to push into the callback function each tick. default=0
  * @param endValue The target value the initialValue should reach. default=1
- * @param extraValue1 An extra value to be passed into the easingFunction (builtin: amplitude/overshoot)
- * @param extraValue2 An extra value to be passed into the easingFunction (builtin: period)
+ * @param extraValue1 An extra value to be passed into the easingFunction
+ * @param extraValue2 An extra value to be passed into the easingFunction
  */
-declare function Tween<Q, T extends LerpableTypes = number>(
+declare function Tween<T extends LerpableTypes = number>(
 	totalDuration: number,
-	easingFunction: Q,
+	easingFunction: (delta: T) => void,
 	callback: (delta: T) => void,
 	initialValue?: T,
 	endValue?: T,

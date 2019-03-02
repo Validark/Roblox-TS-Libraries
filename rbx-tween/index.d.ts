@@ -1,68 +1,9 @@
-/**
- * Returns a value between [initialValue, initialValue + changeInValue] or [0, 1] that represents an in-between value
- * along a Bezier curve.
- * @param elapsedTime the time elapsed [0, d]
- * @param initialValue beginning value being interpolated (default = 0)
- * @param changeInValue change in value being interpolated (equivalent to: ending - beginning) (default = 1)
- * @param totalDuration duration interpolation is occurring over (default = 1)
- */
-type BezierEasingFunction = (
-	elapsedTime: number,
-	initialValue?: number,
-	changeInValue?: number,
-	totalDuration?: number,
-) => number;
-
-/**
- * Returns a value between [initialValue, initialValue + changeInValue] or [0, 1] that represents an in-between value
- * along a Bezier curve.
- * @param elapsedTime the time elapsed [0, d]
- * @param initialValue beginning value being interpolated (default = 0)
- * @param changeInValue change in value being interpolated (equivalent to: ending - beginning) (default = 1)
- * @param totalDuration duration interpolation is occurring over (default = 1)
- */
-type BasicEasingFunction = (
-	elapsedTime: number,
-	initialValue: number,
-	changeInValue: number,
-	totalDuration: number,
-) => number;
-
-/**
- * Returns a value between [initialValue, initialValue + changeInValue] or [0, 1] that represents an in-between value
- * along a Bezier curve.
- * @param elapsedTime the time elapsed [0, d]
- * @param initialValue beginning value being interpolated (default = 0)
- * @param changeInValue change in value being interpolated (equivalent to: ending - beginning) (default = 1)
- * @param totalDuration duration interpolation is occurring over (default = 1)
- * @param amplitude The amplitude of the curve
- * @param period The period of the curve
- */
-type PeriodicEasingFunction = (
-	elapsedTime: number,
-	initialValue: number,
-	changeInValue: number,
-	totalDuration: number,
-	amplitude: number,
-	period: number,
-) => number;
-
-/**
- * Returns a value between [initialValue, initialValue + changeInValue] or [0, 1] that represents an in-between value
- * along a Bezier curve.
- * @param elapsedTime the time elapsed [0, d]
- * @param initialValue beginning value being interpolated (default = 0)
- * @param changeInValue change in value being interpolated (equivalent to: ending - beginning) (default = 1)
- * @param totalDuration duration interpolation is occurring over (default = 1)
- * @param overshoot The overshoot of the curve
- */
-type OvershootEasingFunction = (
-	elapsedTime: number,
-	initialValue: number,
-	changeInValue: number,
-	totalDuration: number,
-	overshoot: number,
-) => number;
+import {
+	BasicEasingFunction,
+	BezierEasingFunction,
+	OvershootEasingFunction,
+	PeriodicEasingFunction,
+} from "rbx-easing-functions";
 
 type LerpableTypes =
 	| number
@@ -138,7 +79,7 @@ declare function Tween(
  */
 declare function Tween<T extends LerpableTypes>(
 	totalDuration: number,
-	easingFunction: BezierEasingFunction,
+	easingFunction: BasicEasingFunction | BezierEasingFunction | PeriodicEasingFunction,
 	callback: (delta: T) => void,
 	initialValue: T,
 	endValue: T,
@@ -162,8 +103,8 @@ declare function Tween<T extends LerpableTypes>(
 	callback: (delta: T) => void,
 	initialValue: T,
 	endValue: T,
-	amplitude?: number,
-	period?: number,
+	amplitude: number,
+	period: number,
 ): PseudoTween;
 
 /**
@@ -198,9 +139,9 @@ declare function Tween<T extends LerpableTypes>(
  * @param extraValue1 An extra value to be passed into the easingFunction
  * @param extraValue2 An extra value to be passed into the easingFunction
  */
-declare function Tween<Q, T extends LerpableTypes = number>(
+declare function Tween<T extends LerpableTypes = number>(
 	totalDuration: number,
-	easingFunction: Q,
+	easingFunction: (delta: T) => void,
 	callback: (delta: T) => void,
 	initialValue?: T,
 	endValue?: T,
