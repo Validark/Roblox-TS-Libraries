@@ -1,0 +1,33 @@
+{
+	"name": "rbx-tween",
+	"version": "0.0.1",
+	"description": "A library for writing efficient, simple interpolation code",
+	"main": "init.lua",
+	"typings": "index.d.ts",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/rbx-tween"
+	},
+	"keywords": [
+		"bezier",
+		"cubic-bezier",
+		"curve",
+		"interpolation",
+		"interpolate",
+		"easing",
+		"ease",
+		"lerp",
+		"tween",
+		"roblox"
+	],
+	"bundledDependencies": [],
+	"dependencies": {
+		"rbx-easing-functions": "^0.0.1"
+	},
+	"author": "Validark",
+	"license": "ISC",
+	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/rbx-tween/README.md"
+}
