@@ -1,6 +1,6 @@
 {
 	"name": "rbx-tween",
-	"version": "0.0.4",
+	"version": "0.0.6",
 	"description": "A library for writing efficient, simple interpolation code",
 	"main": "init.lua",
 	"typings": "index.d.ts",
@@ -25,7 +25,8 @@
 	],
 	"bundledDependencies": [],
 	"dependencies": {
-		"rbx-easing-functions": "^0.0.1"
+		"rbx-easing-functions": "^0.0.1",
+		"rbx-lerp-functions": "^0.0.1"
 	},
 	"author": "Validark",
 	"license": "ISC",

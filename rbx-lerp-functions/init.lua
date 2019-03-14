@@ -3,10 +3,10 @@ local function sortByTime(a, b)
 end
 
 -- Mostly ripped off from https://github.com/Fraktality/anim/blob/master/anim.lua
-local lerpType = {}
+local Lerps = {}
 
 -- bool
-function lerpType.bool(v0, v1)
+function Lerps.boolean(v0, v1)
 	return function(t)
 		if t < 0.5 then
 			return v0
@@ -17,7 +17,7 @@ function lerpType.bool(v0, v1)
 end
 
 -- number
-function lerpType.number(v0, v1)
+function Lerps.number(v0, v1)
 	local dv = v1 - v0
 	return function(t)
 		return v0 + dv*t
@@ -28,7 +28,7 @@ do -- Color3
 	local C3 = Color3.new
 	local black = C3(0, 0, 0)
 
-	function lerpType.Color3(c0, c1)
+	function Lerps.Color3(c0, c1)
 		local u0, v0, u1, v1, l0, l1
 
 		-- Convert from linear RGB to scaled CIELUV (RgbToLuv13)
@@ -185,7 +185,7 @@ do -- string
 	local s_format = string.format
 	local atof = tonumber
 
-	function lerpType.string(v0, v1)
+	function Lerps.string(v0, v1)
 		local n0, d do
 			local sign0, h0, m0, s0 = s_match(v0, '^([+-]?)(%d*):[+-]?(%d*):[+-]?(%d*)$')
 			local sign1, h1, m1, s1 = s_match(v1, '^([+-]?)(%d*):[+-]?(%d*):[+-]?(%d*)$')
@@ -216,7 +216,7 @@ end
 
 do -- CFrame
 	local Slerp = CFrame.new().lerp
-	function lerpType.CFrame(v0, v1)
+	function Lerps.CFrame(v0, v1)
 		return function(t)
 			return Slerp(v0, v1, t)
 		end
@@ -225,7 +225,7 @@ end
 
 do -- NumberRange
 	local NR = NumberRange.new
-	function lerpType.NumberRange(v0, v1)
+	function Lerps.NumberRange(v0, v1)
 		local min0, max0 = v0.Min, v0.Max
 		local dmin, dmax = v1.Min - min0, v1.Max - max0
 		v0, v1 = nil, nil
@@ -237,7 +237,7 @@ end
 
 do -- NumberSequenceKeypoint
 	local NSK = NumberSequenceKeypoint.new
-	function lerpType.NumberSequenceKeypoint(v0, v1)
+	function Lerps.NumberSequenceKeypoint(v0, v1)
 		local t0, v0, e0 = v0.Time, v0.Value, v0.Envelope
 		local dt, dv, de = v1.Time - t0, v1.Value - v0, v1.Envelope - e0
 		v1 = nil
@@ -249,7 +249,7 @@ end
 
 do -- PhysicalProperties
 	local PP = PhysicalProperties.new
-	function lerpType.PhysicalProperties(v0, v1)
+	function Lerps.PhysicalProperties(v0, v1)
 		local d0, e0, ew0, f0, fw0 =
 			v0.Density,
 			v0.Elasticity,
@@ -272,7 +272,7 @@ end
 do -- Ray
 	local R = Ray.new
 	local V3 = Vector3.new
-	function lerpType.Ray(v0, v1)
+	function Lerps.Ray(v0, v1)
 		local o0, d0, o1, d1 =
 			v0.Origin, v0.Direction,
 			v1.Origin, v1.Direction
@@ -296,7 +296,7 @@ end
 do
 	newRect = Rect.new
 
-	function lerpType.Rect(v0, v1)
+	function Lerps.Rect(v0, v1)
 		local sc, of = v0.Min.X, v0.Min.Y
 		local dsc, dof = v1.Min.X - sc, v1.Min.Y - of
 		local sc2, of2 = v0.Max.X, v0.Max.Y
@@ -314,7 +314,7 @@ end
 
 do -- UDim
 	local UD = UDim.new
-	function lerpType.UDim(v0, v1)
+	function Lerps.UDim(v0, v1)
 		local sc, of = v0.Scale, v0.Offset
 		local dsc, dof = v1.Scale - sc, v1.Offset - of
 		v0, v1 = nil, nil
@@ -326,7 +326,7 @@ end
 
 do -- UDim2
 	local Lerp = UDim2.new().Lerp
-	function lerpType.UDim2(v0, v1)
+	function Lerps.UDim2(v0, v1)
 		return function(t)
 			return Lerp(v0, v1, t)
 		end
@@ -335,7 +335,7 @@ end
 
 do -- Vector2
 	local V2 = Vector2.new
-	function lerpType.Vector2(v0, v1)
+	function Lerps.Vector2(v0, v1)
 		local x, y = v0.x, v0.y
 		local dx, dy = v1.x - x, v1.y - y
 		v0, v1 = nil, nil
@@ -347,7 +347,7 @@ end
 
 do -- Vector3
 	local V3 = Vector3.new
-	function lerpType.Vector3(v0, v1)
+	function Lerps.Vector3(v0, v1)
 		local x, y, z = v0.x, v0.y, v0.z
 		local dx, dy, dz = v1.x - x, v1.y - y, v1.z - z
 		v0, v1 = nil, nil
@@ -359,9 +359,9 @@ end
 
 do -- ColorSequence
 	local newColorSequence = ColorSequence.new
-	local Color3Lerp = lerpType.Color3
+	local Color3Lerp = Lerps.Color3
 
-	function lerpType.ColorSequence(start, finish)
+	function Lerps.ColorSequence(start, finish)
 		local l1 = Color3Lerp(start[1], finish[1])
 		local l2 = Color3Lerp(start[2], finish[2])
 
@@ -375,7 +375,7 @@ do -- Region3
 	local newRegion3 = Region3.new
 	local newVector3 = Vector3.new
 
-	function lerpType.Region3(start, finish) -- @author Sharksie
+	function Lerps.Region3(start, finish) -- @author Sharksie
 		local start1 = start.CFrame * (-start.Size*0.5)
 		local start2 = start.CFrame * ( start.Size*0.5)
 
@@ -435,7 +435,7 @@ do -- Region3
 end
 
 do
-	function lerpType.NumberSequence(start, finish)
+	function Lerps.NumberSequence(start, finish)
 		return function(alpha)
 			-- @author Sharksie
 
@@ -516,6 +516,4 @@ do
 	end
 end
 
-table.foreach(lerpType, print)
-
-return lerpType
+return Lerps

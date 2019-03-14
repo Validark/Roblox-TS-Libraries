@@ -5,31 +5,31 @@ import {
 	PeriodicEasingFunction,
 } from "rbx-easing-functions";
 
-type LerpableTypes =
+type LerpFunctions =
+	| string
 	| number
+	| boolean
 	| Region3
 	| CFrame
 	| UDim2
 	| UDim
-	| boolean
-	| PhysicalProperties
-	| NumberSequence
-	| string
 	| Ray
 	| Rect
 	| Color3
 	| Vector2
-	| ColorSequence
 	| Vector3
-	| NumberSequenceKeypoint
-	| NumberRange;
+	| NumberRange
+	| ColorSequence
+	| NumberSequence
+	| PhysicalProperties
+	| NumberSequenceKeypoint;
 
 /**
  * A Tween Object
  */
-interface PseudoTween {
+export interface PseudoTween {
 	/**
-	 * Whether the Tween is currenly interpolating
+	 * Whether the Tween is currently interpolating
 	 */
 	readonly Running: boolean;
 
@@ -71,7 +71,7 @@ interface PseudoTween {
  * @param easingFunction The easingFunction to call each tick
  * @param callback The function to call each tick
  */
-declare function Tween(
+export declare function Tween(
 	totalDuration: number,
 	easingFunction: BasicEasingFunction | BezierEasingFunction | PeriodicEasingFunction,
 	callback: (delta: number) => void,
@@ -87,7 +87,7 @@ declare function Tween(
  * @param initialValue The starting value to interpolate to push into the callback function each tick.
  * @param endValue The target value the initialValue should reach.
  */
-declare function Tween<T extends LerpableTypes>(
+export declare function Tween<T extends LerpFunctions>(
 	totalDuration: number,
 	easingFunction: BasicEasingFunction | BezierEasingFunction | PeriodicEasingFunction,
 	callback: (delta: T) => void,
@@ -107,7 +107,7 @@ declare function Tween<T extends LerpableTypes>(
  * @param amplitude The amplitude of the curve
  * @param period The period of the curve
  */
-declare function Tween<T extends LerpableTypes>(
+export declare function Tween<T extends LerpFunctions>(
 	totalDuration: number,
 	easingFunction: PeriodicEasingFunction,
 	callback: (delta: T) => void,
@@ -128,7 +128,7 @@ declare function Tween<T extends LerpableTypes>(
  * @param endValue The target value the initialValue should reach.
  * @param overstep The overstep of the curve
  */
-declare function Tween<T extends LerpableTypes>(
+export declare function Tween<T extends LerpFunctions>(
 	totalDuration: number,
 	easingFunction: OvershootEasingFunction,
 	callback: (delta: T) => void,
@@ -149,7 +149,7 @@ declare function Tween<T extends LerpableTypes>(
  * @param extraValue1 An extra value to be passed into the easingFunction
  * @param extraValue2 An extra value to be passed into the easingFunction
  */
-declare function Tween<T extends LerpableTypes = number>(
+export declare function Tween<T extends LerpFunctions = number>(
 	totalDuration: number,
 	easingFunction: (delta: T) => void,
 	callback: (delta: T) => void,
@@ -159,4 +159,4 @@ declare function Tween<T extends LerpableTypes = number>(
 	extraValue2?: any,
 ): PseudoTween;
 
-export = Tween;
+export default Tween;

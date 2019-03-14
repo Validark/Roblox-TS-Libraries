@@ -1,4 +1,10 @@
-local Lerps = require(script.lerps);
+local Lerps = script.Parent:FindFirstChild("rbx-lerp-functions")
+
+if Lerps then
+	Lerps = require(Lerps)
+else
+	error("[rbx-tween-functions] Please install rbx-lerp-functions to use this library.")
+end
 
 local Tween = {
 	Running = false;
@@ -54,7 +60,7 @@ function Tween:Wait()
 	return self
 end
 
-return function(Duration, EasingFunction, Callback, InitialValue, EndValue, v1, v2)
+local function MakeTween(Duration, EasingFunction, Callback, InitialValue, EndValue, v1, v2)
 	if InitialValue == nil then
 		InitialValue = 0
 		EndValue = 1
@@ -86,3 +92,8 @@ return function(Duration, EasingFunction, Callback, InitialValue, EndValue, v1, 
 
 	return self:Play()
 end
+
+return {
+	Tween = MakeTween;
+	_default = MakeTween;
+}
