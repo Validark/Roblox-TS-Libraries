@@ -2,12 +2,6 @@
 -- Pretty straightforward
 -- @author Validark
 
--- Micro-optimizations
-local coroutine_wrap = coroutine.wrap
-local coroutine_yield = coroutine.yield
-local coroutine_resume = coroutine.resume
-local coroutine_running = coroutine.running
-
 local Cue = {}
 Cue.__index = Cue
 
@@ -17,20 +11,20 @@ end
 
 function Cue:go(...)
 	for i = 1, #self do
-		coroutine_wrap(self[i])(...)
+		coroutine.wrap(self[i])(...)
 	end
 end
 
 function Cue:waitFor()
-	local Thread = coroutine_running()
+	local Thread = coroutine.running()
 
 	local function Yield(...)
 		self:unbind(Yield)
-		coroutine_resume(Thread, ...)
+		coroutine.resume(Thread, ...)
 	end
 
 	self[#self + 1] = Yield
-	return coroutine_yield()
+	return coroutine.yield()
 end
 
 function Cue:bind(Function)
