@@ -43,9 +43,10 @@ function Spring:update(deltaTime)
 
 	local offset = p0 - goal
 	local decay = exp(-dampingRatio * angularFrequency * deltaTime)
+	local position
 
 	if dampingRatio == 1 then -- Critically damped
-		self.position = (offset * (1 + angularFrequency * deltaTime) + v0 * deltaTime) * decay + goal
+		position = (offset * (1 + angularFrequency * deltaTime) + v0 * deltaTime) * decay + goal
 		self.velocity = (v0 * (1 - angularFrequency * deltaTime) - offset * (angularFrequency * angularFrequency * deltaTime)) * decay
 	elseif dampingRatio < 1 then -- Underdamped
 		local c = sqrt(1 - dampingRatio * dampingRatio)
@@ -87,7 +88,7 @@ function Spring:update(deltaTime)
 			y = deltaTime + ((deltaTime * deltaTime) * (b * b) * (b * b) / 20 - b * b) * (deltaTime * deltaTime * deltaTime) / 6
 		end
 
-		self.position = (offset * (i + dampingRatio * z) + v0 * y) * decay + goal
+		position = (offset * (i + dampingRatio * z) + v0 * y) * decay + goal
 		self.velocity = (v0 * (i - z * dampingRatio) - offset * (z * angularFrequency)) * decay
 	else -- Overdamped
 		local c = sqrt(dampingRatio * dampingRatio - 1)
@@ -101,11 +102,12 @@ function Spring:update(deltaTime)
 		local e1 = co1 * exp(r1 * deltaTime)
 		local e2 = co2 * exp(r2 * deltaTime)
 
-		self.position = e1 + e2 + goal
+		position = e1 + e2 + goal
 		self.velocity = e1 * r1 + e2 * r2
 	end
 
-	return self
+	self.position = position
+	return position
 end
 
 return Spring

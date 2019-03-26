@@ -8,6 +8,8 @@ interface Spring<T> {
 	// spring methods/properties
 	dampingRatio: number;
 	angularFrequency: number;
+
+	/** The value the spring makes its way towards */
 	goal: T;
 
 	/**
@@ -25,22 +27,18 @@ interface Spring<T> {
 	/**
 	 * The tick or stepping function for this spring.
 	 * @param deltaTime the change in time since the last call
+	 * @returns position
 	 */
-	update(deltaTime: number): this;
+	update(deltaTime: number): T;
 }
 
-interface SpringConstructor {
-	/**
-	 * Creates a new critically damped spring.
-	 * @param position The position to set the spring to
-	 * @param angularFrequency The angular frequency of the spring
-	 * @param goal The target of the Spring
-	 * @param dampingRatio The damping ratio of the spring
-	 */
-
-	new <T>(position: T, angularFrequency?: number, goal?: T, dampingRatio?: number): Spring<T>;
-}
-
-declare const Spring: SpringConstructor;
+/**
+ * Creates a new critically damped spring.
+ * @param position The position to set the spring to
+ * @param angularFrequency The angular frequency of the spring
+ * @param goal The target of the Spring
+ * @param dampingRatio The damping ratio of the spring
+ */
+declare const Spring: new <T>(position: T, angularFrequency?: number, goal?: T, dampingRatio?: number) => Spring<T>;
 
 export = Spring;

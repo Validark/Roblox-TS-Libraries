@@ -1,6 +1,6 @@
 {
 	"name": "rbx-spring",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "Simulates the motion of a critically damped spring",
 	"main": "init.lua",
 	"scripts": {
