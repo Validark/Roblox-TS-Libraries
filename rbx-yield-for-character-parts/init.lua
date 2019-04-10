@@ -157,7 +157,7 @@ local yieldForR15CharacterDescendants = function(character)
 	character:WaitForChild("Body Colors");
 	return character;
 end;
-_exports._default = yieldForR15CharacterDescendants;
+_exports.yieldForR15CharacterDescendants = yieldForR15CharacterDescendants;
 _exports.yieldForR6CharacterDescendants = yieldForR6CharacterDescendants;
 _exports._default = yieldForR15CharacterDescendants;
 return _exports;
