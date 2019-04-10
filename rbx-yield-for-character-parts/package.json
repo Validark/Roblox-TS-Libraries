@@ -1,0 +1,30 @@
+{
+  "name": "rbx-yield-for-character-parts",
+  "version": "0.0.0",
+  "description": "Yield until all members of a character rig exist, then dot access!",
+  "main": "init.lua",
+  "types": "index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Validark/Roblox-TS-Libraries.git"
+  },
+  "keywords": [
+    "character",
+    "dot",
+    "Roblox",
+    "Player",
+    "yield",
+    "wait",
+    "members",
+    "parts"
+  ],
+  "author": "Validark",
+  "license": "ISC",
+  "bugs": {
+	"url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
+  },
+  "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/rbx-yield-for-character-parts/README.md"
+}
