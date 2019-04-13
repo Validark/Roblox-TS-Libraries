@@ -200,7 +200,7 @@ export type CharacterRigR6 = Model & {
 	["Body Colors"]: BodyColors;
 };
 
-export function yieldForR6CharacterDescendants(character: Model) {
+export async function yieldForR6CharacterDescendants(character: Model) {
 	const Head = character.WaitForChild("Head");
 	Head.WaitForChild("FaceCenterAttachment");
 	Head.WaitForChild("FaceFrontAttachment");
@@ -255,7 +255,7 @@ export function yieldForR6CharacterDescendants(character: Model) {
 }
 
 /** Yields until every member of CharacterRigR15 exists */
-export function yieldForR15CharacterDescendants(character: Model) {
+export async function yieldForR15CharacterDescendants(character: Model) {
 	const HumanoidRootPart = character.WaitForChild("HumanoidRootPart");
 	HumanoidRootPart.WaitForChild("RootRigAttachment").WaitForChild("OriginalPosition");
 	HumanoidRootPart.WaitForChild("OriginalSize");

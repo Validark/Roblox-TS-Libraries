@@ -168,7 +168,7 @@ export declare type CharacterRigR6 = Model & {
     Pants: Pants;
     ["Body Colors"]: BodyColors;
 };
-export declare function yieldForR6CharacterDescendants(character: Model): CharacterRigR6;
+export declare function yieldForR6CharacterDescendants(character: Model): Promise<CharacterRigR6>;
 /** Yields until every member of CharacterRigR15 exists */
-export declare function yieldForR15CharacterDescendants(character: Model): CharacterRigR15;
+export declare function yieldForR15CharacterDescendants(character: Model): Promise<CharacterRigR15>;
 export default yieldForR15CharacterDescendants;
