@@ -3,6 +3,12 @@
  */
 interface Signal<T = () => void, P = false> {
 	/**
+	 * Fires the BindableEvent with any number of arguments
+	 * @param args
+	 */
+	Fire(...args: FunctionArguments<T>): void;
+
+	/**
 	 * Connects a callback to BindableEvent.Event
 	 * @param callback The callback to connect to BindableEvent.Event
 	 */
@@ -16,21 +22,11 @@ interface Signal<T = () => void, P = false> {
 	Wait(): FunctionArguments<T>;
 
 	/**
-	 * Fires the BindableEvent with any number of arguments
-	 * @param arguments
-	 */
-	Fire(...arguments: Array<unknown>): void;
-
-	/**
 	 * Destroys the Signal
 	 */
 	Destroy(): void;
 }
 
-interface SignalConstructor {
-	new (): Signal;
-}
-
-declare const Signal: SignalConstructor;
+declare const Signal: new () => Signal;
 
 export = Signal;
