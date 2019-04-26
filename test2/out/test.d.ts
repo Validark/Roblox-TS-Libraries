@@ -14,7 +14,7 @@ declare class Signal<T = () => void, P = false> {
     /**
      * Yields the current thread until the thread is fired.
      */
-    Wait(): FunctionArguments<T>;
+    Wait(): LuaTuple<FunctionArguments<T>>;
     /**
      * Destroys the Signal
      */
@@ -23,7 +23,8 @@ declare class Signal<T = () => void, P = false> {
 declare type InternalCheckedSignal = Signal<(isChecked: boolean) => void, false>;
 declare type CheckedSignal = Unpick<Signal<(isChecked: boolean) => void, false>, "Fire">;
 declare class Checkbox {
-    Checked: CheckedSignal;
+    OnChecked: CheckedSignal;
     SetChecked(checked: boolean): void;
 }
-declare function Make<T extends keyof Instance>(className: T, props: Optional<GetProperties<Instances[T]>>): void;
+declare const checkbox: Checkbox;
+declare const foo: boolean;
