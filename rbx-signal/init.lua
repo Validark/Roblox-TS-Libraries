@@ -27,7 +27,6 @@ end
 
 function Signal:Destroy()
 	self.Bindable:Destroy()
-	self.Bindable = nil
 end
 
 return Signal

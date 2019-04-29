@@ -1,39 +1,41 @@
 /** A lightweight custom event library */
-interface Cue<T = () => void, P = false> {
+interface Cue<BoundFunctionSignature = () => void, Generic = false> {
 	/**
-	 * Fires all bound functions and resumes all yielding threads
+	 * Gives a cue to fire all bound functions and resume all yielding threads.
 	 * @param args The arguments to pass into bound functions
 	 */
-	go(...args: FunctionArguments<T>): void;
+	go(...args: FunctionArguments<BoundFunctionSignature>): void;
 
 	/**
-	 * Yields the current thread until this event fires
-	 * @returns arguments from fire
+	 * Binds a function to be run on cue.
+	 * @param callback The function which should be called when the event fires
 	 */
-	waitFor(): FunctionArguments<T>;
-
-	/**
-	 * Runs a function on cue
-	 * @param Callback The function which should be called when the event fires
-	 */
-	bind<O extends Array<unknown> = FunctionArguments<T>>(
-		callback: P extends true ? (FunctionArguments<T> extends Array<unknown> ? (...args: O) => void : T) : T,
+	bind<O extends Array<unknown> = FunctionArguments<BoundFunctionSignature>>(
+		callback: Generic extends true
+			? (FunctionArguments<BoundFunctionSignature> extends Array<unknown>
+					? (...args: O) => void
+					: BoundFunctionSignature)
+			: BoundFunctionSignature,
 	): void;
 
 	/**
-	 * Unbinds a function from this event
-	 * @param Callback The function which, if bound, will be unbound from the event
+	 * Unbinds a function from being run on cue.
+	 * @param callback The function which, if bound, will be unbound from the event
 	 */
-	unbind<O extends Array<unknown> = FunctionArguments<T>>(
-		callback: P extends true ? (FunctionArguments<T> extends Array<unknown> ? (...args: O) => void : T) : T,
+	unbind<O extends Array<unknown> = FunctionArguments<BoundFunctionSignature>>(
+		callback: Generic extends true
+			? (FunctionArguments<BoundFunctionSignature> extends Array<unknown>
+					? (...args: O) => void
+					: BoundFunctionSignature)
+			: BoundFunctionSignature,
 	): void;
 
 	/**
-	 * Unbinds all functions from this event in preparation for garbage-collection
+	 * Unbinds all functions from this event, especially in preparation for garbage-collection.
 	 */
-	destroy(): void;
+	unbindAll(): void;
 }
 
-declare const Cue: new () => Cue;
+declare const Cue: new <BoundFunctionSignature = () => void, Generic = false>() => Cue<BoundFunctionSignature, Generic>;
 
 export = Cue;

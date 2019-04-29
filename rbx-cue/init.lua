@@ -15,18 +15,6 @@ function Cue:go(...)
 	end
 end
 
-function Cue:waitFor()
-	local Thread = coroutine.running()
-
-	local function Yield(...)
-		self:unbind(Yield)
-		coroutine.resume(Thread, ...)
-	end
-
-	self[#self + 1] = Yield
-	return coroutine.yield()
-end
-
 function Cue:bind(Function)
 	self[#self + 1] = Function
 end
@@ -43,7 +31,7 @@ function Cue:unbind(Function)
 	end
 end
 
-function Cue:destroy()
+function Cue:unbindAll()
 	for i = 1, #self do
 		self[i] = nil
 	end
