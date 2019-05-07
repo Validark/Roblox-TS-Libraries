@@ -7,15 +7,11 @@ FastSpawnerEvent.Event:Connect(function(callback, argsPointer)
 	callback(argsPointer())
 end)
 
-local function createPointer(...)
-	local args = { ... }
-	return function()
-		return unpack(args)
-	end
-end
-
 local function FastSpawn(callback, ...)
-	FastSpawnerEvent:Fire(callback, createPointer(...))
+	local args = { ... }
+	FastSpawnerEvent:Fire(callback, function()
+		return unpack(args)
+	end)
 end
 
 return FastSpawn
