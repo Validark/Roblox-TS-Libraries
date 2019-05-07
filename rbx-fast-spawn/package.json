@@ -1,6 +1,6 @@
 {
   "name": "rbx-fast-spawn",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Spawns a new thread without waiting one step",
   "main": "init.lua",
   "types": "index.d.ts",
