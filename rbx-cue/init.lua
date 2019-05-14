@@ -5,13 +5,16 @@
 local Cue = {}
 Cue.__index = Cue
 
+local setmetatable = setmetatable
+
 function Cue.new()
 	return setmetatable({}, Cue)
 end
 
 function Cue:go(...)
 	for i = 1, #self do
-		coroutine.wrap(self[i])(...)
+		local routine = coroutine.create(self[i])
+		coroutine.resume(routine, ...)
 	end
 end
 
