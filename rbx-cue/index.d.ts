@@ -1,7 +1,7 @@
 /** A lightweight custom event library */
 interface Cue<BoundFunctionSignature = () => void, Generic = false> {
 	/**
-	 * Gives a cue to fire all bound functions and resume all yielding threads.
+	 * Gives a cue to fire all bound functions.
 	 * @param args The arguments to pass into bound functions
 	 */
 	go(...args: FunctionArguments<BoundFunctionSignature>): void;
