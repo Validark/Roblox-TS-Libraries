@@ -11,7 +11,7 @@ end
 
 function Cue:go(...)
 	for i = 1, #self do
-		coroutine.wrap(self[i])(...)
+		coroutine.resume(coroutine.create(self[i]), ...)
 	end
 end
 

@@ -1,6 +1,6 @@
 {
 	"name": "rbx-cue",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"description": "The fastest and lightest Event object ever made",
 	"main": "init.lua",
 	"types": "index.d.ts",

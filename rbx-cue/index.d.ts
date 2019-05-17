@@ -11,7 +11,7 @@ interface Cue<BoundFunctionSignature = () => void, Generic = false> {
 	 * @param callback The function which should be called when the event fires
 	 */
 	bind<O extends Array<unknown> = FunctionArguments<BoundFunctionSignature>>(
-		callback: Generic extends true
+		callback?: Generic extends true
 			? (FunctionArguments<BoundFunctionSignature> extends Array<unknown>
 					? (...args: O) => void
 					: BoundFunctionSignature)
@@ -23,7 +23,7 @@ interface Cue<BoundFunctionSignature = () => void, Generic = false> {
 	 * @param callback The function which, if bound, will be unbound from the event
 	 */
 	unbind<O extends Array<unknown> = FunctionArguments<BoundFunctionSignature>>(
-		callback: Generic extends true
+		callback?: Generic extends true
 			? (FunctionArguments<BoundFunctionSignature> extends Array<unknown>
 					? (...args: O) => void
 					: BoundFunctionSignature)
