@@ -1,6 +1,6 @@
 {
   "name": "rbx-object-stack",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A Stack data structure which is formed by creating a singly linked-list on already existing objects.",
   "main": "init.lua",
   "types": "index.d.ts",

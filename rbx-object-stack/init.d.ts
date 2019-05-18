@@ -28,7 +28,11 @@ declare class ObjectStack<
 
 	/** Returns an iterator which iterates through the stack from top to bottom.
 	 *
-	 * For optimal use, one can copy and paste the for loop contained in this function.
+	 * For optimal use, one can copy and paste this for loop:
+	 *
+	 * ```ts
+for (let current = this.top; current; current = current.previousNode)
+```
 	 */
 	public iterate(): IterableIterator<T>;
 }

@@ -7,6 +7,8 @@ See the [index.d.ts file](https://github.com/Validark/Roblox-TS-Libraries/blob/m
 Demo:
 
 ```ts
+import ObjectStack from "rbx-object-stack";
+
 interface Token {
 	type: "a" | "b" | "c";
 	previousNode?: Token;
