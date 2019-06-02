@@ -1,0 +1,31 @@
+{
+	"name": "@rbxts/date",
+	"version": "1.0.0",
+	"description": "A re-implementation of vanilla Lua's os.date function.",
+	"main": "init.lua",
+	"types": "index.d.ts",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/date"
+	},
+	"keywords": [
+		"date",
+		"time",
+		"roblox",
+		"roblox-typescript",
+		"string",
+		"formatter"
+	],
+	"author": "Validark",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Validark/Roblox-TS-libraries/issues"
+	},
+	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/date/README.md",
+	"publishConfig": {
+		"access": "public"
+	}
+}

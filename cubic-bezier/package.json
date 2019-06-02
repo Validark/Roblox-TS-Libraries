@@ -1,0 +1,35 @@
+{
+	"name": "@rbxts/cubic-bezier",
+	"version": "1.0.2",
+	"description": "A library for generating smooth two-dimensional interpolation curves",
+	"main": "init.lua",
+	"types": "index.d.ts",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/cubic-bezier"
+	},
+	"keywords": [
+		"bezier",
+		"cubic-bezier",
+		"curve",
+		"interpolation",
+		"interpolate",
+		"easing",
+		"ease",
+		"lerp",
+		"tween",
+		"roblox"
+	],
+	"author": "Validark",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
+	},
+	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/cubic-bezier/README.md",
+	"publishConfig": {
+		"access": "public"
+	}
+}

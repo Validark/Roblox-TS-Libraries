@@ -1,0 +1,31 @@
+{
+	"name": "@rbxts/cue",
+	"version": "1.0.0",
+	"description": "The fastest and lightest Event object ever made",
+	"main": "init.lua",
+	"types": "index.d.ts",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/cue"
+	},
+	"keywords": [
+		"Roblox",
+		"TypeScript",
+		"roblox-TS",
+		"event",
+		"signal",
+		"connection"
+	],
+	"author": "Validark",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
+	},
+	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/cue/README.md",
+	"publishConfig": {
+		"access": "public"
+	}
+}
