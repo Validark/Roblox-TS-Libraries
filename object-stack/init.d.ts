@@ -1,5 +1,3 @@
-/// <reference types="rbx-types" />
-
 /** A Stack data structure which is formed by creating a singly linked-list on already existing objects.
  *
  * Simply allow a `previousNode` field in the Object type which can point to another object of the same type.

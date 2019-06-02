@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "An extendable object retrieval system for defining folders.",
 	"main": "init.lua",
-	"typings": "init.d.ts",
+	"types": "init.d.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},

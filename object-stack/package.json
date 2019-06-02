@@ -1,25 +1,34 @@
 {
-  "name": "rbx-object-stack",
-  "version": "0.0.1",
-  "description": "A Stack data structure which is formed by creating a singly linked-list on already existing objects.",
-  "main": "init.lua",
-  "types": "index.d.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Validark/Roblox-TS-Libraries.git"
-  },
-  "keywords": [
-    "Roblox",
-    "TypeScript",
-    "Stack",
-    "Data structures"
-  ],
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
-  },
-  "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/rbx-object-stack/README.md"
+    "name": "@rbxts/object-stack",
+    "version": "1.0.0",
+    "description": "A Stack data structure which is formed by creating a singly linked-list on already existing objects.",
+    "main": "init.lua",
+    "types": "index.d.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/object-stack"
+    },
+    "keywords": [
+        "Roblox",
+        "TypeScript",
+        "Stack",
+        "Data structures"
+    ],
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
+    },
+    "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/object-stack/README.md",
+    "publishConfig": {
+        "access": "public"
+    },
+    "peerDependencies": {
+        "@rbxts/types": "^1.0.194"
+    },
+    "dependencies": {
+        "@rbxts/types": "^1.0.194"
+    }
 }

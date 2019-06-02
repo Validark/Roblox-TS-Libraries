@@ -1,9 +1,9 @@
 {
-    "name": "rbx-lerp-functions",
-    "version": "0.0.3",
+    "name": "@rbxts/lerp-functions",
+    "version": "1.0.0",
     "description": "Interpolation functions",
     "main": "init.lua",
-    "typings": "index.d.ts",
+    "types": "index.d.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
@@ -24,7 +24,10 @@
         "url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/lerp-functions"
     },
     "author": "Validark",
-    "license": "ISC",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
+	},
     "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/lerp-functions/README.md",
     "dependencies": {
         "@rbxts/types": "^1.0.194"

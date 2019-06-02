@@ -1,27 +1,33 @@
 {
-  "name": "rbx-signal",
-  "version": "0.0.3",
-  "description": "BindableEvent wrapper which passes values by reference",
-  "main": "init.lua",
-  "types": "index.d.ts",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Validark/Roblox-TS-Libraries.git"
-  },
-  "keywords": [
-    "Roblox",
-    "TypeScript",
-    "Signal",
-    "BindableEvent",
-    "Bindable",
-    "Bind"
-  ],
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
-  },
-  "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/rbx-signal/README.md"
+    "name": "@rbxts/signal",
+    "version": "1.0.0",
+    "description": "BindableEvent wrapper which passes values by reference",
+    "main": "init.lua",
+    "types": "index.d.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/signal"
+    },
+    "keywords": [
+        "Roblox",
+        "TypeScript",
+        "Signal",
+        "BindableEvent",
+        "Bindable",
+        "Bind"
+    ],
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
+    },
+    "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/signal/README.md",
+    "peerDependencies": {
+        "@rbxts/types": "^1.0.194"
+    },
+    "publishConfig": {
+        "access": "public"
+    }
 }

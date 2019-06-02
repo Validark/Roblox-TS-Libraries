@@ -1,23 +1,27 @@
 {
-	"name": "rbx-spring",
-	"version": "0.0.4",
-	"description": "Simulates the motion of a critically damped spring",
-	"main": "init.lua",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/Validark/Roblox-TS-Libraries.git"
-	},
-	"keywords": [
-		"spring",
-		"roblox-TypeScript"
-	],
-	"author": "fractality",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
-	},
-	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/rbx-spring/README.md"
+    "name": "@rbxts/spring",
+    "version": "1.0.0",
+    "description": "Simulates the motion of a critically damped spring",
+    "main": "init.lua",
+    "types": "index.d.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/spring"
+    },
+    "keywords": [
+        "spring",
+        "roblox-TypeScript"
+    ],
+    "author": "fractality",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
+    },
+    "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/spring/README.md",
+    "publishConfig": {
+        "access": "public"
+    }
 }

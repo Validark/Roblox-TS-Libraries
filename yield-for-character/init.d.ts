@@ -1,3 +1,4 @@
+/// <reference types="@rbxts/types" />
 interface HasOriginalSize {
     /** The original size of this Part, according to the HumanoidDescription */
     OriginalSize: Vector3Value;

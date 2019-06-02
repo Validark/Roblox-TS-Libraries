@@ -1,9 +1,5 @@
-import {
-	BasicEasingFunction,
-	BezierEasingFunction,
-	OvershootEasingFunction,
-	PeriodicEasingFunction,
-} from "rbx-easing-functions";
+import Bezier from "@rbxts/cubic-bezier";
+import { BasicEasingFunction, OvershootEasingFunction, PeriodicEasingFunction } from "@rbxts/easing-functions";
 
 type LerpFunctions =
 	| string
@@ -73,7 +69,7 @@ export interface PseudoTween {
  */
 export declare function Tween(
 	totalDuration: number,
-	easingFunction: BasicEasingFunction | BezierEasingFunction | PeriodicEasingFunction,
+	easingFunction: BasicEasingFunction | Bezier | PeriodicEasingFunction,
 	callback: (delta: number) => void,
 ): PseudoTween;
 
@@ -89,7 +85,7 @@ export declare function Tween(
  */
 export declare function Tween<T extends LerpFunctions>(
 	totalDuration: number,
-	easingFunction: BasicEasingFunction | BezierEasingFunction | PeriodicEasingFunction,
+	easingFunction: BasicEasingFunction | Bezier | PeriodicEasingFunction,
 	callback: (delta: T) => void,
 	initialValue: T,
 	endValue: T,

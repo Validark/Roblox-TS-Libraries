@@ -1,10 +1,4 @@
-local Lerps = script.Parent:FindFirstChild("rbx-lerp-functions")
-
-if Lerps then
-	Lerps = require(Lerps)
-else
-	error("[rbx-tween-functions] Please install rbx-lerp-functions to use this library.")
-end
+local Lerps = require(assert(script.Parent:FindFirstChild("rbx-lerp-functions"), "[@rbxts/tween] Please install @rbxts/lerp-functions to use this library."))
 
 local Tween = {
 	Running = false;

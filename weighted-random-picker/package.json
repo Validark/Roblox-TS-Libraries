@@ -1,15 +1,16 @@
 {
-	"name": "rbx-weighted-random-picker",
-	"version": "0.0.5",
+	"name": "@rbxts/weighted-random-picker",
+	"version": "1.0.0",
 	"description": "Generates functions which pick a random element of an array based upon their assigned relative probabilities.",
 	"main": "init.lua",
+    "types": "index.d.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/Validark/Roblox-TS-libraries.git"
-	},
+        "type": "git",
+        "url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/weighted-random-picker"
+    },
 	"keywords": [
 		"Roblox-TypeScript",
 		"Roblox",
@@ -24,5 +25,8 @@
 	"bugs": {
 		"url": "https://github.com/Validark/Roblox-TS-libraries/issues"
 	},
-	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/rbx-weighted-random-picker/README.md"
+	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/rbx-weighted-random-picker/README.md",
+    "publishConfig": {
+        "access": "public"
+    }
 }
