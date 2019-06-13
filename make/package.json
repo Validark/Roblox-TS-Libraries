@@ -1,0 +1,38 @@
+{
+	"name": "@rbxts/make",
+	"version": "1.0.0",
+	"description": "Shorthand for declaring Instances with properties.",
+	"main": "init.lua",
+	"types": "init.d.ts",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/make"
+	},
+	"keywords": [
+		"resources",
+		"roblox-typescript",
+		"RemoteEvents",
+		"RemoteFunctions",
+		"Remotes",
+		"Folder",
+		"Manager"
+	],
+	"peerDependencies": {
+		"@rbxts/types": "^1.0.209"
+	},
+	"author": "Validark",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
+	},
+	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/make/README.md",
+	"publishConfig": {
+		"access": "public"
+	},
+	"dependencies": {
+		"@rbxts/types": "^1.0.209"
+	}
+}
