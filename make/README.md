@@ -29,7 +29,7 @@ Make("Frame", {
 
 Additional Implementation details:
 
-- `Children` is a whitelisted member. It expects an array of Instances to be parented to the generated instance.
-- Setting an event member, e.g. `MouseButton1Down` in the above example, will `Connect` the expected callback to the event.
+- `Children` is a whitelisted member. It expects an array of Instances which will be parented to the generated instance.
+- Setting an event member, like `MouseButton1Down` in the example above, will `Connect` the expected callback to the event.
 
 ###### Note: The `Parent` property is always set last. This avoids ordering bugs/inefficiency

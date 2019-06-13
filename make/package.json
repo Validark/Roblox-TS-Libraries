@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/make",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Shorthand for declaring Instances with properties.",
 	"main": "init.lua",
 	"types": "init.d.ts",

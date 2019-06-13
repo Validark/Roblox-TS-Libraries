@@ -1,6 +1,7 @@
 -- Compiled with https://roblox-ts.github.io v0.1.7
--- June 13, 2019, 2:45 PM Central Daylight Time
+-- June 13, 2019, 3:30 PM Central Daylight Time
 
+local _exports;
 local Make = function(className, settings)
 	local children, parent = settings.Children, settings.Parent;
 	settings.Children = nil;
@@ -23,4 +24,5 @@ local Make = function(className, settings)
 	instance.Parent = parent;
 	return instance;
 end;
-return nil;
+_exports = Make;
+return _exports;
