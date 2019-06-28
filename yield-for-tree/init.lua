@@ -1,5 +1,5 @@
 -- Compiled with https://roblox-ts.github.io v0.2.3
--- June 28, 2019, 6:07 AM Central Daylight Time
+-- June 28, 2019, 7:07 AM Central Daylight Time
 
 local TS = _G[script];
 local _exports = {};
@@ -34,7 +34,8 @@ function yieldForTreeHelper(object, tree)
 	end;
 end;
 local yieldForTree = TS.async(function(object, tree)
-	local subTree = yieldForTreeHelper(object, TS.Object_deepCopy(tree));
+	tree = TS.Object_deepCopy(tree);
+	local subTree = yieldForTreeHelper(object, tree);
 	while subTree and next(subTree, next(subTree)) ~= nil do
 		subTree = tree;
 		local descendant = object.DescendantAdded:Wait();

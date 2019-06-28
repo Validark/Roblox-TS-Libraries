@@ -35,6 +35,6 @@
     },
     "dependencies": {
         "@rbxts/types": "^1.0.227",
-        "@rbxts/yield-for-tree": "^1.0.1"
+        "@rbxts/yield-for-tree": "^1.0.4"
     }
 }

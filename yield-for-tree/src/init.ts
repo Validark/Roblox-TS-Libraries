@@ -58,7 +58,8 @@ export async function yieldForTree<T extends Instance, Q extends InstanceTree>(
 	object: T,
 	tree: Q,
 ): Promise<T & EvaluateTree<Q>> {
-	let subTree: InstanceTree | undefined = yieldForTreeHelper(object, Object.deepCopy(tree));
+	tree = Object.deepCopy(tree);
+	let subTree: InstanceTree | undefined = yieldForTreeHelper(object, tree);
 
 	while (subTree && next(subTree, next(subTree)) !== undefined) {
 		subTree = tree;
