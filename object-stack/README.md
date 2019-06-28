@@ -2,7 +2,7 @@
 
 A Stack data structure which is formed by creating a singly linked-list on already existing objects. All you need to do is add a `previousNode?: T` field to your object you wish to use in the Stack.
 
-See the [index.d.ts file](https://github.com/Validark/Roblox-TS-Libraries/blob/master/rbx-object-stack/init.d.ts) for documentation on each member and method.
+See the [index.d.ts file](https://github.com/Validark/Roblox-TS-Libraries/blob/master/object-stack/init.d.ts) for documentation on each member and method.
 
 Demo:
 
