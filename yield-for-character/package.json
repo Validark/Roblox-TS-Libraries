@@ -1,6 +1,6 @@
 {
     "name": "@rbxts/yield-for-character",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "description": "Yield until all members of a character rig exist, then dot access!",
     "main": "init.lua",
     "types": "init.d.ts",
@@ -28,9 +28,13 @@
     },
     "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/yield-for-character/README.md",
     "peerDependencies": {
-        "@rbxts/types": "^1.0.194"
+        "@rbxts/types": "^1.0.227"
     },
     "publishConfig": {
         "access": "public"
+    },
+    "dependencies": {
+        "@rbxts/types": "^1.0.227",
+        "@rbxts/yield-for-tree": "^1.0.1"
     }
 }

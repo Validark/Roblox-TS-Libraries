@@ -1,388 +1,253 @@
-interface HasOriginalSize {
-	/** The original size of this Part, according to the HumanoidDescription */
-	OriginalSize: Vector3Value;
-}
+import { EvaluateTree, yieldForTree } from "@rbxts/yield-for-tree";
 
-type RigAttachment = Attachment & {
-	/** The original position of this Attachment, according to the HumanoidDescription */
-	OriginalPosition: Vector3Value;
-};
+const CharacterRigR15 = {
+	$className: "Model",
 
-export type CharacterRigR15 = Model & {
-	HumanoidRootPart: Part & {
-		RootRigAttachment: RigAttachment;
-	} & HasOriginalSize;
+	HumanoidRootPart: {
+		$className: "Part",
+		RootRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		OriginalSize: "Vector3Value",
+	},
 
-	LeftHand: MeshPart & {
-		LeftWristRigAttachment: RigAttachment;
-		LeftGripAttachment: RigAttachment;
-		LeftWrist: Motor6D;
-	} & HasOriginalSize;
+	LeftHand: {
+		$className: "MeshPart",
+		LeftWristRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		LeftGripAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		LeftWrist: "Motor6D",
+		OriginalSize: "Vector3Value",
+	},
 
-	LeftLowerArm: MeshPart & {
-		LeftElbowRigAttachment: RigAttachment;
-		LeftWristRigAttachment: RigAttachment;
-		LeftElbow: Motor6D;
-	} & HasOriginalSize;
+	LeftLowerArm: {
+		$className: "MeshPart",
+		LeftElbowRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		LeftWristRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		LeftElbow: "Motor6D",
+		OriginalSize: "Vector3Value",
+	},
 
-	LeftUpperArm: MeshPart & {
-		LeftShoulderRigAttachment: RigAttachment;
-		LeftElbowRigAttachment: RigAttachment;
-		LeftShoulderAttachment: RigAttachment;
-		LeftShoulder: Motor6D;
-	} & HasOriginalSize;
+	LeftUpperArm: {
+		$className: "MeshPart",
+		LeftShoulderRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		LeftElbowRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		LeftShoulderAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		LeftShoulder: "Motor6D",
+		OriginalSize: "Vector3Value",
+	},
 
-	RightHand: MeshPart & {
-		RightWristRigAttachment: RigAttachment;
-		RightGripAttachment: RigAttachment;
-		RightWrist: Motor6D;
-	} & HasOriginalSize;
+	RightHand: {
+		$className: "MeshPart",
+		RightWristRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		RightGripAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		RightWrist: "Motor6D",
+		OriginalSize: "Vector3Value",
+	},
 
-	RightLowerArm: MeshPart & {
-		RightElbowRigAttachment: RigAttachment;
-		RightWristRigAttachment: RigAttachment;
-		RightElbow: Motor6D;
-	} & HasOriginalSize;
+	RightLowerArm: {
+		$className: "MeshPart",
+		RightElbowRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		RightWristRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		RightElbow: "Motor6D",
+		OriginalSize: "Vector3Value",
+	},
 
-	RightUpperArm: MeshPart & {
-		RightShoulderRigAttachment: RigAttachment;
-		RightElbowRigAttachment: RigAttachment;
-		RightShoulderAttachment: RigAttachment;
-		RightShoulder: Motor6D;
-	} & HasOriginalSize;
+	RightUpperArm: {
+		$className: "MeshPart",
+		RightShoulderRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		RightElbowRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		RightShoulderAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		RightShoulder: "Motor6D",
+		OriginalSize: "Vector3Value",
+	},
 
-	UpperTorso: MeshPart & {
-		WaistRigAttachment: RigAttachment;
-		NeckRigAttachment: RigAttachment;
-		LeftShoulderRigAttachment: RigAttachment;
-		RightShoulderRigAttachment: RigAttachment;
-		BodyFrontAttachment: RigAttachment;
-		BodyBackAttachment: RigAttachment;
-		LeftCollarAttachment: RigAttachment;
-		RightCollarAttachment: RigAttachment;
-		NeckAttachment: RigAttachment;
-		Waist: Motor6D;
-	} & HasOriginalSize;
+	UpperTorso: {
+		$className: "MeshPart",
+		WaistRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		NeckRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		LeftShoulderRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		RightShoulderRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		BodyFrontAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		BodyBackAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		LeftCollarAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		RightCollarAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		NeckAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		Waist: "Motor6D",
+		OriginalSize: "Vector3Value",
+	},
 
-	LeftFoot: MeshPart & {
-		LeftAnkleRigAttachment: RigAttachment;
-		LeftAnkle: Motor6D;
-	} & HasOriginalSize;
+	LeftFoot: {
+		$className: "MeshPart",
+		LeftAnkleRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		LeftAnkle: "Motor6D",
+		OriginalSize: "Vector3Value",
+	},
 
-	LeftLowerLeg: MeshPart & {
-		LeftKneeRigAttachment: RigAttachment;
-		LeftAnkleRigAttachment: RigAttachment;
-		LeftKnee: Motor6D;
-	} & HasOriginalSize;
+	LeftLowerLeg: {
+		$className: "MeshPart",
+		LeftKneeRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		LeftAnkleRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		LeftKnee: "Motor6D",
+		OriginalSize: "Vector3Value",
+	},
 
-	LeftUpperLeg: MeshPart & {
-		LeftHipRigAttachment: RigAttachment;
-		LeftKneeRigAttachment: RigAttachment;
-		LeftHip: Motor6D;
-	} & HasOriginalSize;
+	LeftUpperLeg: {
+		$className: "MeshPart",
+		LeftHipRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		LeftKneeRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		LeftHip: "Motor6D",
+		OriginalSize: "Vector3Value",
+	},
 
-	RightFoot: MeshPart & {
-		RightAnkleRigAttachment: RigAttachment;
-		RightAnkle: Motor6D;
-	} & HasOriginalSize;
+	RightFoot: {
+		$className: "MeshPart",
+		RightAnkleRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		RightAnkle: "Motor6D",
+		OriginalSize: "Vector3Value",
+	},
 
-	RightLowerLeg: MeshPart & {
-		RightKneeRigAttachment: RigAttachment;
-		RightAnkleRigAttachment: RigAttachment;
-		RightKnee: Motor6D;
-	} & HasOriginalSize;
+	RightLowerLeg: {
+		$className: "MeshPart",
+		RightKneeRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		RightAnkleRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		RightKnee: "Motor6D",
+		OriginalSize: "Vector3Value",
+	},
 
-	RightUpperLeg: MeshPart & {
-		RightHipRigAttachment: RigAttachment;
-		RightKneeRigAttachment: RigAttachment;
-		RightHip: Motor6D;
-	} & HasOriginalSize;
+	RightUpperLeg: {
+		$className: "MeshPart",
+		RightHipRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		RightKneeRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		RightHip: "Motor6D",
+		OriginalSize: "Vector3Value",
+	},
 
-	LowerTorso: MeshPart & {
-		RootRigAttachment: RigAttachment;
-		WaistRigAttachment: RigAttachment;
-		LeftHipRigAttachment: RigAttachment;
-		RightHipRigAttachment: RigAttachment;
-		WaistCenterAttachment: RigAttachment;
-		WaistFrontAttachment: RigAttachment;
-		WaistBackAttachment: RigAttachment;
-		Root: Motor6D;
-	} & HasOriginalSize;
+	LowerTorso: {
+		$className: "MeshPart",
+		RootRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		WaistRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		LeftHipRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		RightHipRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		WaistCenterAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		WaistFrontAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		WaistBackAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		Root: "Motor6D",
+		OriginalSize: "Vector3Value",
+	},
 
-	Humanoid: Humanoid & {
-		Animator: Animator;
-		BodyTypeScale: number;
-		BodyProportionScale: number;
-		BodyWidthScale: number;
-		BodyHeightScale: number;
-		BodyDepthScale: number;
-		HeadScale: number;
-		HumanoidDescription: HumanoidDescription;
-		Status: Status;
-	};
+	Humanoid: {
+		$className: "Humanoid",
+		Animator: "Animator",
+		BodyTypeScale: "NumberValue",
+		BodyProportionScale: "NumberValue",
+		BodyWidthScale: "NumberValue",
+		BodyHeightScale: "NumberValue",
+		BodyDepthScale: "NumberValue",
+		HeadScale: "NumberValue",
+		HumanoidDescription: "HumanoidDescription",
+		Status: "Status",
+	},
 
-	Head: Part & {
-		Mesh: SpecialMesh & HasOriginalSize;
-		FaceCenterAttachment: RigAttachment;
-		FaceFrontAttachment: RigAttachment;
-		HairAttachment: RigAttachment;
-		HatAttachment: RigAttachment;
-		NeckRigAttachment: RigAttachment;
-		Neck: Motor6D;
-		face: Decal;
-	} & HasOriginalSize;
+	Head: {
+		$className: "Part",
+		Mesh: { $className: "SpecialMesh", OriginalSize: "Vector3Value" },
+		FaceCenterAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		FaceFrontAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		HairAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		HatAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		NeckRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
+		Neck: "Motor6D",
+		face: "Decal",
+		OriginalSize: "Vector3Value",
+	},
 
-	Shirt: Shirt;
-	Pants: Pants;
+	Shirt: "Shirt",
+	Pants: "Pants",
 
-	["Body Colors"]: BodyColors;
-};
+	["Body Colors"]: "BodyColors",
+} as const;
 
-export type CharacterRigR6 = Model & {
-	Head: Part & {
-		FaceCenterAttachment: Attachment;
-		FaceFrontAttachment: Attachment;
-		HairAttachment: Attachment;
-		HatAttachment: Attachment;
-		Mesh: SpecialMesh;
-		face: Decal;
-	};
+const CharacterRigR6 = {
+	$className: "Model",
 
-	HumanoidRootPart: Part & {
-		RootAttachment: Attachment;
-		RootJoint: Motor6D;
-	};
+	Head: {
+		$className: "Part",
+		FaceCenterAttachment: "Attachment",
+		FaceFrontAttachment: "Attachment",
+		HairAttachment: "Attachment",
+		HatAttachment: "Attachment",
+		Mesh: "SpecialMesh",
+		face: "Decal",
+	},
 
-	Humanoid: Humanoid & {
-		Animator: Animator;
-		HumanoidDescription: HumanoidDescription;
-		Status: Status;
-	};
+	HumanoidRootPart: {
+		$className: "Part",
+		RootAttachment: "Attachment",
+		RootJoint: "Motor6D",
+	},
 
-	["Left Arm"]: Part & {
-		LeftGripAttachment: Attachment;
-		LeftShoulderAttachment: Attachment;
-	};
+	Humanoid: {
+		$className: "Humanoid",
+		Animator: "Animator",
+		HumanoidDescription: "HumanoidDescription",
+		Status: "Status",
+	},
 
-	["Left Leg"]: Part & {
-		LeftFootAttachment: Attachment;
-	};
+	["Left Arm"]: {
+		$className: "Part",
+		LeftGripAttachment: "Attachment",
+		LeftShoulderAttachment: "Attachment",
+	},
 
-	["Right Arm"]: Part & {
-		RightGripAttachment: Attachment;
-		RightShoulderAttachment: Attachment;
-	};
+	["Left Leg"]: {
+		$className: "Part",
+		LeftFootAttachment: "Attachment",
+	},
 
-	["Right Leg"]: Part & {
-		RightFootAttachment: Attachment;
-	};
+	["Right Arm"]: {
+		$className: "Part",
+		RightGripAttachment: "Attachment",
+		RightShoulderAttachment: "Attachment",
+	},
 
-	Torso: Part & {
-		["Left Hip"]: Motor6D;
-		["Left Shoulder"]: Motor6D;
-		["Right Hip"]: Motor6D;
-		["Right Shoulder"]: Motor6D;
-		Neck: Motor6D;
+	["Right Leg"]: {
+		$className: "Part",
+		RightFootAttachment: "Attachment",
+	},
 
-		BodyBackAttachment: Attachment;
-		BodyFrontAttachment: Attachment;
-		LeftCollarAttachment: Attachment;
-		NeckAttachment: Attachment;
-		RightCollarAttachment: Attachment;
-		WaistBackAttachment: Attachment;
-		WaistCenterAttachment: Attachment;
-		WaistFrontAttachment: Attachment;
-	};
+	Torso: {
+		$className: "Part",
+		["Left Hip"]: "Motor6D",
+		["Left Shoulder"]: "Motor6D",
+		["Right Hip"]: "Motor6D",
+		["Right Shoulder"]: "Motor6D",
+		Neck: "Motor6D",
 
-	Shirt: Shirt;
-	Pants: Pants;
+		BodyBackAttachment: "Attachment",
+		BodyFrontAttachment: "Attachment",
+		LeftCollarAttachment: "Attachment",
+		NeckAttachment: "Attachment",
+		RightCollarAttachment: "Attachment",
+		WaistBackAttachment: "Attachment",
+		WaistCenterAttachment: "Attachment",
+		WaistFrontAttachment: "Attachment",
+	},
 
-	["Body Colors"]: BodyColors;
-};
+	Shirt: "Shirt",
+	Pants: "Pants",
 
-export async function yieldForR6CharacterDescendants(character: Model) {
-	const Head = character.WaitForChild("Head");
-	Head.WaitForChild("FaceCenterAttachment");
-	Head.WaitForChild("FaceFrontAttachment");
-	Head.WaitForChild("HairAttachment");
-	Head.WaitForChild("HatAttachment");
-	Head.WaitForChild("Mesh");
-	Head.WaitForChild("face");
+	["Body Colors"]: "BodyColors",
+} as const;
 
-	const HumanoidRootPart = character.WaitForChild("HumanoidRootPart");
-	HumanoidRootPart.WaitForChild("RootAttachment");
-	HumanoidRootPart.WaitForChild("RootJoint");
+export type CharacterRigR6 = EvaluateTree<typeof CharacterRigR6>;
+export type CharacterRigR15 = EvaluateTree<typeof CharacterRigR15>;
 
-	const Humanoid = character.WaitForChild("Humanoid");
-	Humanoid.WaitForChild("Animator");
-	Humanoid.WaitForChild("HumanoidDescription");
-	Humanoid.WaitForChild("Status");
-
-	const LeftArm = character.WaitForChild("Left Arm");
-	LeftArm.WaitForChild("LeftGripAttachment");
-	LeftArm.WaitForChild("LeftShoulderAttachment");
-
-	const LeftLeg = character.WaitForChild("Left Leg");
-	LeftLeg.WaitForChild("LeftFootAttachment");
-
-	const RightArm = character.WaitForChild("Right Arm");
-	RightArm.WaitForChild("RightGripAttachment");
-	RightArm.WaitForChild("RightShoulderAttachment");
-
-	const RightLeg = character.WaitForChild("Right Leg");
-	RightLeg.WaitForChild("RightFootAttachment");
-
-	const Torso = character.WaitForChild("Torso");
-	Torso.WaitForChild("Left Hip");
-	Torso.WaitForChild("Left Shoulder");
-	Torso.WaitForChild("Right Hip");
-	Torso.WaitForChild("Right Shoulder");
-	Torso.WaitForChild("Neck");
-	Torso.WaitForChild("BodyBackAttachment");
-	Torso.WaitForChild("BodyFrontAttachment");
-	Torso.WaitForChild("LeftCollarAttachment");
-	Torso.WaitForChild("NeckAttachment");
-	Torso.WaitForChild("RightCollarAttachment");
-	Torso.WaitForChild("WaistBackAttachment");
-	Torso.WaitForChild("WaistCenterAttachment");
-	Torso.WaitForChild("WaistFrontAttachment");
-
-	character.WaitForChild("Shirt");
-	character.WaitForChild("Pants");
-	character.WaitForChild("Body Colors");
-
-	return character as CharacterRigR6;
+/** Yields until every member of CharacterRigR6 exists */
+export async function yieldForR6CharacterDescendants(character: Model): Promise<CharacterRigR6> {
+	return await yieldForTree(character, CharacterRigR6);
 }
 
 /** Yields until every member of CharacterRigR15 exists */
-export async function yieldForR15CharacterDescendants(character: Model) {
-	const HumanoidRootPart = character.WaitForChild("HumanoidRootPart");
-	HumanoidRootPart.WaitForChild("RootRigAttachment").WaitForChild("OriginalPosition");
-	HumanoidRootPart.WaitForChild("OriginalSize");
-
-	const LeftHand = character.WaitForChild("LeftHand");
-	LeftHand.WaitForChild("LeftWristRigAttachment").WaitForChild("OriginalPosition");
-	LeftHand.WaitForChild("LeftGripAttachment").WaitForChild("OriginalPosition");
-	LeftHand.WaitForChild("LeftWrist");
-	LeftHand.WaitForChild("OriginalSize");
-
-	const LeftLowerArm = character.WaitForChild("LeftLowerArm");
-	LeftLowerArm.WaitForChild("LeftElbowRigAttachment").WaitForChild("OriginalPosition");
-	LeftLowerArm.WaitForChild("LeftWristRigAttachment").WaitForChild("OriginalPosition");
-	LeftLowerArm.WaitForChild("LeftElbow");
-	LeftLowerArm.WaitForChild("OriginalSize");
-
-	const LeftUpperArm = character.WaitForChild("LeftUpperArm");
-	LeftUpperArm.WaitForChild("LeftShoulderRigAttachment").WaitForChild("OriginalPosition");
-	LeftUpperArm.WaitForChild("LeftElbowRigAttachment").WaitForChild("OriginalPosition");
-	LeftUpperArm.WaitForChild("LeftShoulderAttachment").WaitForChild("OriginalPosition");
-	LeftUpperArm.WaitForChild("LeftShoulder");
-	LeftUpperArm.WaitForChild("OriginalSize");
-
-	const RightHand = character.WaitForChild("RightHand");
-	RightHand.WaitForChild("RightWristRigAttachment").WaitForChild("OriginalPosition");
-	RightHand.WaitForChild("RightGripAttachment").WaitForChild("OriginalPosition");
-	RightHand.WaitForChild("RightWrist");
-	RightHand.WaitForChild("OriginalSize");
-
-	const RightLowerArm = character.WaitForChild("RightLowerArm");
-	RightLowerArm.WaitForChild("RightElbowRigAttachment").WaitForChild("OriginalPosition");
-	RightLowerArm.WaitForChild("RightWristRigAttachment").WaitForChild("OriginalPosition");
-	RightLowerArm.WaitForChild("RightElbow");
-	RightLowerArm.WaitForChild("OriginalSize");
-
-	const RightUpperArm = character.WaitForChild("RightUpperArm");
-	RightUpperArm.WaitForChild("RightShoulderRigAttachment").WaitForChild("OriginalPosition");
-	RightUpperArm.WaitForChild("RightElbowRigAttachment").WaitForChild("OriginalPosition");
-	RightUpperArm.WaitForChild("RightShoulderAttachment").WaitForChild("OriginalPosition");
-	RightUpperArm.WaitForChild("RightShoulder");
-	RightUpperArm.WaitForChild("OriginalSize");
-
-	const UpperTorso = character.WaitForChild("UpperTorso");
-	UpperTorso.WaitForChild("WaistRigAttachment").WaitForChild("OriginalPosition");
-	UpperTorso.WaitForChild("NeckRigAttachment").WaitForChild("OriginalPosition");
-	UpperTorso.WaitForChild("LeftShoulderRigAttachment").WaitForChild("OriginalPosition");
-	UpperTorso.WaitForChild("RightShoulderRigAttachment").WaitForChild("OriginalPosition");
-	UpperTorso.WaitForChild("BodyFrontAttachment").WaitForChild("OriginalPosition");
-	UpperTorso.WaitForChild("BodyBackAttachment").WaitForChild("OriginalPosition");
-	UpperTorso.WaitForChild("LeftCollarAttachment").WaitForChild("OriginalPosition");
-	UpperTorso.WaitForChild("RightCollarAttachment").WaitForChild("OriginalPosition");
-	UpperTorso.WaitForChild("NeckAttachment").WaitForChild("OriginalPosition");
-	UpperTorso.WaitForChild("Waist");
-	UpperTorso.WaitForChild("OriginalSize");
-
-	const LeftFoot = character.WaitForChild("LeftFoot");
-	LeftFoot.WaitForChild("LeftAnkleRigAttachment").WaitForChild("OriginalPosition");
-	LeftFoot.WaitForChild("LeftAnkle");
-	LeftFoot.WaitForChild("OriginalSize");
-
-	const LeftLowerLeg = character.WaitForChild("LeftLowerLeg");
-	LeftLowerLeg.WaitForChild("LeftKneeRigAttachment").WaitForChild("OriginalPosition");
-	LeftLowerLeg.WaitForChild("LeftAnkleRigAttachment").WaitForChild("OriginalPosition");
-	LeftLowerLeg.WaitForChild("LeftKnee");
-	LeftLowerLeg.WaitForChild("OriginalSize");
-
-	const LeftUpperLeg = character.WaitForChild("LeftUpperLeg");
-	LeftUpperLeg.WaitForChild("LeftHipRigAttachment").WaitForChild("OriginalPosition");
-	LeftUpperLeg.WaitForChild("LeftKneeRigAttachment").WaitForChild("OriginalPosition");
-	LeftUpperLeg.WaitForChild("LeftHip");
-	LeftUpperLeg.WaitForChild("OriginalSize");
-
-	const RightFoot = character.WaitForChild("RightFoot");
-	RightFoot.WaitForChild("RightAnkleRigAttachment").WaitForChild("OriginalPosition");
-	RightFoot.WaitForChild("RightAnkle");
-	RightFoot.WaitForChild("OriginalSize");
-
-	const RightLowerLeg = character.WaitForChild("RightLowerLeg");
-	RightLowerLeg.WaitForChild("RightKneeRigAttachment").WaitForChild("OriginalPosition");
-	RightLowerLeg.WaitForChild("RightAnkleRigAttachment").WaitForChild("OriginalPosition");
-	RightLowerLeg.WaitForChild("RightKnee");
-	RightLowerLeg.WaitForChild("OriginalSize");
-
-	const RightUpperLeg = character.WaitForChild("RightUpperLeg");
-	RightUpperLeg.WaitForChild("RightHipRigAttachment").WaitForChild("OriginalPosition");
-	RightUpperLeg.WaitForChild("RightKneeRigAttachment").WaitForChild("OriginalPosition");
-	RightUpperLeg.WaitForChild("RightHip");
-	RightUpperLeg.WaitForChild("OriginalSize");
-
-	const LowerTorso = character.WaitForChild("LowerTorso");
-	LowerTorso.WaitForChild("RootRigAttachment").WaitForChild("OriginalPosition");
-	LowerTorso.WaitForChild("WaistRigAttachment").WaitForChild("OriginalPosition");
-	LowerTorso.WaitForChild("LeftHipRigAttachment").WaitForChild("OriginalPosition");
-	LowerTorso.WaitForChild("RightHipRigAttachment").WaitForChild("OriginalPosition");
-	LowerTorso.WaitForChild("WaistCenterAttachment").WaitForChild("OriginalPosition");
-	LowerTorso.WaitForChild("WaistFrontAttachment").WaitForChild("OriginalPosition");
-	LowerTorso.WaitForChild("WaistBackAttachment").WaitForChild("OriginalPosition");
-	LowerTorso.WaitForChild("Root");
-	LowerTorso.WaitForChild("OriginalSize");
-
-	const Humanoid = character.WaitForChild("Humanoid");
-	Humanoid.WaitForChild("Animator");
-	Humanoid.WaitForChild("BodyTypeScale");
-	Humanoid.WaitForChild("BodyProportionScale");
-	Humanoid.WaitForChild("BodyWidthScale");
-	Humanoid.WaitForChild("BodyHeightScale");
-	Humanoid.WaitForChild("BodyDepthScale");
-	Humanoid.WaitForChild("HeadScale");
-	Humanoid.WaitForChild("HumanoidDescription");
-	Humanoid.WaitForChild("Status");
-
-	const Head = character.WaitForChild("Head");
-	Head.WaitForChild("Mesh").WaitForChild("OriginalSize");
-	Head.WaitForChild("FaceCenterAttachment").WaitForChild("OriginalPosition");
-	Head.WaitForChild("FaceFrontAttachment").WaitForChild("OriginalPosition");
-	Head.WaitForChild("HairAttachment").WaitForChild("OriginalPosition");
-	Head.WaitForChild("HatAttachment").WaitForChild("OriginalPosition");
-	Head.WaitForChild("NeckRigAttachment").WaitForChild("OriginalPosition");
-	Head.WaitForChild("Neck");
-	Head.WaitForChild("OriginalSize");
-	Head.WaitForChild("face");
-
-	character.WaitForChild("Pants");
-	character.WaitForChild("Shirt");
-	character.WaitForChild("Body Colors");
-
-	return character as CharacterRigR15;
+export async function yieldForR15CharacterDescendants(character: Model): Promise<CharacterRigR15> {
+	return await yieldForTree(character, CharacterRigR15);
 }
 
 export default yieldForR15CharacterDescendants;
