@@ -36,4 +36,4 @@ The first parameter must be an Instance (or extend from it). The second paramete
 
 This library also exports `EvaluateTree` if you want to use it for your own nefarious purposes.
 
-###### Note: This library doesn't mutate/modify anything, it only yields until the tree is fully detected. The only thing manipulated by this library is the passed-in tree.
+###### Note: This library doesn't mutate/modify anything, it only yields until the tree is fully detected.
