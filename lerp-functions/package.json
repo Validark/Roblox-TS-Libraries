@@ -24,13 +24,13 @@
         "url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/lerp-functions"
     },
     "author": "Validark",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
-	},
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
+    },
     "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/lerp-functions/README.md",
     "dependencies": {
-        "@rbxts/types": "^1.0.194"
+        "@rbxts/types": "^1.0.227"
     },
     "publishConfig": {
         "access": "public"
