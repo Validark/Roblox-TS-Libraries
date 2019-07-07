@@ -3,8 +3,8 @@ A library for writing efficient, simple interpolation code.
 
 Setup:
 ```ts
-import { Standard, Deceleration, OutElastic } from "rbx-easing-functions";
-import Tween from "rbx-tween";
+import { Standard, Deceleration, OutElastic } from "@rbxts/easing-functions";
+import Tween from "@rbxts/tween";
 
 const Workspace = game.GetService("Workspace");
 ```

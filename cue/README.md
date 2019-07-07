@@ -1,7 +1,7 @@
 # Cue
-A lightweight custom event library, optimized for speed. The implementation is very straightforward, thus I recommend looking at [the source](https://github.com/Validark/Roblox-TS-Libraries/blob/master/rbx-cue/init.lua).
+A lightweight custom event library, optimized for speed. The implementation is very straightforward, thus I recommend looking at [the source](https://github.com/Validark/Roblox-TS-Libraries/blob/master/cue/init.lua).
 
-View the type definitions with [documentation here](https://github.com/Validark/Roblox-TS-Libraries/blob/master/rbx-cue/index.d.ts)
+View the type definitions with [documentation here](https://github.com/Validark/Roblox-TS-Libraries/blob/master/cue/index.d.ts)
 
 All functions of `Cue` could map to older `Signal` implementations.
 
@@ -17,8 +17,8 @@ This implementation cuts out separate objects being returned for the purpose of 
 
 # Demo
 ```ts
-// Imports the module rbx-cue as `Cue`
-import Cue from "rbx-cue";
+// Imports the module cue as `Cue`
+import Cue from "@rbxts/cue";
 
 // Instantiates a new Cue:
 const cue = new Cue<(bool: boolean, count: number) => void>();
@@ -38,7 +38,7 @@ cue.unbind(printArgs);
 Corresponding Lua equivalent:
 ```lua
 -- Imports the module rbx-cue as `Cue`
-local Cue = require(TS.getModule("rbx-cue", script.Parent));
+local Cue = require(TS.getModule("cue", script.Parent));
 
 -- Instantiates a new Cue:
 local cue = Cue.new();

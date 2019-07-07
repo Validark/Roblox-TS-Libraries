@@ -2,7 +2,7 @@
 BindableEvent wrapper. Passes arguments by reference rather than value.
 
 ```ts
-import Signal from "rbx-signal";
+import Signal from "@rbxts/signal";
 
 const signal = new Signal<(tab: Array<string>) => void>();
 const strings = new Array<string>();
@@ -16,7 +16,7 @@ signal.Fire(strings) // table: 2BC04578
 Corresponding Lua equivalent:
 
 ```lua
-local Signal = require(TS.getModule("rbx-signal", script.Parent));
+local Signal = require(TS.getModule("signal", script.Parent));
 local signal = Signal.new();
 local strings = {};
 signal:Connect(function(a)

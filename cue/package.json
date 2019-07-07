@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/cue",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "The fastest and lightest Event object ever made",
 	"main": "init.lua",
 	"types": "index.d.ts",

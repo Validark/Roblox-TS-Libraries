@@ -10,5 +10,3 @@ yieldForR15CharacterDescendants(character).then(CharR15 => {
 	CharR15.Head.face.Texture = ""
 });
 ```
-
-Meant to be used with [rbx-safe-types](https://www.npmjs.com/package/rbx-safe-types), although it should also work with rbx-types.

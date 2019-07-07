@@ -15,8 +15,8 @@ The main function is called `makeFolderManager`. Its documentation is as follows
 Usage:
 
 ```ts
-import { ReplicatedStorage } from "rbx-services";
-import makeFolderManager from "rbx-extendable-resources";
+import { ReplicatedStorage } from "@rbxts/services";
+import makeFolderManager from "@rbxts/extendable-resources";
 
 // creates/finds a folder named "RemoteEvents" in ReplicatedStorage
 // if it can't find a particular object, it will instantiate a RemoteEvent with the proper name
