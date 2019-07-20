@@ -8,10 +8,9 @@ FastSpawnerEvent.Event:Connect(function(callback, argsPointer)
 end)
 
 local function FastSpawn(callback, ...)
+	local n = select("#", ...)
 	local args = { ... }
-	FastSpawnerEvent:Fire(callback, function()
-		return unpack(args)
-	end)
+	FastSpawnerEvent:Fire(callback, function() return unpack(args, 1, n) end)
 end
 
 return FastSpawn

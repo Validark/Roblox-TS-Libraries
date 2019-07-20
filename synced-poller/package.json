@@ -1,0 +1,36 @@
+{
+    "name": "@rbxts/synced-poller",
+    "version": "1.0.1",
+    "description": "Calls functions on an interval along os.time (for cross-server simultaneous calls)",
+    "main": "init.lua",
+    "types": "init.d.ts",
+    "scripts": {
+        "build": "rbxtsc & mv out/* . & rm -r out"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/synced-poller"
+    },
+    "keywords": [
+        "yield",
+        "wait",
+        "poll",
+        "poller",
+        "synced"
+    ],
+    "author": "Validark",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
+    },
+    "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/synced-poller/README.md",
+    "peerDependencies": {
+        "@rbxts/types": "^1.0.235"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "dependencies": {
+        "@rbxts/types": "^1.0.235"
+    }
+}
