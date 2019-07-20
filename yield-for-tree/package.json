@@ -5,7 +5,7 @@
     "main": "init.lua",
     "types": "init.d.ts",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build": "rbxtsc & mv out/* . & rm -r out"
     },
     "repository": {
         "type": "git",
@@ -35,6 +35,7 @@
         "access": "public"
     },
     "dependencies": {
-        "@rbxts/types": "^1.0.227"
+        "@rbxts/types": "^1.0.227",
+        "@rbxts/validate-tree": "0.0.3"
     }
 }

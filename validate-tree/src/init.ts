@@ -52,7 +52,7 @@ export function validateTree<I extends Instance, T extends InstanceTree>(
 	object: I,
 	tree: T,
 ): object is CoerceInstanceIntoTree<I, T> {
-	if (!("$className" in tree) || object.IsA(tree.$className)) {
+	if (!("$className" in tree) || object.IsA(tree.$className as string)) {
 		const whitelistedKeys = new Set(["$className"]);
 
 		for (const child of object.GetChildren()) {
@@ -116,6 +116,9 @@ export async function yieldForTree<
 	}
 }
 
+/*
+We should establish a spec if people want this. Submit an issue if you have an opinion.
+
 export function instantiateTree<
 	I extends Instance,
 	T extends {
@@ -143,13 +146,4 @@ export function instantiateTree<
 
 	return parent as I & EvaluateInstanceTree<T>;
 }
-
-instantiateTree(game.GetService("Workspace"), {
-	$className: "Workspace",
-	Value: "IntValue",
-	Go: {
-		$className: "Folder",
-		Stiff: "BoolValue",
-		Done: { $className: "IntValue", Configuration: { $className: "Configuration" } },
-	},
-} as const).Go.Done.Configuration;
+*/
