@@ -1,6 +1,6 @@
 {
     "name": "@rbxts/ip-data",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "ip-api.com API Wrapper",
     "main": "init.lua",
     "types": "init.d.ts",
