@@ -1,23 +1,3 @@
-interface NestedInstanceTree {
-	$className: keyof Instances;
-	[Key: string]: keyof Instances | NestedInstanceTree;
-}
-
-type NestedKeyExtendsPropertyName<T extends NestedInstanceTree, K> = K extends "Changed"
-	? true
-	: K extends keyof Instances[T["$className"]]
-	? true
-	: false;
-
-type EvaluateNestedInstanceTree<T extends NestedInstanceTree> = (Instances[T["$className"]]) &
-	{
-		[K in Exclude<keyof T, "$className">]: NestedKeyExtendsPropertyName<T, K> extends true
-			? unknown
-			: (T[K] extends keyof Instances
-					? Instances[T[K]]
-					: (T[K] extends { $className: keyof Instances } ? EvaluateNestedInstanceTree<T[K]> : never))
-	};
-
 type KeyExtendsPropertyName<T extends InstanceTree, K> = K extends "Changed"
 	? true
 	: (T extends { $className: keyof Instances } ? (K extends keyof Instances[T["$className"]] ? true : false) : false);
@@ -25,33 +5,26 @@ type KeyExtendsPropertyName<T extends InstanceTree, K> = K extends "Changed"
 /** Defines a Rojo-esque tree type which defines an abstract object tree. */
 export interface InstanceTree {
 	$className?: keyof Instances;
-	[Key: string]: keyof Instances | undefined | NestedInstanceTree;
+	[Key: string]: keyof Instances | undefined | InstanceTree;
 }
 
 /** Evaluates a Rojo-esque tree and transforms it into an indexable type. */
-export type EvaluateInstanceTree<T extends InstanceTree> = (T extends { $className: keyof Instances }
+export type EvaluateInstanceTree<T extends InstanceTree, D = Instance> = (T extends { $className: keyof Instances }
 	? Instances[T["$className"]]
-	: unknown) &
+	: D) &
 	{
 		[K in Exclude<keyof T, "$className">]: KeyExtendsPropertyName<T, K> extends true
 			? unknown
 			: (T[K] extends keyof Instances
 					? Instances[T[K]]
-					: (T[K] extends { $className: keyof Instances } ? EvaluateNestedInstanceTree<T[K]> : never))
+					: (T[K] extends { $className: keyof Instances } ? EvaluateInstanceTree<T[K]> : never))
 	};
 
-type CoerceInstanceIntoTree<I extends Instance, T extends InstanceTree> = T extends { $className: keyof Instances }
-	? (T["$className"] extends I["ClassName"]
-			? (EvaluateNestedInstanceTree<T> extends I
-					? EvaluateNestedInstanceTree<T>
-					: I & EvaluateNestedInstanceTree<T>)
-			: never)
-	: I & EvaluateInstanceTree<T>;
-
+/** Returns whether a given Instance matches a particular Rojo-eque InstanceTree. */
 export function validateTree<I extends Instance, T extends InstanceTree>(
 	object: I,
 	tree: T,
-): object is CoerceInstanceIntoTree<I, T> {
+): object is I & EvaluateInstanceTree<T, I> {
 	if (!("$className" in tree) || object.IsA(tree.$className as string)) {
 		const whitelistedKeys = new Set(["$className"]);
 
@@ -78,17 +51,12 @@ export function validateTree<I extends Instance, T extends InstanceTree>(
  * There is also a shorthand syntax available, where setting a key equal to a className is equivalent
  * to an object with `$className` defined. Hence `Things: "Folder"` is equivalent to `Things: { $className: "Folder" }`
  */
-export async function yieldForTree<
-	I extends Instance,
-	T extends {
-		$className?: {
-			[K in keyof Instances]: Instances[K] extends I ? (I extends Instances[K] ? K : never) : never
-		}[keyof Instances];
-		[Key: string]: keyof Instances | undefined | NestedInstanceTree;
-	}
->(object: I, tree: T): Promise<CoerceInstanceIntoTree<I, T>> {
+export async function yieldForTree<I extends Instance, T extends InstanceTree>(
+	object: I,
+	tree: T,
+): Promise<I & EvaluateInstanceTree<T, I>> {
 	if (validateTree(object, tree)) {
-		return object as CoerceInstanceIntoTree<I, T>;
+		return object as I & EvaluateInstanceTree<T, I>;
 	} else {
 		return await new Promise((resolve, reject) => {
 			const connections = new Array<RBXScriptConnection>();
@@ -96,7 +64,7 @@ export async function yieldForTree<
 			const updateTreeForDescendant = () => {
 				if (validateTree(object, tree)) {
 					for (const connection of connections) connection.Disconnect();
-					resolve(object as CoerceInstanceIntoTree<I, T>);
+					resolve(object as I & EvaluateInstanceTree<T, I>);
 				}
 			};
 
@@ -125,7 +93,7 @@ export function instantiateTree<
 		$className?: {
 			[K in keyof Instances]: Instances[K] extends I ? (I extends Instances[K] ? K : never) : never
 		}[keyof Instances];
-		[Key: string]: keyof Instances | undefined | NestedInstanceTree;
+		[Key: string]: keyof Instances | undefined | InstanceTree;
 	}
 >(parent: I, tree: T): I & EvaluateInstanceTree<T> {
 	for (const [name, definition] of Object.entries(tree)) {
@@ -137,10 +105,10 @@ export function instantiateTree<
 			instance.Name = name as string;
 			instance.Parent = parent;
 		} else {
-			const instance = new Instance((definition as NestedInstanceTree).$className) as Instances[keyof Instances];
+			const instance = new Instance((definition as InstanceTree).$className) as Instances[keyof Instances];
 			instance.Name = name as string;
 			instance.Parent = parent;
-			instantiateTree(instance, definition as NestedInstanceTree);
+			instantiateTree(instance, definition as InstanceTree);
 		}
 	}
 

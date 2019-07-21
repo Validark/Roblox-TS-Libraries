@@ -1,6 +1,78 @@
-import { EvaluateTree, yieldForTree } from "@rbxts/yield-for-tree";
+import { EvaluateInstanceTree, yieldForTree } from "@rbxts/validate-tree";
 
-const CharacterRigR15 = {
+const R6Layout = {
+	$className: "Model",
+
+	Head: {
+		$className: "Part",
+		FaceCenterAttachment: "Attachment",
+		FaceFrontAttachment: "Attachment",
+		HairAttachment: "Attachment",
+		HatAttachment: "Attachment",
+		Mesh: "SpecialMesh",
+		face: "Decal",
+	},
+
+	HumanoidRootPart: {
+		$className: "Part",
+		RootAttachment: "Attachment",
+		RootJoint: "Motor6D",
+	},
+
+	Humanoid: {
+		$className: "Humanoid",
+		Animator: "Animator",
+		HumanoidDescription: "HumanoidDescription",
+		Status: "Status",
+	},
+
+	["Left Arm"]: {
+		$className: "Part",
+		LeftGripAttachment: "Attachment",
+		LeftShoulderAttachment: "Attachment",
+	},
+
+	["Left Leg"]: {
+		$className: "Part",
+		LeftFootAttachment: "Attachment",
+	},
+
+	["Right Arm"]: {
+		$className: "Part",
+		RightGripAttachment: "Attachment",
+		RightShoulderAttachment: "Attachment",
+	},
+
+	["Right Leg"]: {
+		$className: "Part",
+		RightFootAttachment: "Attachment",
+	},
+
+	Torso: {
+		$className: "Part",
+		["Left Hip"]: "Motor6D",
+		["Left Shoulder"]: "Motor6D",
+		["Right Hip"]: "Motor6D",
+		["Right Shoulder"]: "Motor6D",
+		Neck: "Motor6D",
+
+		BodyBackAttachment: "Attachment",
+		BodyFrontAttachment: "Attachment",
+		LeftCollarAttachment: "Attachment",
+		NeckAttachment: "Attachment",
+		RightCollarAttachment: "Attachment",
+		WaistBackAttachment: "Attachment",
+		WaistCenterAttachment: "Attachment",
+		WaistFrontAttachment: "Attachment",
+	},
+
+	Shirt: "Shirt",
+	Pants: "Pants",
+
+	["Body Colors"]: "BodyColors",
+} as const;
+
+const R15Layout = {
 	$className: "Model",
 
 	HumanoidRootPart: {
@@ -165,89 +237,17 @@ const CharacterRigR15 = {
 	["Body Colors"]: "BodyColors",
 } as const;
 
-const CharacterRigR6 = {
-	$className: "Model",
-
-	Head: {
-		$className: "Part",
-		FaceCenterAttachment: "Attachment",
-		FaceFrontAttachment: "Attachment",
-		HairAttachment: "Attachment",
-		HatAttachment: "Attachment",
-		Mesh: "SpecialMesh",
-		face: "Decal",
-	},
-
-	HumanoidRootPart: {
-		$className: "Part",
-		RootAttachment: "Attachment",
-		RootJoint: "Motor6D",
-	},
-
-	Humanoid: {
-		$className: "Humanoid",
-		Animator: "Animator",
-		HumanoidDescription: "HumanoidDescription",
-		Status: "Status",
-	},
-
-	["Left Arm"]: {
-		$className: "Part",
-		LeftGripAttachment: "Attachment",
-		LeftShoulderAttachment: "Attachment",
-	},
-
-	["Left Leg"]: {
-		$className: "Part",
-		LeftFootAttachment: "Attachment",
-	},
-
-	["Right Arm"]: {
-		$className: "Part",
-		RightGripAttachment: "Attachment",
-		RightShoulderAttachment: "Attachment",
-	},
-
-	["Right Leg"]: {
-		$className: "Part",
-		RightFootAttachment: "Attachment",
-	},
-
-	Torso: {
-		$className: "Part",
-		["Left Hip"]: "Motor6D",
-		["Left Shoulder"]: "Motor6D",
-		["Right Hip"]: "Motor6D",
-		["Right Shoulder"]: "Motor6D",
-		Neck: "Motor6D",
-
-		BodyBackAttachment: "Attachment",
-		BodyFrontAttachment: "Attachment",
-		LeftCollarAttachment: "Attachment",
-		NeckAttachment: "Attachment",
-		RightCollarAttachment: "Attachment",
-		WaistBackAttachment: "Attachment",
-		WaistCenterAttachment: "Attachment",
-		WaistFrontAttachment: "Attachment",
-	},
-
-	Shirt: "Shirt",
-	Pants: "Pants",
-
-	["Body Colors"]: "BodyColors",
-} as const;
-
-export type CharacterRigR6 = EvaluateTree<typeof CharacterRigR6>;
-export type CharacterRigR15 = EvaluateTree<typeof CharacterRigR15>;
+export type CharacterRigR6 = EvaluateInstanceTree<typeof R6Layout>;
+export type CharacterRigR15 = EvaluateInstanceTree<typeof R15Layout>;
 
 /** Yields until every member of CharacterRigR6 exists */
-export async function yieldForR6CharacterDescendants(character: Model): Promise<CharacterRigR6> {
-	return await yieldForTree(character, CharacterRigR6);
+export function yieldForR6CharacterDescendants(character: Model): Promise<CharacterRigR6> {
+	return yieldForTree(character, R6Layout);
 }
 
 /** Yields until every member of CharacterRigR15 exists */
-export async function yieldForR15CharacterDescendants(character: Model): Promise<CharacterRigR15> {
-	return await yieldForTree(character, CharacterRigR15);
+export function yieldForR15CharacterDescendants(character: Model): Promise<CharacterRigR15> {
+	return yieldForTree(character, R15Layout);
 }
 
 export default yieldForR15CharacterDescendants;

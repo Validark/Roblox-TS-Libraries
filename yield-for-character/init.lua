@@ -1,10 +1,70 @@
--- Compiled with https://roblox-ts.github.io v0.2.3
--- June 28, 2019, 6:17 AM Central Daylight Time
+-- Compiled with https://roblox-ts.github.io v0.2.7
+-- July 20, 2019, 8:20 PM Central Daylight Time
 
 local TS = _G[script];
 local _exports = {};
-local yieldForTree = TS.import(TS.getModule("yield-for-tree")).yieldForTree;
-local CharacterRigR15 = {
+local yieldForTree = TS.import(TS.getModule("validate-tree")).yieldForTree;
+local R6Layout = {
+	["$className"] = "Model";
+	Head = {
+		["$className"] = "Part";
+		FaceCenterAttachment = "Attachment";
+		FaceFrontAttachment = "Attachment";
+		HairAttachment = "Attachment";
+		HatAttachment = "Attachment";
+		Mesh = "SpecialMesh";
+		face = "Decal";
+	};
+	HumanoidRootPart = {
+		["$className"] = "Part";
+		RootAttachment = "Attachment";
+		RootJoint = "Motor6D";
+	};
+	Humanoid = {
+		["$className"] = "Humanoid";
+		Animator = "Animator";
+		HumanoidDescription = "HumanoidDescription";
+		Status = "Status";
+	};
+	["Left Arm"] = {
+		["$className"] = "Part";
+		LeftGripAttachment = "Attachment";
+		LeftShoulderAttachment = "Attachment";
+	};
+	["Left Leg"] = {
+		["$className"] = "Part";
+		LeftFootAttachment = "Attachment";
+	};
+	["Right Arm"] = {
+		["$className"] = "Part";
+		RightGripAttachment = "Attachment";
+		RightShoulderAttachment = "Attachment";
+	};
+	["Right Leg"] = {
+		["$className"] = "Part";
+		RightFootAttachment = "Attachment";
+	};
+	Torso = {
+		["$className"] = "Part";
+		["Left Hip"] = "Motor6D";
+		["Left Shoulder"] = "Motor6D";
+		["Right Hip"] = "Motor6D";
+		["Right Shoulder"] = "Motor6D";
+		Neck = "Motor6D";
+		BodyBackAttachment = "Attachment";
+		BodyFrontAttachment = "Attachment";
+		LeftCollarAttachment = "Attachment";
+		NeckAttachment = "Attachment";
+		RightCollarAttachment = "Attachment";
+		WaistBackAttachment = "Attachment";
+		WaistCenterAttachment = "Attachment";
+		WaistFrontAttachment = "Attachment";
+	};
+	Shirt = "Shirt";
+	Pants = "Pants";
+	["Body Colors"] = "BodyColors";
+};
+local R15Layout = {
 	["$className"] = "Model";
 	HumanoidRootPart = {
 		["$className"] = "Part";
@@ -290,72 +350,12 @@ local CharacterRigR15 = {
 	Pants = "Pants";
 	["Body Colors"] = "BodyColors";
 };
-local CharacterRigR6 = {
-	["$className"] = "Model";
-	Head = {
-		["$className"] = "Part";
-		FaceCenterAttachment = "Attachment";
-		FaceFrontAttachment = "Attachment";
-		HairAttachment = "Attachment";
-		HatAttachment = "Attachment";
-		Mesh = "SpecialMesh";
-		face = "Decal";
-	};
-	HumanoidRootPart = {
-		["$className"] = "Part";
-		RootAttachment = "Attachment";
-		RootJoint = "Motor6D";
-	};
-	Humanoid = {
-		["$className"] = "Humanoid";
-		Animator = "Animator";
-		HumanoidDescription = "HumanoidDescription";
-		Status = "Status";
-	};
-	["Left Arm"] = {
-		["$className"] = "Part";
-		LeftGripAttachment = "Attachment";
-		LeftShoulderAttachment = "Attachment";
-	};
-	["Left Leg"] = {
-		["$className"] = "Part";
-		LeftFootAttachment = "Attachment";
-	};
-	["Right Arm"] = {
-		["$className"] = "Part";
-		RightGripAttachment = "Attachment";
-		RightShoulderAttachment = "Attachment";
-	};
-	["Right Leg"] = {
-		["$className"] = "Part";
-		RightFootAttachment = "Attachment";
-	};
-	Torso = {
-		["$className"] = "Part";
-		["Left Hip"] = "Motor6D";
-		["Left Shoulder"] = "Motor6D";
-		["Right Hip"] = "Motor6D";
-		["Right Shoulder"] = "Motor6D";
-		Neck = "Motor6D";
-		BodyBackAttachment = "Attachment";
-		BodyFrontAttachment = "Attachment";
-		LeftCollarAttachment = "Attachment";
-		NeckAttachment = "Attachment";
-		RightCollarAttachment = "Attachment";
-		WaistBackAttachment = "Attachment";
-		WaistCenterAttachment = "Attachment";
-		WaistFrontAttachment = "Attachment";
-	};
-	Shirt = "Shirt";
-	Pants = "Pants";
-	["Body Colors"] = "BodyColors";
-};
-local yieldForR6CharacterDescendants = TS.async(function(character)
-	return TS.await(yieldForTree(character, CharacterRigR6));
-end);
-local yieldForR15CharacterDescendants = TS.async(function(character)
-	return TS.await(yieldForTree(character, CharacterRigR15));
-end);
+local function yieldForR6CharacterDescendants(character)
+	return yieldForTree(character, R6Layout);
+end;
+local function yieldForR15CharacterDescendants(character)
+	return yieldForTree(character, R15Layout);
+end;
 _exports._default = yieldForR15CharacterDescendants;
 _exports.yieldForR6CharacterDescendants = yieldForR6CharacterDescendants;
 _exports.yieldForR15CharacterDescendants = yieldForR15CharacterDescendants;

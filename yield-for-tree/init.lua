@@ -1,5 +1,9 @@
--- Compiled with https://roblox-ts.github.io v0.2.7
--- July 20, 2019, 6:06 PM Central Daylight Time
+-- Compiled by hand by Validark
 
 local TS = _G[script];
-return {};
+local yieldForTree = TS.import(TS.getModule("validate-tree")).yieldForTree;
+
+return {
+	yieldForTree = yieldForTree;
+	default = yieldForTree;
+};

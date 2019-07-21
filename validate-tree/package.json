@@ -1,6 +1,6 @@
 {
     "name": "@rbxts/validate-tree",
-    "version": "0.0.3",
+    "version": "1.0.1",
     "description": "Validates whether a given instance matches a given instance tree",
     "main": "init.lua",
     "types": "init.d.ts",
