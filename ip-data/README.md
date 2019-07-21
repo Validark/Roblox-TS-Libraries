@@ -2,8 +2,6 @@
 
 Wraps the following API: http://ip-api.com/docs/api:json
 
-Please do not abuse. Only call this function once per server instance.
-
 Demo usage:
 
 ```ts
