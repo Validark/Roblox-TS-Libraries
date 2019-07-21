@@ -1,7 +1,7 @@
 {
     "name": "@rbxts/ip-data",
-    "version": "1.0.3",
-    "description": "ip-api.com API Wrapper",
+    "version": "1.0.4",
+    "description": "https://ip-api.com API Wrapper",
     "main": "init.lua",
     "types": "init.d.ts",
     "scripts": {
