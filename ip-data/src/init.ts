@@ -174,6 +174,8 @@ function ipAPIAsync(binaryInteger: number) {
 		: HttpService.GetAsync(`http://ip-api.com/json/?fields=${binaryInteger}`);
 }
 
+let previouslyRun = false;
+
 /**
  * Returns a table with information about the IP that called this function.
  *
@@ -215,17 +217,26 @@ async function getIPData(...fields: Array<keyof IPDataFields>) {
 	// This binary integer is equivalent, according to the API, to passing along a CSV
 	// list of all the fields you would like returned back to you.
 	// The reason we do this is to optimize bandwidth.
-	let binaryInteger = FORCED_FIELDS_SUM;
-	for (const field of fields) binaryInteger += fieldBits[field];
-	const [success, data] = pcall(ipAPIAsync, binaryInteger);
-
-	if (success) {
-		return HttpService.JSONDecode(data) as IPDataSuccess;
-	} else {
+	if (previouslyRun) {
 		return {
 			status: "fail",
-			message: data,
+			message: "already requested http://ip-api.com for this server instance",
 		} as IPDataFail;
+	} else {
+		previouslyRun = true;
+
+		let binaryInteger = FORCED_FIELDS_SUM;
+		for (const field of fields) binaryInteger += fieldBits[field];
+		const [success, data] = pcall(ipAPIAsync, binaryInteger);
+
+		if (success) {
+			return HttpService.JSONDecode(data) as IPDataSuccess;
+		} else {
+			return {
+				status: "fail",
+				message: data,
+			} as IPDataFail;
+		}
 	}
 }
 

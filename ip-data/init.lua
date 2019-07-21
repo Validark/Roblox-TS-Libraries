@@ -1,5 +1,5 @@
 -- Compiled with https://roblox-ts.github.io v0.2.7
--- July 20, 2019, 2:55 PM Central Daylight Time
+-- July 21, 2019, 5:41 PM Central Daylight Time
 
 local TS = _G[script];
 local _exports;
@@ -35,21 +35,30 @@ local function ipAPIAsync(binaryInteger)
 		return HttpService:GetAsync("http://ip-api.com/json/?fields=" .. tostring(binaryInteger));
 	end;
 end;
+local previouslyRun = false;
 getIPData = TS.async(function(...)
 	local fields = { ... };
-	local binaryInteger = FORCED_FIELDS_SUM;
-	for _0 = 1, #fields do
-		local field = fields[_0];
-		binaryInteger = binaryInteger + (fieldBits[field]);
-	end;
-	local success, data = pcall(ipAPIAsync, binaryInteger);
-	if success then
-		return HttpService:JSONDecode(data);
-	else
+	if previouslyRun then
 		return {
 			status = "fail";
-			message = data;
+			message = "already requested http://ip-api.com for this server instance";
 		};
+	else
+		previouslyRun = true;
+		local binaryInteger = FORCED_FIELDS_SUM;
+		for _0 = 1, #fields do
+			local field = fields[_0];
+			binaryInteger = binaryInteger + (fieldBits[field]);
+		end;
+		local success, data = pcall(ipAPIAsync, binaryInteger);
+		if success then
+			return HttpService:JSONDecode(data);
+		else
+			return {
+				status = "fail";
+				message = data;
+			};
+		end;
 	end;
 end);
 _exports = getIPData;
