@@ -1,8 +1,8 @@
--- Compiled with https://roblox-ts.github.io v0.2.7
--- July 20, 2019, 8:20 PM Central Daylight Time
+-- Compiled with https://roblox-ts.github.io v0.2.14
+-- July 27, 2019, 4:25 PM Central Daylight Time
 
 local TS = _G[script];
-local _exports = {};
+local exports = {};
 local yieldForTree = TS.import(TS.getModule("validate-tree")).yieldForTree;
 local R6Layout = {
 	["$className"] = "Model";
@@ -356,7 +356,7 @@ end;
 local function yieldForR15CharacterDescendants(character)
 	return yieldForTree(character, R15Layout);
 end;
-_exports._default = yieldForR15CharacterDescendants;
-_exports.yieldForR6CharacterDescendants = yieldForR6CharacterDescendants;
-_exports.yieldForR15CharacterDescendants = yieldForR15CharacterDescendants;
-return _exports;
+exports.default = yieldForR15CharacterDescendants;
+exports.yieldForR6CharacterDescendants = yieldForR6CharacterDescendants;
+exports.yieldForR15CharacterDescendants = yieldForR15CharacterDescendants;
+return exports;

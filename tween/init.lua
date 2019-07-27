@@ -89,5 +89,5 @@ end
 
 return {
 	Tween = MakeTween;
-	_default = MakeTween;
+	default = MakeTween;
 }

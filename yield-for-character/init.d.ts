@@ -1,4 +1,4 @@
-/// <reference types="@rbxts/@rbxts/types" />
+/// <reference types="@rbxts/types" />
 import { EvaluateInstanceTree } from "@rbxts/validate-tree";
 declare const R6Layout: {
     readonly $className: "Model";
