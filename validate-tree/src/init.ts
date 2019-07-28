@@ -1,7 +1,10 @@
-type KeyExtendsPropertyName<T extends InstanceTree, K> = K extends "Changed"
+type KeyExtendsPropertyName<T extends InstanceTree, K, V> = K extends "Changed"
 	? true
-	: (T extends { $className: keyof Instances } ? (K extends keyof Instances[T["$className"]] ? true : false) : false);
-
+	: (T extends {
+			$className: keyof Instances;
+	  }
+			? (K extends keyof Instances[T["$className"]] ? (V extends Instances[T["$className"]][K] ? V : unknown) : V)
+			: V);
 /** Defines a Rojo-esque tree type which defines an abstract object tree. */
 export interface InstanceTree {
 	$className?: keyof Instances;
@@ -9,15 +12,23 @@ export interface InstanceTree {
 }
 
 /** Evaluates a Rojo-esque tree and transforms it into an indexable type. */
-export type EvaluateInstanceTree<T extends InstanceTree, D = Instance> = (T extends { $className: keyof Instances }
+export declare type EvaluateInstanceTree<T extends InstanceTree, D = Instance> = (T extends {
+	$className: keyof Instances;
+}
 	? Instances[T["$className"]]
 	: D) &
 	{
-		[K in Exclude<keyof T, "$className">]: KeyExtendsPropertyName<T, K> extends true
-			? unknown
-			: (T[K] extends keyof Instances
-					? Instances[T[K]]
-					: (T[K] extends { $className: keyof Instances } ? EvaluateInstanceTree<T[K]> : never))
+		[K in Exclude<keyof T, "$className">]: KeyExtendsPropertyName<
+			T,
+			K,
+			T[K] extends keyof Instances
+				? Instances[T[K]]
+				: (T[K] extends {
+						$className: keyof Instances;
+				  }
+						? EvaluateInstanceTree<T[K]>
+						: never)
+		>
 	};
 
 /** Returns whether a given Instance matches a particular Rojo-eque InstanceTree. */

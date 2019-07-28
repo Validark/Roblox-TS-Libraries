@@ -1,8 +1,8 @@
--- Compiled with https://roblox-ts.github.io v0.2.7
--- July 20, 2019, 8:10 PM Central Daylight Time
+-- Compiled with https://roblox-ts.github.io v0.2.14
+-- July 28, 2019, 6:05 AM Central Daylight Time
 
 local TS = _G[script];
-local _exports = {};
+local exports = {};
 local validateTree;
 function validateTree(object, tree)
 	if not (tree["$className"] ~= nil) or object:IsA(tree["$className"]) then
@@ -66,6 +66,6 @@ local yieldForTree = TS.async(function(object, tree)
 		end));
 	end;
 end);
-_exports.validateTree = validateTree;
-_exports.yieldForTree = yieldForTree;
-return _exports;
+exports.validateTree = validateTree;
+exports.yieldForTree = yieldForTree;
+return exports;
