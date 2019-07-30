@@ -1,6 +1,6 @@
 import { EvaluateInstanceTree, yieldForTree } from "@rbxts/validate-tree";
 
-const R6Layout = {
+export const CharacterRigR6 = {
 	$className: "Model",
 
 	Head: {
@@ -72,7 +72,7 @@ const R6Layout = {
 	["Body Colors"]: "BodyColors",
 } as const;
 
-const R15Layout = {
+export const CharacterRigR15 = {
 	$className: "Model",
 
 	HumanoidRootPart: {
@@ -237,17 +237,17 @@ const R15Layout = {
 	["Body Colors"]: "BodyColors",
 } as const;
 
-export type CharacterRigR6 = EvaluateInstanceTree<typeof R6Layout>;
-export type CharacterRigR15 = EvaluateInstanceTree<typeof R15Layout>;
+export type CharacterRigR6 = EvaluateInstanceTree<typeof CharacterRigR6>;
+export type CharacterRigR15 = EvaluateInstanceTree<typeof CharacterRigR15>;
 
 /** Yields until every member of CharacterRigR6 exists */
 export function yieldForR6CharacterDescendants(character: Model): Promise<CharacterRigR6> {
-	return yieldForTree(character, R6Layout);
+	return yieldForTree(character, CharacterRigR6);
 }
 
 /** Yields until every member of CharacterRigR15 exists */
 export function yieldForR15CharacterDescendants(character: Model): Promise<CharacterRigR15> {
-	return yieldForTree(character, R15Layout);
+	return yieldForTree(character, CharacterRigR15);
 }
 
 export default yieldForR15CharacterDescendants;

@@ -1,6 +1,6 @@
 {
     "name": "@rbxts/yield-for-tree",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "Yield until all members of a specified tree exist, then dot access!",
     "main": "init.lua",
     "types": "init.d.ts",
@@ -36,6 +36,6 @@
     },
     "dependencies": {
         "@rbxts/types": "^1.0.227",
-        "@rbxts/validate-tree": "1.0.0"
+        "@rbxts/validate-tree": "^1.0.0"
     }
 }

@@ -1,10 +1,10 @@
 -- Compiled with https://roblox-ts.github.io v0.2.14
--- July 27, 2019, 4:25 PM Central Daylight Time
+-- July 30, 2019, 9:16 AM Central Daylight Time
 
 local TS = _G[script];
 local exports = {};
 local yieldForTree = TS.import(TS.getModule("validate-tree")).yieldForTree;
-local R6Layout = {
+local CharacterRigR6 = {
 	["$className"] = "Model";
 	Head = {
 		["$className"] = "Part";
@@ -64,7 +64,7 @@ local R6Layout = {
 	Pants = "Pants";
 	["Body Colors"] = "BodyColors";
 };
-local R15Layout = {
+local CharacterRigR15 = {
 	["$className"] = "Model";
 	HumanoidRootPart = {
 		["$className"] = "Part";
@@ -351,12 +351,14 @@ local R15Layout = {
 	["Body Colors"] = "BodyColors";
 };
 local function yieldForR6CharacterDescendants(character)
-	return yieldForTree(character, R6Layout);
+	return yieldForTree(character, CharacterRigR6);
 end;
 local function yieldForR15CharacterDescendants(character)
-	return yieldForTree(character, R15Layout);
+	return yieldForTree(character, CharacterRigR15);
 end;
 exports.default = yieldForR15CharacterDescendants;
+exports.CharacterRigR6 = CharacterRigR6;
+exports.CharacterRigR15 = CharacterRigR15;
 exports.yieldForR6CharacterDescendants = yieldForR6CharacterDescendants;
 exports.yieldForR15CharacterDescendants = yieldForR15CharacterDescendants;
 return exports;

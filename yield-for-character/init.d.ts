@@ -1,6 +1,6 @@
 /// <reference types="@rbxts/types" />
 import { EvaluateInstanceTree } from "@rbxts/validate-tree";
-declare const R6Layout: {
+export declare const CharacterRigR6: {
     readonly $className: "Model";
     Head: {
         readonly $className: "Part";
@@ -60,7 +60,7 @@ declare const R6Layout: {
     readonly Pants: "Pants";
     readonly ["Body Colors"]: "BodyColors";
 };
-declare const R15Layout: {
+export declare const CharacterRigR15: {
     readonly $className: "Model";
     HumanoidRootPart: {
         readonly $className: "Part";
@@ -346,8 +346,8 @@ declare const R15Layout: {
     readonly Pants: "Pants";
     readonly ["Body Colors"]: "BodyColors";
 };
-export declare type CharacterRigR6 = EvaluateInstanceTree<typeof R6Layout>;
-export declare type CharacterRigR15 = EvaluateInstanceTree<typeof R15Layout>;
+export declare type CharacterRigR6 = EvaluateInstanceTree<typeof CharacterRigR6>;
+export declare type CharacterRigR15 = EvaluateInstanceTree<typeof CharacterRigR15>;
 /** Yields until every member of CharacterRigR6 exists */
 export declare function yieldForR6CharacterDescendants(character: Model): Promise<CharacterRigR6>;
 /** Yields until every member of CharacterRigR15 exists */

@@ -5,6 +5,7 @@ type KeyExtendsPropertyName<T extends InstanceTree, K, V> = K extends "Changed"
 	  }
 			? (K extends keyof Instances[T["$className"]] ? (V extends Instances[T["$className"]][K] ? V : unknown) : V)
 			: V);
+
 /** Defines a Rojo-esque tree type which defines an abstract object tree. */
 export interface InstanceTree {
 	$className?: keyof Instances;
@@ -35,8 +36,9 @@ export declare type EvaluateInstanceTree<T extends InstanceTree, D = Instance> =
 export function validateTree<I extends Instance, T extends InstanceTree>(
 	object: I,
 	tree: T,
+	violators?: Array<string>,
 ): object is I & EvaluateInstanceTree<T, I> {
-	if (!("$className" in tree) || object.IsA(tree.$className as string)) {
+	if (!("$className" in tree) || object.IsA(tree.$className as string) || violators) {
 		const whitelistedKeys = new Set(["$className"]);
 
 		for (const child of object.GetChildren()) {
@@ -44,15 +46,32 @@ export function validateTree<I extends Instance, T extends InstanceTree>(
 			if (childName !== "$className") {
 				const className = tree[childName] as string | InstanceTree | undefined;
 
-				if (typeIs(className, "string") ? child.IsA(className) : className && validateTree(child, className)) {
+				if (
+					typeIs(className, "string")
+						? child.IsA(className)
+						: className && validateTree(child, className, violators)
+				) {
 					whitelistedKeys.add(childName);
 				}
 			}
 		}
 
-		for (const value of Object.keys(tree)) if (!whitelistedKeys.has(value as string)) return false;
-		return true;
-	} else return false;
+		let matches = true;
+
+		for (const value of Object.keys(tree)) {
+			if (!whitelistedKeys.has(value as string)) {
+				if (violators) {
+					const fullName = object.GetFullName();
+					violators.push(fullName + "." + value);
+					matches = false;
+				} else return false;
+			}
+		}
+
+		return matches;
+	} else {
+		return false;
+	}
 }
 
 /** Yields until a given tree of objects exists within an object.
@@ -70,12 +89,31 @@ export async function yieldForTree<I extends Instance, T extends InstanceTree>(
 		return object as I & EvaluateInstanceTree<T, I>;
 	} else {
 		return await new Promise((resolve, reject) => {
+			let resolved = false;
+			let openDelay = 0;
 			const connections = new Array<RBXScriptConnection>();
+
+			const tryWarning = (id: number) => {
+				if (id === openDelay && !resolved) {
+					const violators = new Array<string>();
+					if (validateTree(object, tree, violators)) {
+						for (const connection of connections) connection.Disconnect();
+						resolve(object as I & EvaluateInstanceTree<T, I>);
+						resolved = true;
+					} else {
+						warn(`[yieldForTree] Infinite yield possible. Waiting for: ${violators.join(", ")}`);
+					}
+				}
+			};
 
 			const updateTreeForDescendant = () => {
 				if (validateTree(object, tree)) {
 					for (const connection of connections) connection.Disconnect();
 					resolve(object as I & EvaluateInstanceTree<T, I>);
+					resolved = true;
+				} else {
+					const id = ++openDelay;
+					delay(5, () => tryWarning(id));
 				}
 			};
 
@@ -91,6 +129,8 @@ export async function yieldForTree<I extends Instance, T extends InstanceTree>(
 					updateTreeForDescendant();
 				}),
 			);
+
+			delay(5, () => tryWarning(0));
 		});
 	}
 }
