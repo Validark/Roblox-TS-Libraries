@@ -66,8 +66,8 @@ export const CharacterRigR6 = {
 		WaistFrontAttachment: "Attachment",
 	},
 
-	Shirt: "Shirt",
-	Pants: "Pants",
+	// Shirt: "Shirt",
+	// Pants: "Pants",
 
 	["Body Colors"]: "BodyColors",
 } as const;
@@ -231,8 +231,8 @@ export const CharacterRigR15 = {
 		OriginalSize: "Vector3Value",
 	},
 
-	Shirt: "Shirt",
-	Pants: "Pants",
+	// Shirt: "Shirt",
+	// Pants: "Pants",
 
 	["Body Colors"]: "BodyColors",
 } as const;

@@ -1,5 +1,5 @@
 -- Compiled with https://roblox-ts.github.io v0.2.14
--- July 30, 2019, 9:16 AM Central Daylight Time
+-- July 30, 2019, 9:35 AM Central Daylight Time
 
 local TS = _G[script];
 local exports = {};
@@ -60,8 +60,6 @@ local CharacterRigR6 = {
 		WaistCenterAttachment = "Attachment";
 		WaistFrontAttachment = "Attachment";
 	};
-	Shirt = "Shirt";
-	Pants = "Pants";
 	["Body Colors"] = "BodyColors";
 };
 local CharacterRigR15 = {
@@ -346,8 +344,6 @@ local CharacterRigR15 = {
 		face = "Decal";
 		OriginalSize = "Vector3Value";
 	};
-	Shirt = "Shirt";
-	Pants = "Pants";
 	["Body Colors"] = "BodyColors";
 };
 local function yieldForR6CharacterDescendants(character)
