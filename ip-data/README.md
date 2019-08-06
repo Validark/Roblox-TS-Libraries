@@ -1,6 +1,6 @@
 # ip-data
 
-Wraps the following API: http://ip-api.com/docs/api:json
+Typings for the following API: http://ip-api.com/docs/api:json
 
 Demo usage:
 

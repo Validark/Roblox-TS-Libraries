@@ -168,8 +168,7 @@ const HttpService = game.GetService("HttpService");
 let ipData: IPDataSuccess | IPDataFail | undefined;
 
 export = async () =>
-	ipData
-		? ipData
-		: (ipData = HttpService.JSONDecode(HttpService.GetAsync("http://ip-api.com/json/?fields=" + (2 ** 24 - 1))) as
-				| IPDataSuccess
-				| IPDataFail);
+	ipData ||
+	(ipData = HttpService.JSONDecode(HttpService.GetAsync("http://ip-api.com/json/?fields=" + (2 ** 24 - 1))) as
+		| IPDataSuccess
+		| IPDataFail);

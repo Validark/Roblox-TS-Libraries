@@ -1,16 +1,16 @@
--- Compiled with https://roblox-ts.github.io v0.2.7
--- July 21, 2019, 6:30 PM Central Daylight Time
+-- Compiled with https://roblox-ts.github.io v0.3.0
+-- August 5, 2019, 11:13 PM Central Daylight Time
 
 local TS = _G[script];
-local _exports;
+local exports;
 local HttpService = game:GetService("HttpService");
 local ipData;
-_exports = TS.async(function()
-	if ipData then
-		return ipData;
-	else
+exports = TS.async(function()
+	local _0 = ipData;
+	if not (_0) then
 		ipData = HttpService:JSONDecode(HttpService:GetAsync("http://ip-api.com/json/?fields=" .. (2 ^ 24 - 1)));
-		return ipData;
+		_0 = ipData;
 	end;
+	return _0;
 end);
-return _exports;
+return exports;
