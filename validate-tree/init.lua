@@ -1,12 +1,11 @@
 -- Compiled with https://roblox-ts.github.io v0.2.14
--- July 30, 2019, 9:10 AM Central Daylight Time
+-- August 11, 2019, 4:44 AM Central Daylight Time
 
 local TS = _G[script];
 local exports = {};
 local validateTree;
 function validateTree(object, tree, violators)
-	local isProperClass = not (tree["$className"] ~= nil) or object:IsA(tree["$className"]);
-	if isProperClass or violators then
+	if not (tree["$className"] ~= nil) or object:IsA(tree["$className"]) or violators then
 		local whitelistedKeys = {
 			["$className"] = true;
 		};
@@ -50,37 +49,15 @@ local yieldForTree = TS.async(function(object, tree)
 	else
 		return TS.await(TS.Promise.new(function(resolve, reject)
 			local resolved = false;
-			local openDelay = 0;
 			local connections = {};
-			local tryWarning = function(id)
-				if id == openDelay and not resolved then
-					local violators = {};
-					if validateTree(object, tree, violators) then
-						for _0 = 1, #connections do
-							local connection = connections[_0];
-							connection:Disconnect();
-						end;
-						resolve(object);
-						resolved = true;
-					else
-						warn("[yieldForTree] Infinite yield possible. Waiting for: " .. table.concat(violators, ", "));
-					end;
-				end;
-			end;
 			local updateTreeForDescendant = function()
-				if validateTree(object, tree) then
+				if not resolved and validateTree(object, tree) then
+					resolved = true;
 					for _0 = 1, #connections do
 						local connection = connections[_0];
 						connection:Disconnect();
 					end;
 					resolve(object);
-					resolved = true;
-				else
-					openDelay = openDelay + 1;
-					local id = openDelay;
-					delay(5, function()
-						return tryWarning(id);
-					end);
 				end;
 			end;
 			local processDescendant = function(descendant)
@@ -96,7 +73,19 @@ local yieldForTree = TS.async(function(object, tree)
 				updateTreeForDescendant();
 			end);
 			delay(5, function()
-				return tryWarning(0);
+				if not resolved then
+					local violators = {};
+					if validateTree(object, tree, violators) then
+						resolved = true;
+						for _2 = 1, #connections do
+							local connection = connections[_2];
+							connection:Disconnect();
+						end;
+						resolve(object);
+					else
+						warn("[yieldForTree] Infinite yield possible. Waiting for: " .. table.concat(violators, ", "));
+					end;
+				end;
 			end);
 		end));
 	end;

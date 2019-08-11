@@ -93,10 +93,10 @@ export async function yieldForTree<I extends Instance, T extends InstanceTree>(
 			const connections = new Array<RBXScriptConnection>();
 
 			const updateTreeForDescendant = () => {
-				if (validateTree(object, tree)) {
+				if (!resolved && validateTree(object, tree)) {
+					resolved = true;
 					for (const connection of connections) connection.Disconnect();
 					resolve(object as I & EvaluateInstanceTree<T, I>);
-					resolved = true;
 				}
 			};
 
@@ -117,6 +117,7 @@ export async function yieldForTree<I extends Instance, T extends InstanceTree>(
 				if (!resolved) {
 					const violators = new Array<string>();
 					if (validateTree(object, tree, violators)) {
+						resolved = true;
 						for (const connection of connections) connection.Disconnect();
 						resolve(object as I & EvaluateInstanceTree<T, I>);
 					} else {

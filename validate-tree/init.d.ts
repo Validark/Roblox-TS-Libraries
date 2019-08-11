@@ -1,7 +1,7 @@
 /// <reference types="@rbxts/types" />
 declare type KeyExtendsPropertyName<T extends InstanceTree, K, V> = K extends "Changed" ? true : (T extends {
     $className: keyof Instances;
-} ? (K extends keyof Instances[T["$className"]] ? (V extends Instances[T["$className"]][K] ? V : unknown) : V) : V);
+} ? (K extends keyof Instances[T["$className"]] ? unknown : V) : V);
 /** Defines a Rojo-esque tree type which defines an abstract object tree. */
 export interface InstanceTree {
     $className?: keyof Instances;
