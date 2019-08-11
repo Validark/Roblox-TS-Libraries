@@ -3,7 +3,7 @@ type KeyExtendsPropertyName<T extends InstanceTree, K, V> = K extends "Changed"
 	: (T extends {
 			$className: keyof Instances;
 	  }
-			? (K extends keyof Instances[T["$className"]] ? (V extends Instances[T["$className"]][K] ? V : unknown) : V)
+			? (K extends keyof Instances[T["$className"]] ? unknown : V)
 			: V);
 
 /** Defines a Rojo-esque tree type which defines an abstract object tree. */
@@ -90,30 +90,13 @@ export async function yieldForTree<I extends Instance, T extends InstanceTree>(
 	} else {
 		return await new Promise((resolve, reject) => {
 			let resolved = false;
-			let openDelay = 0;
 			const connections = new Array<RBXScriptConnection>();
-
-			const tryWarning = (id: number) => {
-				if (id === openDelay && !resolved) {
-					const violators = new Array<string>();
-					if (validateTree(object, tree, violators)) {
-						for (const connection of connections) connection.Disconnect();
-						resolve(object as I & EvaluateInstanceTree<T, I>);
-						resolved = true;
-					} else {
-						warn(`[yieldForTree] Infinite yield possible. Waiting for: ${violators.join(", ")}`);
-					}
-				}
-			};
 
 			const updateTreeForDescendant = () => {
 				if (validateTree(object, tree)) {
 					for (const connection of connections) connection.Disconnect();
 					resolve(object as I & EvaluateInstanceTree<T, I>);
 					resolved = true;
-				} else {
-					const id = ++openDelay;
-					delay(5, () => tryWarning(id));
 				}
 			};
 
@@ -130,7 +113,17 @@ export async function yieldForTree<I extends Instance, T extends InstanceTree>(
 				}),
 			);
 
-			delay(5, () => tryWarning(0));
+			delay(5, () => {
+				if (!resolved) {
+					const violators = new Array<string>();
+					if (validateTree(object, tree, violators)) {
+						for (const connection of connections) connection.Disconnect();
+						resolve(object as I & EvaluateInstanceTree<T, I>);
+					} else {
+						warn(`[yieldForTree] Infinite yield possible. Waiting for: ${violators.join(", ")}`);
+					}
+				}
+			});
 		});
 	}
 }
