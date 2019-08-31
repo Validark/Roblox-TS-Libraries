@@ -1,3 +1,5 @@
+## object-composer
+
 object-composer ships a single `compose` function, which combines a series of callbacks which each return an object, into a single function which returns the combination of all returned objects. Each callback function can optionally take a single `state` parameter, with the defined properties that one should be able to (or need to) pass into the callback during  object construction. Property-Collisions error at compile-time and run-time. If TypeScript underlines one of your object constructors and says it isn't assignable to `never`, that's because there is a property/method collision.
 
 Here is a demo, taking inspiration from this video: https://youtu.be/wfMtDGfHWpA
