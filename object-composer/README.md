@@ -93,7 +93,7 @@ function f(o: Dog) {
 }
 ```
 
-A cool feature of TypeScript is that you can define the `this` property to make compile-time checks on the call site. For example, if you wanted to define a method that should only work if called on an object with a particular property, you can do that as well. With proper object composition you shouldn't need to do this, but I thought it was cool regardless.
+A cool feature of TypeScript is that you can define the `this` property to make compile-time checks on the call site. For example, if you wanted to define a method that should only work if called on an object with a particular property, you can do so! With proper object composition you shouldn't need to do this, but I thought it was cool regardless.
 
 ```ts
 export {};
