@@ -1,0 +1,38 @@
+{
+    "name": "@rbxts/object-composer",
+    "version": "1.0.0",
+    "description": "A simple, light-weight multiple inheritance object composition library",
+    "main": "init.lua",
+    "types": "index.d.ts",
+    "scripts": {
+        "build": "rbxtsc & mv out/* . & rm -r out"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/object-composer"
+    },
+    "keywords": [
+        "Roblox",
+        "TypeScript",
+        "Stack",
+        "Data structures",
+        "Object",
+        "Composition",
+        "Multiple Inheritance",
+        "Inheritance"
+    ],
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
+    },
+    "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/object-composer/README.md",
+    "publishConfig": {
+        "access": "public"
+    },
+    "peerDependencies": {
+        "@rbxts/types": "^1.0.194"
+    },
+    "dependencies": {
+        "@rbxts/types": "^1.0.260"
+    }
+}
