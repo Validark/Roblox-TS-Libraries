@@ -95,7 +95,7 @@ A cool feature of TypeScript is that you can define the `this` property to make 
 
 ```ts
 export {};
-import compose from "shared/compose";
+import compose from "@rbxts/object-composer";
 
 const ToStringHaver = () => ({
 	toString(): string {
