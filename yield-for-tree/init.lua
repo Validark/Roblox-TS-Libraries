@@ -3,6 +3,6 @@
 
 local TS = _G[script];
 local exports = {};
-local _0 = TS.import(TS.getModule("validate-tree"));
+local _0 = TS.import(script, TS.getModule(script, "validate-tree"));
 exports.yieldForTree, exports.default = _0.yieldForTree, _0.yieldForTree;
 return exports;

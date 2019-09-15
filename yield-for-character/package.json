@@ -1,6 +1,6 @@
 {
     "name": "@rbxts/yield-for-character",
-    "version": "1.0.9",
+    "version": "1.0.10",
     "description": "Yield until all members of a character rig exist, then dot access!",
     "main": "init.lua",
     "types": "init.d.ts",

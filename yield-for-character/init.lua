@@ -3,7 +3,7 @@
 
 local TS = _G[script];
 local exports = {};
-local yieldForTree = TS.import(TS.getModule("validate-tree")).yieldForTree;
+local yieldForTree = TS.import(script, TS.getModule(script, "validate-tree")).yieldForTree;
 local CharacterRigR6 = {
 	["$className"] = "Model";
 	Head = {
