@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/date",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A re-implementation of vanilla Lua's os.date function.",
 	"main": "init.lua",
 	"types": "index.d.ts",
