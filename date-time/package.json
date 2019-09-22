@@ -9,16 +9,15 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/extendable-resources"
+		"url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/date-time"
 	},
 	"keywords": [
 		"resources",
 		"roblox-typescript",
-		"RemoteEvents",
-		"RemoteFunctions",
-		"Remotes",
-		"Folder",
-		"Manager"
+		"time",
+		"date",
+		"formatting",
+		"formatter"
 	],
 	"peerDependencies": {
 		"@rbxts/types": "^1.0.194"
@@ -28,7 +27,7 @@
 	"bugs": {
 		"url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
 	},
-	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/extendable-resources/README.md",
+	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/date-time/README.md",
 	"publishConfig": {
 		"access": "public"
 	},
