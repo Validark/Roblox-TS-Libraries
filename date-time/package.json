@@ -1,0 +1,38 @@
+{
+	"name": "@rbxts/date-time",
+	"version": "0.0.0",
+	"description": "An extendable date formatting object. In development",
+	"main": "init.lua",
+	"types": "init.d.ts",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/extendable-resources"
+	},
+	"keywords": [
+		"resources",
+		"roblox-typescript",
+		"RemoteEvents",
+		"RemoteFunctions",
+		"Remotes",
+		"Folder",
+		"Manager"
+	],
+	"peerDependencies": {
+		"@rbxts/types": "^1.0.194"
+	},
+	"author": "Validark",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
+	},
+	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/extendable-resources/README.md",
+	"publishConfig": {
+		"access": "public"
+	},
+	"dependencies": {
+		"@rbxts/types": "^1.0.194"
+	}
+}
