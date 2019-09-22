@@ -9,7 +9,7 @@ A new wrapper object for dealing with dates and times.
 - Objects should be immutable, and shouldn't be very large.
 - It should be clear to the library and user what a developer means by a declaration, and that should be translated over to a locale.
     - A developer declaration should not accidentally get declared in a locale, leading to mismatched events
-
+- Support a few different formatting options.
 
 Example:
 
