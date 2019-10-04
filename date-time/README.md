@@ -17,7 +17,7 @@ Example:
 // This should create an event for the entire October of 2019.
 // EventStart should be the first second of October 2019, 00:00:00 in UTC time
 const eventStart = DateTime.fromObject({ month: 10, year: 2019 });
-// Event end shold be the last second of October 2019, 23:59:59 in UTC time
+// Event end should be the last second of October 2019, 23:59:59 in UTC time
 const eventEnd = eventStart.endOf("month");
 
 // Should print the default format of this locale, and the date should be adjusted to the locale's calendar.
