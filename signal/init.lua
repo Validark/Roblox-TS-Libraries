@@ -15,9 +15,10 @@ end
 
 function Signal:Fire(...)
 	local Arguments = { ... }
+	local n = select("#", ...)
 
 	self.Bindable:Fire(function()
-		return unpack(Arguments)
+		return unpack(Arguments, 1, n)
 	end)
 end
 

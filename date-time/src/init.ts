@@ -33,7 +33,7 @@ interface Locale {
 	};
 	PATTERNS: PatternDefinition;
 	FIRST_DAY_OF_WEEK: number;
-};
+}
 
 function DeclareReplacePatterns(patterns: Omit<PatternDefinition, keyof typeof UNIVERSAL_PATTERNS>) {
 	patterns = Object.assign(patterns, UNIVERSAL_PATTERNS);
@@ -402,6 +402,8 @@ function printDateTable(dateTable: DateTable) {
 
 const DEFAULT_LOCALE = "en-us";
 
+function f2() {}
+
 class DateTime {
 	/** Ripped from `CorePackages.AppTempCommon.LuaChat.DateTime`. Experimental. */
 	static getUTCOffset() {
@@ -593,18 +595,27 @@ const prototype = (DateTime as unknown) as typeof DateTime.prototype;
 
 print(new DateTime());
 
-// Create an event that runs during the month of May 2020
-const eventStart = DateTime.fromObject({ month: 10, year: 2019 });
+// Create an event that runs during the month of December 2020
+const eventStart = DateTime.fromObject({ month: 12, year: 2020 });
 const eventEnd = eventStart.endOf("month");
-const current = new DateTime();
 
-print(`EVENT START: ${eventStart}`);
+print(`EVENT START: ${eventStart}`); // calls `tostring(eventStart)`, which calls eventStart.toString()
 print(`EVENT END: ${eventEnd}`);
 
-if (eventStart.valueOf() <= current.valueOf() && current.valueOf() <= eventEnd.valueOf()) {
+// Create an object for the current date and time (default), which we can compare with event DateTimes
+const current = new DateTime();
+
+if (eventStart <= current && current <= eventEnd) {
 	print("EVENT ONGOING");
 } else {
 	print("EVENT ENDED");
 }
 
 new DateTime().plus({ years: 1 });
+new DateTime().plus({ months: 1 });
+
+function f(a: number | string, b: string) {
+	if (a < b) print("bad!");
+}
+
+type X = DateTime["valueOf"];

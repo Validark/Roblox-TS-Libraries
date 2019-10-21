@@ -28,14 +28,14 @@
 		"@rbxts/easing-functions": "^1.0.0",
 		"@rbxts/lerp-functions": "^1.0.0",
 		"@rbxts/cubic-bezier": "^1.0.2",
-		"@rbxts/types": "^1.0.194"
+		"@rbxts/types": "^1.0.282"
 	},
 	"author": "Validark",
 	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
 	},
-	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/rbx-tween/README.md",
+	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/tween/README.md",
 	"publishConfig": {
 		"access": "public"
 	}
