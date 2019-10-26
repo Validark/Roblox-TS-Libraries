@@ -1,9 +1,9 @@
 {
     "name": "@rbxts/object-composer",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A simple, light-weight multiple inheritance object composition library",
     "main": "init.lua",
-    "types": "index.d.ts",
+    "types": "init.d.ts",
     "scripts": {
         "build": "rbxtsc & mv out/* . & rm -r out"
     },
