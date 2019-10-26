@@ -32,27 +32,22 @@ function Make<T extends keyof CreatableInstances>(
 		Parent?: Instance | undefined;
 	},
 ) {
-	const { Children: children, Parent: parent } = settings;
-
-	settings.Children = undefined;
-	settings.Parent = undefined;
+	const { Children, Parent, ...rest } = settings;
 
 	const instance = new Instance(className);
 
-	for (const [setting, value] of Object.entries(settings as GetPartialObjectWithBindableConnectSlots<
-		CreatableInstances[T]
-	>)) {
+	for (const [setting, value] of Object.entries(rest)) {
 		const { [setting]: prop } = instance;
 
 		if (typeIs(prop, "RBXScriptSignal")) {
-			prop.Connect(value!);
+			prop.Connect(value as () => void);
 		} else {
 			instance[setting] = value as any;
 		}
 	}
 
-	if (children) for (const child of children) child.Parent = instance;
-	instance.Parent = parent;
+	if (Children) for (const child of Children) child.Parent = instance;
+	instance.Parent = Parent;
 	return instance;
 }
 
