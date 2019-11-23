@@ -1,5 +1,5 @@
 -- Compiled with https://roblox-ts.github.io v0.2.14
--- August 11, 2019, 4:44 AM Central Daylight Time
+-- November 23, 2019, 1:36 PM Western European Standard Time
 
 local TS = _G[script];
 local exports = {};
@@ -12,18 +12,36 @@ function validateTree(object, tree, violators)
 		local _0 = object:GetChildren();
 		for _1 = 1, #_0 do
 			local child = _0[_1];
-			local childName = child.Name;
-			if childName ~= "$className" then
-				local className = tree[childName];
-				local _2;
-				if (typeof(className) == "string") then
-					_2 = child:IsA(className);
-				else
-					_2 = className and validateTree(child, className, violators);
+			local _continue_0 = false;
+			repeat
+				local childName;
+				local _2, _3 = pcall(function()
+					childName = child.Name;
+				end);
+				if not _2 then
+					local err = _3;
+					if tree["$className"] == "DataModel" then
+						_continue_0 = true; break;
+					else
+						error("Could not validate the tree - Got '" .. tostring(err) .. "' in DataModel node");
+					end;
 				end;
-				if _2 then
-					whitelistedKeys[childName] = true;
+				if childName ~= "$className" then
+					local className = tree[childName];
+					local _4;
+					if (typeof(className) == "string") then
+						_4 = child:IsA(className);
+					else
+						_4 = className and validateTree(child, className, violators);
+					end;
+					if _4 then
+						whitelistedKeys[childName] = true;
+					end;
 				end;
+				_continue_0 = true;
+			until true;
+			if not _continue_0 then
+				break;
 			end;
 		end;
 		local matches = true;

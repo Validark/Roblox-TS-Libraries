@@ -1,10 +1,12 @@
 type KeyExtendsPropertyName<T extends InstanceTree, K, V> = K extends "Changed"
 	? true
-	: (T extends {
+	: T extends {
 			$className: keyof Instances;
 	  }
-			? (K extends keyof Instances[T["$className"]] ? unknown : V)
-			: V);
+	? K extends keyof Instances[T["$className"]]
+		? unknown
+		: V
+	: V;
 
 /** Defines a Rojo-esque tree type which defines an abstract object tree. */
 export interface InstanceTree {
@@ -24,12 +26,12 @@ export declare type EvaluateInstanceTree<T extends InstanceTree, D = Instance> =
 			K,
 			T[K] extends keyof Instances
 				? Instances[T[K]]
-				: (T[K] extends {
+				: T[K] extends {
 						$className: keyof Instances;
 				  }
-						? EvaluateInstanceTree<T[K]>
-						: never)
-		>
+				? EvaluateInstanceTree<T[K]>
+				: never
+		>;
 	};
 
 /** Returns whether a given Instance matches a particular Rojo-eque InstanceTree. */
@@ -42,7 +44,21 @@ export function validateTree<I extends Instance, T extends InstanceTree>(
 		const whitelistedKeys = new Set(["$className"]);
 
 		for (const child of object.GetChildren()) {
-			const childName = child.Name;
+			/* Possible Roblox security context violation if tree root is the DataModel */
+
+			let childName;
+			try {
+				childName = child.Name;
+			} catch (err) {
+				/* Expected situation: The current identity (X) cannot Class security check (lacking permission Y) */
+				if (tree.$className === "DataModel") {
+					continue;
+				} else {
+					// FIXME Proper runtime error message
+					throw "Could not validate the tree - Got '" + err + "' in DataModel node";
+				}
+			}
+
 			if (childName !== "$className") {
 				const className = tree[childName] as string | InstanceTree | undefined;
 
