@@ -28,7 +28,7 @@ export declare type EvaluateInstanceTree<T extends InstanceTree, D = Instance> =
 				? Instances[T[K]]
 				: T[K] extends {
 						$className: keyof Instances;
-				  }
+				}
 				? EvaluateInstanceTree<T[K]>
 				: never
 		>;
@@ -44,18 +44,18 @@ export function validateTree<I extends Instance, T extends InstanceTree>(
 		const whitelistedKeys = new Set(["$className"]);
 
 		for (const child of object.GetChildren()) {
-			/* Possible Roblox security context violation if tree root is the DataModel */
+			/* Possible Roblox security context violation if tree root is the DataModel (aka 'game') */
 
 			let childName;
 			try {
 				childName = child.Name;
 			} catch (err) {
 				/* Expected situation: The current identity (X) cannot Class security check (lacking permission Y) */
-				if (tree.$className === "DataModel") {
+				if (tree.$className === "DataModel" || object as Instance === game) {
 					continue;
 				} else {
 					// FIXME Proper runtime error message
-					throw "Could not validate the tree - Got '" + err + "' in DataModel node";
+					throw "Could not validate the tree - Got '" + err + "' in non-DataModel node (child '" + child + "')";
 				}
 			}
 

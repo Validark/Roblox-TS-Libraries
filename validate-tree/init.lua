@@ -1,5 +1,5 @@
 -- Compiled with https://roblox-ts.github.io v0.2.14
--- November 23, 2019, 1:36 PM Western European Standard Time
+-- November 23, 2019, 3:13 PM Western European Standard Time
 
 local TS = _G[script];
 local exports = {};
@@ -20,10 +20,10 @@ function validateTree(object, tree, violators)
 				end);
 				if not _2 then
 					local err = _3;
-					if tree["$className"] == "DataModel" then
+					if tree["$className"] == "DataModel" or object == game then
 						_continue_0 = true; break;
 					else
-						error("Could not validate the tree - Got '" .. tostring(err) .. "' in DataModel node");
+						error("Could not validate the tree - Got '" .. tostring(err) .. "' in non-DataModel node (child '" .. tostring(child) .. "')");
 					end;
 				end;
 				if childName ~= "$className" then
