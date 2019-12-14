@@ -4,7 +4,7 @@
  * @editor Validark
  */
 
-interface Spring<T> {
+export interface Spring<T> {
 	// spring methods/properties
 	dampingRatio: number;
 	angularFrequency: number;
@@ -39,6 +39,4 @@ interface Spring<T> {
  * @param goal The target of the Spring
  * @param dampingRatio The damping ratio of the spring
  */
-declare const Spring: new <T>(position: T, angularFrequency?: number, goal?: T, dampingRatio?: number) => Spring<T>;
-
-export = Spring;
+export const Spring: new <T>(position: T, angularFrequency?: number, goal?: T, dampingRatio?: number) => Spring<T>;
