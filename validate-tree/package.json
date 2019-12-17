@@ -1,6 +1,6 @@
 {
     "name": "@rbxts/validate-tree",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "Validates whether a given instance matches a given instance tree",
     "main": "init.lua",
     "types": "init.d.ts",
@@ -28,12 +28,12 @@
     },
     "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/validate-tree/README.md",
     "peerDependencies": {
-        "@rbxts/types": "^1.0.227"
+        "@rbxts/types": "^1.0.316"
     },
     "publishConfig": {
         "access": "public"
     },
     "dependencies": {
-        "@rbxts/types": "^1.0.227"
+        "@rbxts/types": "^1.0.316"
     }
 }
