@@ -1,5 +1,5 @@
 -- Compiled with https://roblox-ts.github.io v0.2.14
--- December 17, 2019, 2:54 PM Western European Standard Time
+-- December 17, 2019, 3:15 PM Western European Standard Time
 
 local TS = _G[script];
 local exports = {};
@@ -9,28 +9,16 @@ function validateTree(object, tree, violators)
 		local whitelistedKeys = {
 			["$className"] = true;
 		};
-		if object == game then
-			for serv, newTree in pairs(tree) do
-				if serv ~= "$className" then
-					local service = game:GetService(serv);
-					if not service then
-						return false;
-					end;
-					local _0;
-					if (typeof(newTree) == "string") then
-						_0 = service:IsA(newTree);
-					else
-						_0 = serv and validateTree(service, newTree, violators);
-					end;
-					if _0 then
-						whitelistedKeys[serv] = true;
-					end;
-				end;
+		local function getChild(object, search)
+			if (object) == game then
+				return game:GetService(search);
+			else
+				return object:FindFirstChild(search);
 			end;
 		end;
 		for className, childClass in pairs(tree) do
 			if className ~= "$className" then
-				local child = object:FindFirstChild(className);
+				local child = getChild(object, className);
 				if not child then
 					return false;
 				end;

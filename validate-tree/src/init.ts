@@ -41,28 +41,17 @@ export function validateTree<I extends Instance, T extends InstanceTree>(
 	if (!("$className" in tree) || object.IsA(tree.$className as string) || violators) {
 		const whitelistedKeys = new Set(["$className"]);
 
-		if (object as Instance === game) {
-			// Convert to something we can iterate
-			for (const [serv, newTree] of tree as unknown as Map<string, string | InstanceTree>) {
-				if (serv !== "$className") {
-					const service = game.GetService(serv);
-					if (!service) {
-						return false;
-					}
-
-					if (
-						typeIs(newTree, "string")
-							? service.IsA(newTree)
-							: serv && validateTree(service, newTree, violators)
-					) {
-						whitelistedKeys.add(serv);
-					}
-				}
+		function getChild(object: I, search: string): Instance | undefined {
+			if ((object as Instance) === game) {
+				return game.GetService(search);
+			} else {
+				return object.FindFirstChild(search);
 			}
 		}
+
 		for (const [className, childClass] of tree as unknown as Map<string, string | InstanceTree>) {
 			if (className !== "$className") {
-				const child = object.FindFirstChild(className);
+				const child = getChild(object, className);
 				if (!child) {
 					// Tree invalid, early quit
 					return false;
