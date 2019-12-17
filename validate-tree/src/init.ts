@@ -26,7 +26,7 @@ export declare type EvaluateInstanceTree<T extends InstanceTree, D = Instance> =
 				? Instances[T[K]]
 				: (T[K] extends {
 						$className: keyof Instances;
-				  }
+					}
 						? EvaluateInstanceTree<T[K]>
 						: never)
 		>
@@ -41,17 +41,39 @@ export function validateTree<I extends Instance, T extends InstanceTree>(
 	if (!("$className" in tree) || object.IsA(tree.$className as string) || violators) {
 		const whitelistedKeys = new Set(["$className"]);
 
-		for (const child of object.GetChildren()) {
-			const childName = child.Name;
-			if (childName !== "$className") {
-				const className = tree[childName] as string | InstanceTree | undefined;
+		if (object as Instance === game) {
+			// Convert to something we can iterate
+			for (const [serv, newTree] of tree as unknown as Map<string, string | InstanceTree>) {
+				if (serv !== "$className") {
+					const service = game.GetService(serv);
+					if (!service) {
+						return false;
+					}
+
+					if (
+						typeIs(newTree, "string")
+							? service.IsA(newTree)
+							: serv && validateTree(service, newTree, violators)
+					) {
+						whitelistedKeys.add(serv);
+					}
+				}
+			}
+		}
+		for (const [className, childClass] of tree as unknown as Map<string, string | InstanceTree>) {
+			if (className !== "$className") {
+				const child = object.FindFirstChild(className);
+				if (!child) {
+					// Tree invalid, early quit
+					return false;
+				}
 
 				if (
-					typeIs(className, "string")
-						? child.IsA(className)
-						: className && validateTree(child, className, violators)
+					typeIs(childClass, "string")
+						? child.IsA(childClass)
+						: className && validateTree(child, childClass, violators)
 				) {
-					whitelistedKeys.add(childName);
+					whitelistedKeys.add(className);
 				}
 			}
 		}

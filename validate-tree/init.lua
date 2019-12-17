@@ -1,5 +1,5 @@
 -- Compiled with https://roblox-ts.github.io v0.2.14
--- August 11, 2019, 4:44 AM Central Daylight Time
+-- December 17, 2019, 2:54 PM Western European Standard Time
 
 local TS = _G[script];
 local exports = {};
@@ -9,20 +9,39 @@ function validateTree(object, tree, violators)
 		local whitelistedKeys = {
 			["$className"] = true;
 		};
-		local _0 = object:GetChildren();
-		for _1 = 1, #_0 do
-			local child = _0[_1];
-			local childName = child.Name;
-			if childName ~= "$className" then
-				local className = tree[childName];
-				local _2;
-				if (typeof(className) == "string") then
-					_2 = child:IsA(className);
-				else
-					_2 = className and validateTree(child, className, violators);
+		if object == game then
+			for serv, newTree in pairs(tree) do
+				if serv ~= "$className" then
+					local service = game:GetService(serv);
+					if not service then
+						return false;
+					end;
+					local _0;
+					if (typeof(newTree) == "string") then
+						_0 = service:IsA(newTree);
+					else
+						_0 = serv and validateTree(service, newTree, violators);
+					end;
+					if _0 then
+						whitelistedKeys[serv] = true;
+					end;
 				end;
-				if _2 then
-					whitelistedKeys[childName] = true;
+			end;
+		end;
+		for className, childClass in pairs(tree) do
+			if className ~= "$className" then
+				local child = object:FindFirstChild(className);
+				if not child then
+					return false;
+				end;
+				local _0;
+				if (typeof(childClass) == "string") then
+					_0 = child:IsA(childClass);
+				else
+					_0 = className and validateTree(child, childClass, violators);
+				end;
+				if _0 then
+					whitelistedKeys[className] = true;
 				end;
 			end;
 		end;
