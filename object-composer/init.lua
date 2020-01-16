@@ -1,18 +1,16 @@
--- Compiled with https://roblox-ts.github.io v0.2.14
--- August 31, 2019, 5:11 PM Central Daylight Time
-
-local exports = {};
-local compose;
-function compose(...)
+local function compose(...)
 	local constructors = { ... };
 	return function(state)
 		if state == nil then state = {}; end;
 		local x = {};
 		for _0 = 1, #constructors do
-			local constructor = constructors[_0];
-			for prop, value in pairs(constructor(state)) do
-				if x[prop] ~= nil then
-					error("Property collision at " .. tostring(prop) .. "!");
+			for prop, value in pairs(constructors[_0](state)) do
+				local previous = x[prop];
+				if previous ~= nil then
+					local t = typeof(previous)
+					if t ~= typeof(value) or t == "table" or t == "userdata" then
+						error("Property collision at " .. tostring(prop) .. "!");
+					end
 				else
 					x[prop] = value;
 				end;
@@ -21,6 +19,8 @@ function compose(...)
 		return x;
 	end;
 end;
-exports.default = compose;
-exports.compose = compose;
-return exports;
+
+return {
+	default = compose;
+	compose = compose;
+};

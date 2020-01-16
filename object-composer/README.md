@@ -1,6 +1,6 @@
 ## object-composer
 
-object-composer ships a single `compose` function, which combines a series of callbacks which each return an object, into a single function which returns the combination of all returned objects. Each callback function can optionally take a single `state` parameter, with the defined properties that one should be able to (or need to) pass into the callback during  object construction. Property-Collisions error at compile-time and run-time. If TypeScript underlines one of your object constructors and says it isn't assignable to `never`, that's because there is a property/method collision.
+object-composer ships a single `compose` function, which combines a series of callbacks which each return an object into a single function which returns the combination of all returned objects. Each callback function can optionally take a single `state` parameter which will be passed into each constructor function during object instantiation. Property collisions can occur at run-time if two constructors each attempt to write to the same property (key) with conflicting types (see bottom of readme).
 
 Here is a demo, taking inspiration from this video: https://youtu.be/wfMtDGfHWpA
 
@@ -188,3 +188,4 @@ sizedTheme.getTextSize();
 ```
 
 ###### Note: Index signatures are not unsupported, but they aren't "supported" either. TypeScript may only error at run-time if you use index signatures (and why would you do that? Just use a Map)
+###### Note: For the purposes of this readme, "conflicting types" between `a` and `b` are defined as `typeof(a) ~= typeof(b) or typeof(a) == "table" or typeof(a) == "userdata`

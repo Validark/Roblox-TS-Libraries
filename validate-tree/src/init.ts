@@ -1,10 +1,12 @@
 type KeyExtendsPropertyName<T extends InstanceTree, K, V> = K extends "Changed"
 	? true
-	: (T extends {
+	: T extends {
 			$className: keyof Instances;
 	  }
-			? (K extends keyof Instances[T["$className"]] ? unknown : V)
-			: V);
+	? K extends keyof Instances[T["$className"]]
+		? unknown
+		: V
+	: V;
 
 /** Defines a Rojo-esque tree type which defines an abstract object tree. */
 export interface InstanceTree {
@@ -24,54 +26,88 @@ export declare type EvaluateInstanceTree<T extends InstanceTree, D = Instance> =
 			K,
 			T[K] extends keyof Instances
 				? Instances[T[K]]
-				: (T[K] extends {
+				: T[K] extends {
 						$className: keyof Instances;
 				  }
-						? EvaluateInstanceTree<T[K]>
-						: never)
-		>
+				? EvaluateInstanceTree<T[K]>
+				: never
+		>;
 	};
 
-/** Returns whether a given Instance matches a particular Rojo-eque InstanceTree. */
+function getService(serviceName: string) {
+	return game.GetService(serviceName);
+}
+
+/** Returns whether a given Instance matches a particular Rojo-eque InstanceTree.
+ * @param object The object which needs validation
+ * @param tree The tree to validate
+ * @param violators
+ */
 export function validateTree<I extends Instance, T extends InstanceTree>(
 	object: I,
 	tree: T,
 	violators?: Array<string>,
-): object is I & EvaluateInstanceTree<T, I> {
-	if (!("$className" in tree) || object.IsA(tree.$className as string) || violators) {
+): object is I & EvaluateInstanceTree<T, I>;
+
+export function validateTree<T extends InstanceTree>(object: Instance, tree: T, violators?: Array<string>) {
+	if ("$className" in tree && !object.IsA(tree.$className as string)) {
+		return false;
+	}
+
+	let matches = true;
+
+	if (classIs(object, "DataModel")) {
+		for (const [serviceName, classOrTree] of Object.entries(tree)) {
+			if (serviceName !== "$className") {
+				const [success, service] = pcall(getService, serviceName);
+				if (!success) {
+					if (violators) {
+						matches = false;
+						violators.push(`game.GetService("${serviceName}")`);
+					}
+					return false;
+				}
+				const child = service as Exclude<typeof service, string>;
+
+				if (child && (typeIs(classOrTree, "string") || validateTree(child, classOrTree, violators))) {
+					if (child.Name !== serviceName) child.Name = serviceName;
+				} else {
+					if (violators) {
+						matches = false;
+						violators.push(`game.GetService("${serviceName}")`);
+					} else return false;
+				}
+			}
+		}
+	} else {
 		const whitelistedKeys = new Set(["$className"]);
 
 		for (const child of object.GetChildren()) {
 			const childName = child.Name;
 			if (childName !== "$className") {
-				const className = tree[childName] as string | InstanceTree | undefined;
+				const classOrTree = tree[childName] as string | InstanceTree | undefined;
 
 				if (
-					typeIs(className, "string")
-						? child.IsA(className)
-						: className && validateTree(child, className, violators)
+					typeIs(classOrTree, "string")
+						? child.IsA(classOrTree)
+						: classOrTree && validateTree(child, classOrTree, violators)
 				) {
 					whitelistedKeys.add(childName);
 				}
 			}
 		}
 
-		let matches = true;
-
-		for (const value of Object.keys(tree)) {
-			if (!whitelistedKeys.has(value as string)) {
+		for (const key of Object.keys(tree)) {
+			if (!whitelistedKeys.has(key as string)) {
 				if (violators) {
-					const fullName = object.GetFullName();
-					violators.push(fullName + "." + value);
 					matches = false;
+					violators.push(object.GetFullName() + "." + key);
 				} else return false;
 			}
 		}
-
-		return matches;
-	} else {
-		return false;
 	}
+
+	return matches;
 }
 
 /** Yields until a given tree of objects exists within an object.
@@ -88,44 +124,31 @@ export async function yieldForTree<I extends Instance, T extends InstanceTree>(
 	if (validateTree(object, tree)) {
 		return object as I & EvaluateInstanceTree<T, I>;
 	} else {
-		return await new Promise((resolve, reject) => {
-			let resolved = false;
+		let prom: Promise<I & EvaluateInstanceTree<T, I>>;
+		return await (prom = new Promise((resolve, reject) => {
 			const connections = new Array<RBXScriptConnection>();
 
-			const updateTreeForDescendant = () => {
-				if (!resolved && validateTree(object, tree)) {
-					resolved = true;
+			const updateTreeForDescendant = (violators?: Array<string>) => {
+				if (prom.isPending && validateTree(object, tree, violators)) {
 					for (const connection of connections) connection.Disconnect();
 					resolve(object as I & EvaluateInstanceTree<T, I>);
+				} else if (violators) {
+					warn(`[yieldForTree] Infinite yield possible. Waiting for: ${violators.join(", ")}`);
 				}
 			};
 
-			const processDescendant = (descendant: Instance) => {
+			for (const descendant of object.GetDescendants())
 				connections.push(descendant.GetPropertyChangedSignal("Name").Connect(updateTreeForDescendant));
-			};
-
-			for (const descendant of object.GetDescendants()) processDescendant(descendant);
 
 			connections.push(
 				object.DescendantAdded.Connect(descendant => {
-					processDescendant(descendant);
+					connections.push(descendant.GetPropertyChangedSignal("Name").Connect(updateTreeForDescendant));
 					updateTreeForDescendant();
 				}),
 			);
 
-			delay(5, () => {
-				if (!resolved) {
-					const violators = new Array<string>();
-					if (validateTree(object, tree, violators)) {
-						resolved = true;
-						for (const connection of connections) connection.Disconnect();
-						resolve(object as I & EvaluateInstanceTree<T, I>);
-					} else {
-						warn(`[yieldForTree] Infinite yield possible. Waiting for: ${violators.join(", ")}`);
-					}
-				}
-			});
-		});
+			delay(5, () => prom.isPending && updateTreeForDescendant(new Array<string>()));
+		}));
 	}
 }
 

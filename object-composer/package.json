@@ -1,12 +1,10 @@
 {
     "name": "@rbxts/object-composer",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "A simple, light-weight multiple inheritance object composition library",
     "main": "init.lua",
     "types": "init.d.ts",
-    "scripts": {
-        "build": "rbxtsc & mv out/* . & rm -r out"
-    },
+    "scripts": {},
     "repository": {
         "type": "git",
         "url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/object-composer"

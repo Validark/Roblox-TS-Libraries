@@ -1,12 +1,12 @@
 {
 	"name": "@rbxts/fast-spawn",
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"description": "Spawns a new thread without waiting one step",
 	"main": "init.lua",
 	"types": "index.d.ts",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
+        "build": "rbxtsc & mv out/* . & rm -r out"
+    },
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/fast-spawn"
@@ -29,7 +29,6 @@
 		"access": "public"
 	},
 	"peerDependencies": {
-		"@rbxts/types": "^1.0.194"
-	},
-	"dependencies": {}
+		"@rbxts/types": "^1.0.317"
+	}
 }
