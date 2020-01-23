@@ -40,11 +40,11 @@ export interface PseudoTween {
 	 * this will have no effect unless the tween has finished or has been stopped
 	 * (either by this.Cancel() or this.Pause()).
 	 */
-	Resume(): this;
+	Play(): this;
 
 	/**
 	 * The Pause function halts playback of its Tween.
-	 * If TweenBase/Resume is called again the tween will resume playback from the moment it was paused.
+	 * If TweenBase/Play is called again the tween will resume playback from the moment it was paused.
 	 */
 	Pause(): this;
 
