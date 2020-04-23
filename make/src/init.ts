@@ -39,15 +39,13 @@ function Make<T extends keyof CreatableInstances>(
 
 	const instance = new Instance(className);
 
-	for (const [setting, value] of Object.entries(settings as GetPartialObjectWithBindableConnectSlots<
-		CreatableInstances[T]
-	>)) {
+	for (const [setting, value] of Object.entries(settings) as Array<[WritableInstanceProperties<Instance>, unknown]>) {
 		const { [setting]: prop } = instance;
 
 		if (typeIs(prop, "RBXScriptSignal")) {
-			prop.Connect(value!);
+			prop.Connect(value as () => void);
 		} else {
-			instance[setting] = value as any;
+			instance[setting] = value as never;
 		}
 	}
 

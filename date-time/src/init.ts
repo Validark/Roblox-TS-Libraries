@@ -1,3 +1,5 @@
+const DEFAULT_LOCALE = "en-us";
+
 const UNIVERSAL_PATTERNS = {
 	D: "%m/%d/%y",
 	F: "%Y-%m-%d",
@@ -74,8 +76,14 @@ const LOCALES = {
 		MONTH_NAMES_SHORT: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 		SUFFIXES: ["st", "nd", "rd"],
 		AM_PM: {
-			LOWER: new Map([[false, "am"], [true, "pm"]]),
-			UPPER: new Map([[false, "AM"], [true, "PM"]]),
+			LOWER: new Map([
+				[false, "am"],
+				[true, "pm"],
+			]),
+			UPPER: new Map([
+				[false, "AM"],
+				[true, "PM"],
+			]),
 		},
 		PATTERNS: DeclareReplacePatterns({
 			c: "%a %b %e %X %Y",
@@ -91,12 +99,34 @@ const LOCALES = {
 	} as Locale,
 };
 
+// interface DateTable {
+// 	/** The year. */
+// 	year: number;
+// 	/** The month. [1, 12] */
+// 	month: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+// 	/** The day. [1, 31] */
+// 	day: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31;
+
+// 	/** The hour. [0, 23] */
+// 	hour?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23;
+// 	/** The minute. [0, 59] */
+// 	min?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 | 48 | 49 | 50 | 51 | 52 | 53 | 54 | 55 | 56 | 57 | 58 | 59;
+// 	/** The second. [0, 59] */
+// 	sec?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 | 48 | 49 | 50 | 51 | 52 | 53 | 54 | 55 | 56 | 57 | 58 | 59;
+// 	/** Whether this object represents a daylight savings time. */
+// 	isdst?: boolean;
+// 	/** The number of days into the year. [1, 366] */
+// 	yday?: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 | 48 | 49 | 50 | 51 | 52 | 53 | 54 | 55 | 56 | 57 | 58 | 59 | 60 | 61 | 62 | 63 | 64 | 65 | 66 | 67 | 68 | 69 | 70 | 71 | 72 | 73 | 74 | 75 | 76 | 77 | 78 | 79 | 80 | 81 | 82 | 83 | 84 | 85 | 86 | 87 | 88 | 89 | 90 | 91 | 92 | 93 | 94 | 95 | 96 | 97 | 98 | 99 | 100 | 101 | 102 | 103 | 104 | 105 | 106 | 107 | 108 | 109 | 110 | 111 | 112 | 113 | 114 | 115 | 116 | 117 | 118 | 119 | 120 | 121 | 122 | 123 | 124 | 125 | 126 | 127 | 128 | 129 | 130 | 131 | 132 | 133 | 134 | 135 | 136 | 137 | 138 | 139 | 140 | 141 | 142 | 143 | 144 | 145 | 146 | 147 | 148 | 149 | 150 | 151 | 152 | 153 | 154 | 155 | 156 | 157 | 158 | 159 | 160 | 161 | 162 | 163 | 164 | 165 | 166 | 167 | 168 | 169 | 170 | 171 | 172 | 173 | 174 | 175 | 176 | 177 | 178 | 179 | 180 | 181 | 182 | 183 | 184 | 185 | 186 | 187 | 188 | 189 | 190 | 191 | 192 | 193 | 194 | 195 | 196 | 197 | 198 | 199 | 200 | 201 | 202 | 203 | 204 | 205 | 206 | 207 | 208 | 209 | 210 | 211 | 212 | 213 | 214 | 215 | 216 | 217 | 218 | 219 | 220 | 221 | 222 | 223 | 224 | 225 | 226 | 227 | 228 | 229 | 230 | 231 | 232 | 233 | 234 | 235 | 236 | 237 | 238 | 239 | 240 | 241 | 242 | 243 | 244 | 245 | 246 | 247 | 248 | 249 | 250 | 251 | 252 | 253 | 254 | 255 | 256 | 257 | 258 | 259 | 260 | 261 | 262 | 263 | 264 | 265 | 266 | 267 | 268 | 269 | 270 | 271 | 272 | 273 | 274 | 275 | 276 | 277 | 278 | 279 | 280 | 281 | 282 | 283 | 284 | 285 | 286 | 287 | 288 | 289 | 290 | 291 | 292 | 293 | 294 | 295 | 296 | 297 | 298 | 299 | 300 | 301 | 302 | 303 | 304 | 305 | 306 | 307 | 308 | 309 | 310 | 311 | 312 | 313 | 314 | 315 | 316 | 317 | 318 | 319 | 320 | 321 | 322 | 323 | 324 | 325 | 326 | 327 | 328 | 329 | 330 | 331 | 332 | 333 | 334 | 335 | 336 | 337 | 338 | 339 | 340 | 341 | 342 | 343 | 344 | 345 | 346 | 347 | 348 | 349 | 350 | 351 | 352 | 353 | 354 | 355 | 356 | 357 | 358 | 359 | 360 | 361 | 362 | 363 | 364 | 365 | 366;
+// 	/** The day of the week. [1, 7] */
+// 	wday?: 1 | 2 | 3 | 4 | 5 | 6 | 7;
+// }
+
 type LocaleDateTable = Required<DateTable> & { locale: keyof typeof LOCALES };
 type TagReplacerFunction = (t: LocaleDateTable) => string | number;
 
-const getDay: TagReplacerFunction = t => t.day;
-const getMonthShort: TagReplacerFunction = t => LOCALES[t.locale].MONTH_NAMES_SHORT[t.month - 1];
-const getHour: TagReplacerFunction = t => t.hour;
+const getDay: TagReplacerFunction = (t) => t.day;
+const getMonthShort: TagReplacerFunction = (t) => LOCALES[t.locale].MONTH_NAMES_SHORT[t.month - 1];
+const getHour: TagReplacerFunction = (t) => t.hour;
 const get12Hour: TagReplacerFunction = ({ hour }) => (hour > 12 ? hour - 12 : hour === 0 ? 12 : hour);
 
 let TIME_ZONE_OFFSET: string;
@@ -112,13 +142,8 @@ let TIME_ZONE_OFFSET2: string;
 }
 
 function patternReplacer(replacement: keyof PatternDefinition): TagReplacerFunction {
-	return (t: LocaleDateTable) => LOCALES[t.locale].PATTERNS[replacement].gsub("%%(#?.)", t)[0];
+	return (t: LocaleDateTable) => LOCALES[t.locale].PATTERNS[replacement].gsub("%%(#?.)", t as {})[0];
 }
-
-type DoesPatternsImplementTagReplacers<T extends keyof typeof TagReplacers> = T;
-type DoesPatternsImplementTagReplacersAssertion = DoesPatternsImplementTagReplacers<
-	keyof typeof LOCALES[keyof typeof LOCALES]["PATTERNS"]
->;
 
 const TagReplacers = setmetatable(
 	{
@@ -361,6 +386,11 @@ const TagReplacers = setmetatable(
 	},
 );
 
+type DoesPatternsImplementTagReplacers<T extends keyof typeof TagReplacers> = T;
+type DoesPatternsImplementTagReplacersAssertion = DoesPatternsImplementTagReplacers<
+	keyof typeof LOCALES[keyof typeof LOCALES]["PATTERNS"]
+>;
+
 const ReplaceIndexer = {
 	__index: (a: LocaleDateTable, i: Exclude<keyof typeof TagReplacers, keyof LocaleDateTable>) => TagReplacers[i](a),
 };
@@ -376,7 +406,7 @@ function formatDate(formatString?: string, unix?: number, locale: keyof typeof L
 
 	return formatString === "*t"
 		? timeData
-		: (formatString || "%c").gsub("%%(#?.)", setmetatable(timeData as LocaleDateTable, ReplaceIndexer));
+		: (formatString || "%c").gsub("%%(#?.)", setmetatable(timeData as LocaleDateTable, ReplaceIndexer) as {})[0];
 }
 
 interface Duration {
@@ -395,16 +425,12 @@ interface DateChangeTable extends Duration {
 function printDateTable(dateTable: DateTable) {
 	const largest: Array<keyof DateTable> = ["year", "month", "day", "hour", "min", "sec", "isdst", "wday", "yday"];
 
-	Object.entries(dateTable)
-		.sort(([a], [b]) => largest.indexOf(b) - largest.indexOf(a))
-		.forEach(([i, v]) => print(i, v));
+	// Object.entries(dateTable)
+	// 	.sort(([a], [b]) => largest.indexOf(a) < largest.indexOf(b))
+	// 	.forEach(([i, v]) => print(i, v));
 }
 
-const DEFAULT_LOCALE = "en-us";
-
-function f2() {}
-
-class DateTime {
+export class DateTime {
 	/** Ripped from `CorePackages.AppTempCommon.LuaChat.DateTime`. Experimental. */
 	static getUTCOffset() {
 		const day = 3;
@@ -427,13 +453,9 @@ class DateTime {
 
 	static fromObject(dateTable: Omit<DateTable, "day"> & { day?: number } & { formatString: "*t" | "!*t" }): DateTime;
 	static fromObject(dateTable: Omit<DateTable, "day"> & { day?: number }, formatString?: "*t" | "!*t"): DateTime;
-	static fromObject(
-		dateTable: Omit<DateTable, "day"> & { day?: number } & { formatString: "*t" | "!*t" },
-		formatString = "formatString" in dateTable ? dateTable.formatString : "*t",
-	) {
+	static fromObject(dateTable: Omit<DateTable, "day"> & { day?: number } & { formatString: "*t" | "!*t" }) {
 		const { day = 1 } = dateTable;
-		dateTable.day = day;
-		return new DateTime(formatString, os.time(dateTable as DateTable));
+		return new DateTime(os.time(Object.assign(dateTable, { day }) as DateTable));
 	}
 
 	/** Finds the first occuring date in a series. Similar to `math.min`. */
@@ -447,23 +469,30 @@ class DateTime {
 	}
 
 	static now() {
-		return new DateTime("*t");
+		return new DateTime(undefined, false);
 	}
 
 	static utc() {
-		return new DateTime("!*t");
+		return new DateTime();
 	}
+
+	//  "Utc"|"Local"
 
 	public readonly timeData: LocaleDateTable;
 
 	/** The seconds since Jan 1, 1970, adjusted to UTC */
 	readonly unix: number;
 
-	constructor(formatString: "*t" | "!*t" = "*t", time?: number, locale: keyof typeof LOCALES = DEFAULT_LOCALE) {
-		const dateTable = os.date(formatString, time) as LocaleDateTable;
+	/**
+	 *
+	 * @param seconds The number of seconds since Jan 1, 1970
+	 * @param utc true if `seconds` represents the UTC timezone, false if it represents the local timezone
+	 * @param locale
+	 */
+	constructor(seconds?: number, utc = true, locale: keyof typeof LOCALES = DEFAULT_LOCALE) {
+		const dateTable = os.date(utc ? "!*t" : "*t", seconds);
 		this.unix = os.time(dateTable);
-		dateTable.locale = locale;
-		this.timeData = dateTable;
+		this.timeData = Object.assign(dateTable, { locale });
 	}
 
 	get<T extends keyof LocaleDateTable>(unit: T) {
@@ -471,7 +500,15 @@ class DateTime {
 	}
 
 	set(unit: Partial<LocaleDateTable>) {
-		return new DateTime("!*t", os.time(Object.assign(this.toObject(), unit)));
+		return new DateTime(os.time(Object.assign(this.toObject(), unit)));
+	}
+
+	easter() {
+		const { year } = this.timeData;
+		const a = math.floor(year / 100) * 1483 - math.floor(year / 400) * 2225 + 2613;
+		const b = math.floor(((year % 19) * 3510 + math.floor(a / 25) * 319) / 330) % 29;
+		const c = 148 - b - ((math.floor(year * 1.25) + a - b) % 7);
+		return new DateTime(os.time({ year, month: math.floor(c / 31), day: (c % 31) + 1 }));
 	}
 
 	/** Adds units of time to this date object. */
@@ -481,8 +518,9 @@ class DateTime {
 		let month = dateTable.month + months;
 		if (month > 12) year += (month - (month = month % 12)) / 12;
 
+		if (month > 12) month -= 12 * (year += math.floor(month / 12));
+
 		return new DateTime(
-			"!*t",
 			os.time({ year, month, day: dateTable.day }) +
 				((((weeks * 7 + days) * 24 + hours) * 60 + minutes) * 60 + seconds),
 		);
@@ -497,7 +535,6 @@ class DateTime {
 		if (month < 1) year -= (month - (month = ((month - 1) % 12) + 1) - 2) / 12;
 
 		return new DateTime(
-			"!*t",
 			os.time({ year, month, day: dateTable.day }) -
 				((((weeks * 7 + days) * 24 + hours) * 60 + minutes) * 60 + seconds),
 		);
@@ -526,7 +563,7 @@ class DateTime {
 				dateTable.sec = 0;
 		}
 
-		return new DateTime("!*t", os.time(dateTable));
+		return new DateTime(os.time(dateTable));
 	}
 
 	endOf(unit: "year" | "month" | "week" | "day" | "hour" | "min") {
@@ -547,37 +584,29 @@ class DateTime {
 				dateTable.hour = 23;
 			case "hour":
 				dateTable.min = 59;
+
 			case "min":
 				dateTable.sec = 59;
 		}
 
-		printDateTable(dateTable);
-		return new DateTime("!*t", os.time(dateTable));
+		return new DateTime(os.time(dateTable));
 	}
 
 	/** Converts this DateTime into a new DateTable. */
-	toObject(): LocaleDateTable {
-		const { timeData: dateTable } = this;
-		return {
-			year: dateTable.year,
-			month: dateTable.month,
-			day: dateTable.day,
-			hour: dateTable.hour,
-			min: dateTable.min,
-			sec: dateTable.sec,
-			isdst: dateTable.isdst,
-			yday: dateTable.yday,
-			wday: dateTable.wday,
-			locale: dateTable.locale,
-		};
+	toObject() {
+		return Object.copy(this.timeData);
 	}
 
-	toString(formatString = "%A, %B %#d, %Y at %X %p") {
-		return formatDate("!" + formatString, this.unix);
+	toString(formatString = "%A, %B %#d, %Y at %X %p"): string {
+		const formattedDate = formatDate("!" + formatString, this.unix);
+
+		return typeIs(formattedDate, "string")
+			? formattedDate
+			: game.GetService("HttpService").JSONEncode(formattedDate);
 	}
 
 	/** Returns the number of seconds since Jan 1, 1970 in the UTC time-zone. */
-	valueOf() {
+	valueOf(): number {
 		return this.unix;
 	}
 
@@ -605,11 +634,11 @@ print(`EVENT END: ${eventEnd}`);
 // Create an object for the current date and time (default), which we can compare with event DateTimes
 const current = new DateTime();
 
-if (eventStart <= current && current <= eventEnd) {
-	print("EVENT ONGOING");
-} else {
-	print("EVENT ENDED");
-}
+// if (eventStart <= current && current <= eventEnd) {
+// 	print("EVENT ONGOING");
+// } else {
+// 	print("EVENT ENDED");
+// }
 
 new DateTime().plus({ years: 1 });
 new DateTime().plus({ months: 1 });
@@ -619,3 +648,10 @@ function f(a: number | string, b: string) {
 }
 
 type X = DateTime["valueOf"];
+DateTime.fromObject({
+	month: 1,
+	year: 2020,
+});
+
+// Easter event
+print(new DateTime().easter().toString());

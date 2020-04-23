@@ -21,7 +21,7 @@
 		"Manager"
 	],
 	"peerDependencies": {
-		"@rbxts/types": "^1.0.209"
+		"@rbxts/types": "^1.0.350"
 	},
 	"author": "Validark",
 	"license": "ISC",
@@ -33,6 +33,6 @@
 		"access": "public"
 	},
 	"dependencies": {
-		"@rbxts/types": "^1.0.209"
+		"@rbxts/types": "^1.0.350"
 	}
 }
