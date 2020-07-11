@@ -4,6 +4,7 @@
     "description": "Validates whether a given instance matches a given instance tree",
     "main": "init.lua",
     "types": "init.d.ts",
+	"files": ["init.lua", "init.d.ts", "README.md"],
     "scripts": {
         "build": "rbxtsc & mv out/* . & rm -r out"
     },
