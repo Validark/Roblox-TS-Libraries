@@ -4,6 +4,7 @@
 		"allowSyntheticDefaultImports": true,
 		"downlevelIteration": true,
 		"module": "commonjs",
+		"moduleResolution": "Node",
 		"noLib": true,
 		"strict": true,
 		"target": "es6",
