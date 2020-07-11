@@ -1,15 +1,16 @@
--- Compiled with https://roblox-ts.github.io v0.1.7
--- June 13, 2019, 3:30 PM Central Daylight Time
+-- Compiled with https://roblox-ts.github.io v0.3.2
+-- July 11, 2020, 9:57 PM New Zealand Standard Time
 
-local _exports;
-local Make = function(className, settings)
-	local children, parent = settings.Children, settings.Parent;
+local exports;
+local function Make(className, settings)
+	local children = settings.Children;
+	local parent = settings.Parent;
 	settings.Children = nil;
 	settings.Parent = nil;
 	local instance = Instance.new(className);
 	for setting, value in pairs(settings) do
 		local prop = instance[setting];
-		if (typeof(prop) == "RBXScriptSignal") then
+		if typeof(prop) == "RBXScriptSignal" then
 			prop:Connect(value);
 		else
 			instance[setting] = value;
@@ -24,5 +25,5 @@ local Make = function(className, settings)
 	instance.Parent = parent;
 	return instance;
 end;
-_exports = Make;
-return _exports;
+exports = Make;
+return exports;

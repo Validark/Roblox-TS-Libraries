@@ -4,6 +4,7 @@
 	"description": "Shorthand for declaring Instances with properties.",
 	"main": "init.lua",
 	"types": "init.d.ts",
+	"files": ["init.lua", "init.d.ts", "README.md"],
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
