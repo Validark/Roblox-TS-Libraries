@@ -131,7 +131,7 @@ interface IPDataSuccess {
      *
      * Example: 10
      */
-    accuracy: 10;
+    accuracy: number;
 }
 interface IPDataFail {
     status: "fail";

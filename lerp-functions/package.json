@@ -1,6 +1,6 @@
 {
     "name": "@rbxts/lerp-functions",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Interpolation functions",
     "main": "init.lua",
     "types": "index.d.ts",
@@ -34,5 +34,10 @@
     },
     "publishConfig": {
         "access": "public"
-    }
+    },
+    "files": [
+        "init.lua",
+        "index.d.ts",
+        "README.md"
+    ]
 }

@@ -1,6 +1,6 @@
 {
     "name": "@rbxts/object-stack",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A Stack data structure which is formed by creating a singly linked-list on already existing objects.",
     "main": "init.lua",
     "types": "index.d.ts",
@@ -30,5 +30,10 @@
     },
     "dependencies": {
         "@rbxts/types": "^1.0.194"
-    }
+    },
+    "files": [
+        "init.lua",
+        "init.d.ts",
+        "README.md"
+    ]
 }

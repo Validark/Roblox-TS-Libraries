@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/extendable-resources",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "An extendable object retrieval system for defining folders.",
 	"main": "init.lua",
 	"types": "init.d.ts",
@@ -34,5 +34,10 @@
 	},
 	"dependencies": {
 		"@rbxts/types": "^1.0.194"
-	}
+	},
+	"files": [
+		"init.lua",
+		"init.d.ts",
+		"README.md"
+	]
 }

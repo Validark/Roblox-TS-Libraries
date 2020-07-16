@@ -1,6 +1,6 @@
 {
     "name": "@rbxts/spring",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Simulates the motion of a critically damped spring",
     "main": "init.lua",
     "types": "index.d.ts",
@@ -23,5 +23,10 @@
     "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/spring/README.md",
     "publishConfig": {
         "access": "public"
-    }
+    },
+    "files": [
+        "init.lua",
+        "index.d.ts",
+        "README.md"
+    ]
 }

@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/easing-functions",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "A bunch of reuseable Easing Functions, including those from the Material Design specification and Robert Penner.",
 	"main": "init.lua",
 	"typings": "index.d.ts",
@@ -38,5 +38,10 @@
 	},
 	"dependencies": {
 		"@rbxts/cubic-bezier": "^1.0.2"
-	}
+	},
+	"files": [
+		"init.lua",
+		"index.d.ts",
+		"README.md"
+	]
 }

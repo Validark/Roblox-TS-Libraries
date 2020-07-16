@@ -28,7 +28,7 @@ function constructManager<T extends keyof CreatableInstances>(
 ): (instanceName: string) => CreatableInstances[T] {
 	if (isServer) {
 		return instanceName => {
-			let target = folder.FindFirstChild(instanceName) as CreatableInstances[T];
+			let target = folder.FindFirstChild(instanceName) as CreatableInstances[T] | undefined;
 
 			if (target === undefined) {
 				if (optionalInstanceType) {

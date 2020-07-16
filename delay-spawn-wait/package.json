@@ -1,0 +1,33 @@
+{
+	"name": "@rbxts/delay-spawn-wait",
+	"version": "1.0.0",
+	"description": "Replacement for the default delay, spawn, and wait functions",
+	"main": "init.lua",
+	"types": "index.d.ts",
+	"scripts": {},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/delay-spawn-wait"
+	},
+	"keywords": [
+		"yield",
+		"wait",
+		"spawn",
+		"delay"
+	],
+	"author": "Validark",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
+	},
+	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/delay-spawn-wait/README.md",
+	"peerDependencies": {
+		"@rbxts/types": "^1.0.235"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"dependencies": {
+		"@rbxts/types": "^1.0.381"
+	}
+}

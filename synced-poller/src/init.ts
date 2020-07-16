@@ -1,5 +1,15 @@
-/** The difference in seconds between os.time() and tick(), rounded to the nearest 15 minutes */
-const timeDifferential = math.floor((tick() - os.time()) / 900 + 0.5) * 900;
+import { delay as delayed } from "@rbxts/delay-spawn-wait";
+
+/** The difference in seconds between os.time() and os.clock().
+ * With this, we can use `os.clock() + timeDifferential` as a more precise os.time()
+ */
+let timeDifferential: number;
+
+{
+	const targetTime = os.time() + 1;
+	while (os.time() !== targetTime);
+	timeDifferential = targetTime - os.clock();
+}
 
 /** A polling class that continually calls a callback in sync with os.time.
  * If a condition is provided, it will call the callback on each poll, and cancel if it returns false
@@ -12,20 +22,19 @@ class SyncedPoller {
 	 * @param callback The callback to call.
 	 * @param condition If provided, will call this on every poll, and will cancel the synced-poller if it returns false.
 	 */
-	constructor(
-		interval: number,
-		callback: (timeElapsed: number, gameTime: number) => void,
-		condition?: () => boolean,
-	) {
-		const recall = (timeElapsed: number, gameTime: number) => {
-			if (condition) this.isRunning = condition();
+	constructor(interval: number, callback: (timeElapsed: number) => void, condition?: () => boolean) {
+		const recall = (timeElapsed: number) => {
 			if (this.isRunning) {
-				callback(timeElapsed, gameTime);
-				delay(interval - ((tick() + timeDifferential) % interval), recall);
+				if (condition === undefined || condition()) {
+					callback(timeElapsed);
+					delayed(interval - ((os.clock() + timeDifferential) % interval), recall);
+				} else {
+					this.isRunning = false;
+				}
 			}
 		};
 
-		delay(interval - ((tick() + timeDifferential) % interval), recall);
+		delayed(interval - ((os.clock() + timeDifferential) % interval), recall);
 	}
 
 	public cancel() {

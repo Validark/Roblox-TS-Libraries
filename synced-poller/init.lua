@@ -1,9 +1,16 @@
--- Compiled with https://roblox-ts.github.io v0.2.7
--- July 20, 2019, 2:33 PM Central Daylight Time
+-- Compiled with https://roblox-ts.github.io v0.3.2
+-- July 16, 2020, 5:01 AM Central Daylight Time
 
-local _exports;
-local recall;
-local timeDifferential = math.floor((tick() - os.time()) / 900 + 0.5) * 900;
+local TS = _G[script];
+local exports;
+local delayed = TS.import(script, TS.getModule(script, "delay-spawn-wait")).delay;
+local timeDifferential;
+do
+	local targetTime = os.time() + 1;
+	while os.time() ~= targetTime do
+	end;
+	timeDifferential = targetTime - os.clock();
+end;
 local SyncedPoller;
 do
 	SyncedPoller = setmetatable({}, {
@@ -16,21 +23,23 @@ do
 		return self;
 	end;
 	function SyncedPoller:constructor(interval, callback, condition)
+		local recall;
 		self.isRunning = true;
-		recall = function(timeElapsed, gameTime)
-			if condition then
-				self.isRunning = condition();
-			end;
+		recall = function(timeElapsed)
 			if self.isRunning then
-				callback(timeElapsed, gameTime);
-				delay(interval - ((tick() + timeDifferential) % interval), recall);
+				if (condition == nil) or (condition()) then
+					callback(timeElapsed);
+					delayed(interval - ((os.clock() + timeDifferential) % interval), recall);
+				else
+					self.isRunning = false;
+				end;
 			end;
 		end;
-		delay(interval - ((tick() + timeDifferential) % interval), recall);
+		delayed(interval - ((os.clock() + timeDifferential) % interval), recall);
 	end;
 	function SyncedPoller:cancel()
 		self.isRunning = false;
 	end;
 end;
-_exports = SyncedPoller;
-return _exports;
+exports = SyncedPoller;
+return exports;

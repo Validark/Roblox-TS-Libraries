@@ -38,7 +38,7 @@ function getService(serviceName: string) {
 	return game.GetService(serviceName);
 }
 
-/** Returns whether a given Instance matches a particular Rojo-eque InstanceTree.
+/** Returns whether a given Instance matches a particular Rojo-esque InstanceTree.
  * @param object The object which needs validation
  * @param tree The tree to validate
  * @param violators
@@ -50,10 +50,7 @@ export function validateTree<I extends Instance, T extends InstanceTree>(
 ): object is I & EvaluateInstanceTree<T, I>;
 
 export function validateTree<T extends InstanceTree>(object: Instance, tree: T, violators?: Array<string>) {
-	if ("$className" in tree && !object.IsA(tree.$className as string)) {
-		return false;
-	}
-
+	if ("$className" in tree && !object.IsA(tree.$className as string)) return false;
 	let matches = true;
 
 	if (classIs(object, "DataModel")) {

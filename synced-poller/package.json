@@ -1,6 +1,6 @@
 {
     "name": "@rbxts/synced-poller",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Calls functions on an interval along os.time (for cross-server simultaneous calls)",
     "main": "init.lua",
     "types": "init.d.ts",
@@ -31,6 +31,12 @@
         "access": "public"
     },
     "dependencies": {
-        "@rbxts/types": "^1.0.235"
-    }
+        "@rbxts/delay-spawn-wait": "^1.0.0",
+        "@rbxts/types": "^1.0.381"
+    },
+    "files": [
+        "init.lua",
+        "init.d.ts",
+        "README.md"
+    ]
 }
