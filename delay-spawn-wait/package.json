@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/delay-spawn-wait",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Replacement for the default delay, spawn, and wait functions",
 	"main": "init.lua",
 	"types": "index.d.ts",
@@ -29,5 +29,10 @@
 	},
 	"dependencies": {
 		"@rbxts/types": "^1.0.381"
-	}
+	},
+	"files": [
+		"init.lua",
+		"index.d.ts",
+		"README.md"
+	]
 }
