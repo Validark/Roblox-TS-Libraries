@@ -1,0 +1,42 @@
+{
+    "name": "@rbxts/schema",
+    "version": "0.0.1",
+    "description": "A powerful tree reconciler with support for user-defined checks and instantiate callbacks.",
+    "main": "init.lua",
+    "types": "index.d.ts",
+    "scripts": {
+        "build": "npx roblox-ts && mv out/* . && rm -r out && echo \"\tMake sure to swap out Symbol.iterator for pairs()!\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/schema"
+    },
+    "keywords": [
+        "Roblox",
+        "TypeScript",
+        "Schema",
+        "Tree",
+        "Validator",
+        "Validate",
+        "reconcile",
+        "reconciler",
+        "instance",
+        "hierarchy"
+    ],
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
+    },
+    "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/schema/README.md",
+    "peerDependencies": {
+        "@rbxts/types": "^1.0.194"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "files": [
+        "init.lua",
+        "index.d.ts",
+        "README.md"
+    ]
+}
