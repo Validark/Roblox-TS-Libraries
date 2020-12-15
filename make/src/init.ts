@@ -11,7 +11,7 @@ type GetBindableToRBXScriptSignal<T> = {
  * while also allowing functions to be passed in which can be bound to a Cue.
  */
 type GetPartialObjectWithBindableConnectSlots<T extends Instance> = Partial<
-	Pick<T, GetWritableProperties<T>> & GetBindableToRBXScriptSignal<T>
+	Pick<T, InstanceProperties<T>> & GetBindableToRBXScriptSignal<T>
 >;
 
 /**
@@ -39,7 +39,9 @@ function Make<T extends keyof CreatableInstances>(
 
 	const instance = new Instance(className);
 
-	for (const [setting, value] of Object.entries(settings) as Array<[WritableInstanceProperties<Instance>, unknown]>) {
+	for (const [setting, value] of pairs(settings) as IterableFunction<
+		LuaTuple<[WritableInstanceProperties<Instance>, unknown]>
+	>) {
 		const { [setting]: prop } = instance;
 
 		if (typeIs(prop, "RBXScriptSignal")) {
@@ -49,7 +51,11 @@ function Make<T extends keyof CreatableInstances>(
 		}
 	}
 
-	if (children) for (const child of children) child.Parent = instance;
+	if (children) {
+		for (const child of children) {
+			child.Parent = instance;
+		}
+	}
 	instance.Parent = parent;
 	return instance;
 }
