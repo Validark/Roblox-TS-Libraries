@@ -1,28 +1,28 @@
--- Compiled with https://roblox-ts.github.io v0.1.7
--- June 13, 2019, 3:30 PM Central Daylight Time
+-- Compiled with roblox-ts v1.0.0-beta.10
 
-local _exports;
-local Make = function(className, settings)
-	local children, parent = settings.Children, settings.Parent;
-	settings.Children = nil;
-	settings.Parent = nil;
-	local instance = Instance.new(className);
+local function Make(className, settings)
+	local _0 = settings
+	local children = _0.Children
+	local parent = _0.Parent
+	settings.Children = nil
+	settings.Parent = nil
+	local instance = Instance.new(className)
 	for setting, value in pairs(settings) do
-		local prop = instance[setting];
-		if (typeof(prop) == "RBXScriptSignal") then
-			prop:Connect(value);
+		local _1 = instance
+		local prop = _1[setting]
+		local _2 = prop
+		if typeof(_2) == "RBXScriptSignal" then
+			prop:Connect(value)
 		else
-			instance[setting] = value;
-		end;
-	end;
+			instance[setting] = value
+		end
+	end
 	if children then
-		for _0 = 1, #children do
-			local child = children[_0];
-			child.Parent = instance;
-		end;
-	end;
-	instance.Parent = parent;
-	return instance;
-end;
-_exports = Make;
-return _exports;
+		for _, child in ipairs(children) do
+			child.Parent = instance
+		end
+	end
+	instance.Parent = parent
+	return instance
+end
+return Make
