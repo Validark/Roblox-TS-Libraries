@@ -39,9 +39,7 @@ function Make<T extends keyof CreatableInstances>(
 
 	const instance = new Instance(className);
 
-	for (const [setting, value] of pairs(settings) as IterableFunction<
-		LuaTuple<[WritableInstanceProperties<Instance>, unknown]>
-	>) {
+	for (const [setting, value] of pairs(settings as unknown as Map<WritableInstanceProperties<Instance>, unknown>)) {
 		const { [setting]: prop } = instance;
 
 		if (typeIs(prop, "RBXScriptSignal")) {

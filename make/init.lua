@@ -1,5 +1,20 @@
--- Compiled with roblox-ts v1.0.0-beta.10
-
+-- Compiled with roblox-ts v1.0.0-beta.11
+--[[
+	*
+	* Returns a table wherein an object's writable properties can be specified,
+	* while also allowing functions to be passed in which can be bound to a Cue.
+]]
+--[[
+	*
+	* Instantiates a new Instance of `className` with given `settings`,
+	* where `settings` is an object of the form { [K: propertyName]: value }.
+	*
+	* `settings.Children` is an array of child objects to be parented to the generated Instance.
+	*
+	* Events can be set to a callback function, which will be connected.
+	*
+	* `settings.Parent` is always set last.
+]]
 local function Make(className, settings)
 	local _0 = settings
 	local children = _0.Children

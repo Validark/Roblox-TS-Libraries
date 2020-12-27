@@ -1,4 +1,5 @@
 /// <reference types="@rbxts/types" />
+/// <reference types="@rbxts/compiler-types" />
 declare type GetBindableToRBXScriptSignal<T> = {
     [key in ({
         [k in keyof T]-?: T[k] extends RBXScriptSignal ? k : never;
@@ -8,7 +9,7 @@ declare type GetBindableToRBXScriptSignal<T> = {
  * Returns a table wherein an object's writable properties can be specified,
  * while also allowing functions to be passed in which can be bound to a Cue.
  */
-declare type GetPartialObjectWithBindableConnectSlots<T extends Instance> = Partial<Pick<T, WritableInstanceProperties<T>> & GetBindableToRBXScriptSignal<T>>;
+declare type GetPartialObjectWithBindableConnectSlots<T extends Instance> = Partial<Pick<T, InstanceProperties<T>> & GetBindableToRBXScriptSignal<T>>;
 /**
  * Instantiates a new Instance of `className` with given `settings`,
  * where `settings` is an object of the form { [K: propertyName]: value }.
