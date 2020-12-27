@@ -12,6 +12,10 @@ export type InstanceSchema = {
 
 		/** Called when reconciling a schema and instantiating this instance */
 		$instantiate?: (instance: CreatableInstances[K]) => void;
+
+		/** If true, won't delete unknown instances. */
+		// $ignoreUnknownInstances?: boolean;
+		// TODO: add this functionality
 	};
 }[keyof CreatableInstances];
 
@@ -31,6 +35,10 @@ interface GenericInstanceSchema {
 
 	/** Called when reconciling a schema and instantiating this instance */
 	$instantiate?: (instance: Instance) => void;
+
+	/** If true, won't delete unknown instances. */
+	// $ignoreUnknownInstances?: boolean;
+	// TODO: add this functionality
 }
 
 function instantiateChild(
@@ -133,7 +141,7 @@ function reconcileChildren(
 				else childMap.set(Name, child);
 			}
 
-			for (const [name, schema] of children[Symbol.iterator]()) {
+			for (const [name, schema] of pairs(children as unknown as Map<string | number, keyof CreatableInstances | InstanceSchema>)) {
 				let child: Instance | Array<Instance> | undefined;
 
 				if (typeIs(name, "number")) {
@@ -192,7 +200,7 @@ function reconcileChildren(
 				else for (const evil of child) evil.Destroy();
 			}
 		} else {
-			for (const [name, childSchema] of children[Symbol.iterator]()) {
+			for (const [name, childSchema] of pairs(children as unknown as Map<string | number, keyof CreatableInstances | InstanceSchema>)) {
 				instantiateChild(parent, name, childSchema, undefined);
 			}
 		}

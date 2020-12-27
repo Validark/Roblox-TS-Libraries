@@ -29,7 +29,8 @@
     },
     "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/schema/README.md",
     "peerDependencies": {
-        "@rbxts/types": "^1.0.194"
+        "@rbxts/compiler-types": "^1.0.0-beta.11.1",
+        "@rbxts/types": "^1.0.431"
     },
     "publishConfig": {
         "access": "public"
@@ -38,5 +39,9 @@
         "init.lua",
         "index.d.ts",
         "README.md"
-    ]
+    ],
+    "dependencies": {
+        "@rbxts/compiler-types": "^1.0.0-beta.11.1",
+        "@rbxts/types": "^1.0.431"
+    }
 }

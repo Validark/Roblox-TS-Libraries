@@ -96,6 +96,13 @@ function Spring:update(deltaTime)
 		local r1 = -angularFrequency * (dampingRatio - c)
 		local r2 = -angularFrequency * (dampingRatio + c)
 
+		-- local x = -angularFrequency * dampingRatio
+		-- local y = angularFrequency * c
+		-- local r1 = x + y
+		-- local r2 = x - y
+
+		-- TODO: verify math transformations are sound
+
 		local co2 = (v0 - offset * r1) / (2 * angularFrequency * c)
 		local co1 = offset - co2
 

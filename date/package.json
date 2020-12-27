@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/date",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "A re-implementation of vanilla Lua's os.date function.",
 	"main": "init.lua",
 	"types": "index.d.ts",
@@ -27,5 +27,18 @@
 	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/date/README.md",
 	"publishConfig": {
 		"access": "public"
-	}
+	},
+	"dependencies": {
+		"@rbxts/compiler-types": "^1.0.0-beta.11.1",
+		"@rbxts/types": "^1.0.431"
+	},
+	"peerDependencies": {
+		"@rbxts/compiler-types": "^1.0.0-beta.11.1",
+		"@rbxts/types": "^1.0.431"
+	},
+    "files": [
+        "init.lua",
+        "index.d.ts",
+        "README.md"
+    ]
 }

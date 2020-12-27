@@ -1,6 +1,6 @@
 {
     "name": "@rbxts/ip-data",
-    "version": "1.0.6",
+    "version": "1.0.7",
     "description": "https://ip-api.com API Wrapper",
     "main": "init.lua",
     "types": "init.d.ts",
@@ -21,13 +21,15 @@
     },
     "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/ip-data/README.md",
     "peerDependencies": {
+        "@rbxts/compiler-types": "^1.0.0-beta.11.1",
         "@rbxts/types": "^1.0.235"
     },
     "publishConfig": {
         "access": "public"
     },
     "dependencies": {
-        "@rbxts/types": "^1.0.235"
+        "@rbxts/compiler-types": "^1.0.0-beta.11.1",
+        "@rbxts/types": "^1.0.431"
     },
     "files": [
         "init.lua",

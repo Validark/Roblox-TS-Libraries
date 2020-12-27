@@ -10,8 +10,71 @@ yieldForR15CharacterDescendants(character).then(char => {
 	char.Head.face.Texture = ""
 });
 
-// alternatively, one may use `await` inside an async function
+// alternatively, one may use `await`
 async function f() {
 	const char = await yieldForR15CharacterDescendants(character);
+	char.Head.face.Texture = ""
 }
+```
+
+Here is what I envision as a practical use for this library:
+
+```ts
+import {
+	yieldForR6CharacterDescendants,
+	yieldForR15CharacterDescendants,
+	CharacterRigR15,
+	CharacterRigR6,
+} from "@rbxts/yield-for-character";
+import { Players } from "@rbxts/services";
+
+async function yieldForChildOfClass<T extends keyof StrictInstances>(
+	model: Instance,
+	className: T,
+): Promise<StrictInstances[T]> {
+	for (const child of model.GetChildren()) {
+		if (child.ClassName === className) {
+			return child as never;
+		}
+	}
+
+	return await new Promise<StrictInstances[T]>((resolve) => {
+		const connection = model.ChildAdded.Connect((child) => {
+			if (child.ClassName === className) {
+				connection.Disconnect();
+				resolve(child as never);
+			}
+		});
+	});
+}
+
+function doStuffWithR15(rig: CharacterRigR15) {
+	rig.RightFoot.Destroy();
+}
+
+function doStuffWithR6(rig: CharacterRigR6) {
+	rig["Left Arm"].Destroy();
+}
+
+async function handleCharacterModel(model: Model) {
+	const rigType = (await yieldForChildOfClass(model, "Humanoid")).RigType.Name;
+
+	if (rigType === "R15") {
+		const rig15 = await yieldForR15CharacterDescendants(model);
+		rig15.Head.Neck.Destroy(); // R15 specific logic :)
+		doStuffWithR15(rig15);
+	} else if (rigType === "R6") {
+		const rig6 = await yieldForR6CharacterDescendants(model);
+		rig6.Torso.Destroy(); // R6 specific logic :)
+		doStuffWithR6(rig6);
+	} else {
+		throw `${model.Name} has an unknown rig type! ${rigType}`;
+	}
+}
+
+Players.PlayerAdded.Connect(({ Name, Character, CharacterAdded }) => {
+	print(`Welcome, ${Name}`);
+	if (Character) handleCharacterModel(Character);
+	CharacterAdded.Connect(handleCharacterModel);
+});
 ```

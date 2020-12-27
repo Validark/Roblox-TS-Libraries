@@ -25,4 +25,3 @@ export declare function reconcileSchema<T extends InstanceSchema>(schema: T, ins
 export declare type EvaluateSchema<T extends InstanceSchema> = Instances[T["$className"]] extends infer B ? (T["$check"] extends (a: unknown) => a is infer A ? (A extends B ? A : A & B) : B) & (T["$children"] extends object ? {
     [K in keyof T["$children"]]: T["$children"][K] extends infer U ? U extends InstanceSchema ? EvaluateSchema<U> : U extends keyof Instances ? Instances[U] : never : never;
 } : unknown) : never;
-export {};

@@ -26,15 +26,14 @@ export declare type EvaluateInstanceTree<T extends InstanceTree, D = Instance> =
 			K,
 			T[K] extends keyof Instances
 				? Instances[T[K]]
-				: T[K] extends {
-						$className: keyof Instances;
-				  }
+				: T[K] extends InstanceTree
 				? EvaluateInstanceTree<T[K]>
 				: never
 		>;
 	};
 
 function getService(serviceName: string) {
+	// @ts-expect-error
 	return game.GetService(serviceName);
 }
 
@@ -50,24 +49,26 @@ export function validateTree<I extends Instance, T extends InstanceTree>(
 ): object is I & EvaluateInstanceTree<T, I>;
 
 export function validateTree<T extends InstanceTree>(object: Instance, tree: T, violators?: Array<string>) {
-	if ("$className" in tree && !object.IsA(tree.$className as string)) return false;
+	if ("$className" in tree && !object.IsA(tree.$className!)) return false;
 	let matches = true;
 
 	if (classIs(object, "DataModel")) {
-		for (const [serviceName, classOrTree] of Object.entries(tree)) {
+		for (const [serviceName, classOrTree] of pairs(tree as unknown as Map<string, keyof Instances | InstanceTree>)) {
 			if (serviceName !== "$className") {
-				const [success, service] = pcall(getService, serviceName);
-				if (!success) {
+				const result = pcall(getService, serviceName);
+
+				if (!result[0]) {
 					if (violators) {
 						matches = false;
 						violators.push(`game.GetService("${serviceName}")`);
 					}
 					return false;
 				}
-				const child = service as Exclude<typeof service, string>;
 
-				if (child && (typeIs(classOrTree, "string") || validateTree(child, classOrTree, violators))) {
-					if (child.Name !== serviceName) child.Name = serviceName;
+				const [, value] = result;
+
+				if (value && (typeIs(classOrTree, "string") || validateTree(value, classOrTree, violators))) {
+					if (value.Name !== serviceName) value.Name = serviceName;
 				} else {
 					if (violators) {
 						matches = false;
@@ -82,7 +83,7 @@ export function validateTree<T extends InstanceTree>(object: Instance, tree: T, 
 		for (const child of object.GetChildren()) {
 			const childName = child.Name;
 			if (childName !== "$className") {
-				const classOrTree = tree[childName] as string | InstanceTree | undefined;
+				const classOrTree = tree[childName];
 
 				if (
 					typeIs(classOrTree, "string")
@@ -94,8 +95,8 @@ export function validateTree<T extends InstanceTree>(object: Instance, tree: T, 
 			}
 		}
 
-		for (const key of Object.keys(tree)) {
-			if (!whitelistedKeys.has(key as string)) {
+		for (const [key] of pairs(tree as unknown as Map<string, keyof Instances | InstanceTree>)) {
+			if (!whitelistedKeys.has(key)) {
 				if (violators) {
 					matches = false;
 					violators.push(object.GetFullName() + "." + key);
@@ -121,16 +122,22 @@ export async function yieldForTree<I extends Instance, T extends InstanceTree>(
 	if (validateTree(object, tree)) {
 		return object as I & EvaluateInstanceTree<T, I>;
 	} else {
-		let prom: Promise<I & EvaluateInstanceTree<T, I>>;
-		return await (prom = new Promise((resolve, reject) => {
+		return await new Promise((resolve, _, onCancel) => {
 			const connections = new Array<RBXScriptConnection>();
+			const warner = Promise.delay(5)
 
-			const updateTreeForDescendant = (violators?: Array<string>) => {
-				if (prom.isPending && validateTree(object, tree, violators)) {
-					for (const connection of connections) connection.Disconnect();
+			function cleanup() {
+				for (const connection of connections) connection.Disconnect();
+				warner.cancel();
+			}
+
+			onCancel(cleanup)
+
+			function updateTreeForDescendant(violators?: Array<string>) {
+				if (validateTree(object, tree, violators)) {
+					cleanup()
 					resolve(object as I & EvaluateInstanceTree<T, I>);
-				} else if (violators) {
-					warn(`[yieldForTree] Infinite yield possible. Waiting for: ${violators.join(", ")}`);
+					return true;
 				}
 			};
 
@@ -144,39 +151,11 @@ export async function yieldForTree<I extends Instance, T extends InstanceTree>(
 				}),
 			);
 
-			delay(5, () => prom.isPending && updateTreeForDescendant(new Array<string>()));
-		}));
+			warner.then(() => {
+				const violators = new Array<string>();
+				if (!updateTreeForDescendant(violators))
+					warn(`[yieldForTree] Infinite yield possible. Waiting for: ${violators.join(", ")}`);
+			})
+		});
 	}
 }
-
-/*
-We should establish a spec if people want this. Submit an issue if you have an opinion.
-
-export function instantiateTree<
-	I extends Instance,
-	T extends {
-		$className?: {
-			[K in keyof Instances]: Instances[K] extends I ? (I extends Instances[K] ? K : never) : never
-		}[keyof Instances];
-		[Key: string]: keyof Instances | undefined | InstanceTree;
-	}
->(parent: I, tree: T): I & EvaluateInstanceTree<T> {
-	for (const [name, definition] of Object.entries(tree)) {
-		let className: string;
-
-		if (typeIs(definition, "string")) {
-			className = definition;
-			const instance = new Instance(className);
-			instance.Name = name as string;
-			instance.Parent = parent;
-		} else {
-			const instance = new Instance((definition as InstanceTree).$className) as Instances[keyof Instances];
-			instance.Name = name as string;
-			instance.Parent = parent;
-			instantiateTree(instance, definition as InstanceTree);
-		}
-	}
-
-	return parent as I & EvaluateInstanceTree<T>;
-}
-*/

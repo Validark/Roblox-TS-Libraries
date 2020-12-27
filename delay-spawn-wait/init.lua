@@ -46,7 +46,10 @@ local function delay(seconds, callback, ...)
 
 	if connection == nil then -- first is nil when connection is nil
 		first = node
+		local i = 0
 		connection = RunService.Heartbeat:Connect(function()
+			print(first, i)
+			i = i + 1
 			while first.endTime <= os.clock() do
 				local current = first
 				first = current.next

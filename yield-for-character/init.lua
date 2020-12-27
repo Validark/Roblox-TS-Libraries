@@ -1,360 +1,359 @@
--- Compiled with https://roblox-ts.github.io v0.2.14
--- July 30, 2019, 9:35 AM Central Daylight Time
-
-local TS = _G[script];
-local exports = {};
-local yieldForTree = TS.import(script, TS.getModule(script, "validate-tree")).yieldForTree;
+-- Compiled with roblox-ts v1.0.0-beta.11
+local TS = _G[script]
+local yieldForTree = TS.import(script, TS.getModule(script, "validate-tree")).yieldForTree
 local CharacterRigR6 = {
-	["$className"] = "Model";
+	["$className"] = "Model",
 	Head = {
-		["$className"] = "Part";
-		FaceCenterAttachment = "Attachment";
-		FaceFrontAttachment = "Attachment";
-		HairAttachment = "Attachment";
-		HatAttachment = "Attachment";
-		Mesh = "SpecialMesh";
-		face = "Decal";
-	};
+		["$className"] = "Part",
+		FaceCenterAttachment = "Attachment",
+		FaceFrontAttachment = "Attachment",
+		HairAttachment = "Attachment",
+		HatAttachment = "Attachment",
+		Mesh = "SpecialMesh",
+		face = "Decal",
+	},
 	HumanoidRootPart = {
-		["$className"] = "Part";
-		RootAttachment = "Attachment";
-		RootJoint = "Motor6D";
-	};
+		["$className"] = "Part",
+		RootAttachment = "Attachment",
+		RootJoint = "Motor6D",
+	},
 	Humanoid = {
-		["$className"] = "Humanoid";
-		Animator = "Animator";
-		HumanoidDescription = "HumanoidDescription";
-		Status = "Status";
-	};
+		["$className"] = "Humanoid",
+		Animator = "Animator",
+		HumanoidDescription = "HumanoidDescription",
+	},
 	["Left Arm"] = {
-		["$className"] = "Part";
-		LeftGripAttachment = "Attachment";
-		LeftShoulderAttachment = "Attachment";
-	};
+		["$className"] = "Part",
+		LeftGripAttachment = "Attachment",
+		LeftShoulderAttachment = "Attachment",
+	},
 	["Left Leg"] = {
-		["$className"] = "Part";
-		LeftFootAttachment = "Attachment";
-	};
+		["$className"] = "Part",
+		LeftFootAttachment = "Attachment",
+	},
 	["Right Arm"] = {
-		["$className"] = "Part";
-		RightGripAttachment = "Attachment";
-		RightShoulderAttachment = "Attachment";
-	};
+		["$className"] = "Part",
+		RightGripAttachment = "Attachment",
+		RightShoulderAttachment = "Attachment",
+	},
 	["Right Leg"] = {
-		["$className"] = "Part";
-		RightFootAttachment = "Attachment";
-	};
+		["$className"] = "Part",
+		RightFootAttachment = "Attachment",
+	},
 	Torso = {
-		["$className"] = "Part";
-		["Left Hip"] = "Motor6D";
-		["Left Shoulder"] = "Motor6D";
-		["Right Hip"] = "Motor6D";
-		["Right Shoulder"] = "Motor6D";
-		Neck = "Motor6D";
-		BodyBackAttachment = "Attachment";
-		BodyFrontAttachment = "Attachment";
-		LeftCollarAttachment = "Attachment";
-		NeckAttachment = "Attachment";
-		RightCollarAttachment = "Attachment";
-		WaistBackAttachment = "Attachment";
-		WaistCenterAttachment = "Attachment";
-		WaistFrontAttachment = "Attachment";
-	};
-	["Body Colors"] = "BodyColors";
-};
+		["$className"] = "Part",
+		["Left Hip"] = "Motor6D",
+		["Left Shoulder"] = "Motor6D",
+		["Right Hip"] = "Motor6D",
+		["Right Shoulder"] = "Motor6D",
+		Neck = "Motor6D",
+		BodyBackAttachment = "Attachment",
+		BodyFrontAttachment = "Attachment",
+		LeftCollarAttachment = "Attachment",
+		NeckAttachment = "Attachment",
+		RightCollarAttachment = "Attachment",
+		WaistBackAttachment = "Attachment",
+		WaistCenterAttachment = "Attachment",
+		WaistFrontAttachment = "Attachment",
+	},
+	["Body Colors"] = "BodyColors",
+}
 local CharacterRigR15 = {
-	["$className"] = "Model";
+	["$className"] = "Model",
 	HumanoidRootPart = {
-		["$className"] = "Part";
+		["$className"] = "Part",
 		RootRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
-		OriginalSize = "Vector3Value";
-	};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
+		OriginalSize = "Vector3Value",
+	},
 	LeftHand = {
-		["$className"] = "MeshPart";
+		["$className"] = "MeshPart",
 		LeftWristRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		LeftGripAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
-		LeftWrist = "Motor6D";
-		OriginalSize = "Vector3Value";
-	};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
+		LeftWrist = "Motor6D",
+		OriginalSize = "Vector3Value",
+	},
 	LeftLowerArm = {
-		["$className"] = "MeshPart";
+		["$className"] = "MeshPart",
 		LeftElbowRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		LeftWristRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
-		LeftElbow = "Motor6D";
-		OriginalSize = "Vector3Value";
-	};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
+		LeftElbow = "Motor6D",
+		OriginalSize = "Vector3Value",
+	},
 	LeftUpperArm = {
-		["$className"] = "MeshPart";
+		["$className"] = "MeshPart",
 		LeftShoulderRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		LeftElbowRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		LeftShoulderAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
-		LeftShoulder = "Motor6D";
-		OriginalSize = "Vector3Value";
-	};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
+		LeftShoulder = "Motor6D",
+		OriginalSize = "Vector3Value",
+	},
 	RightHand = {
-		["$className"] = "MeshPart";
+		["$className"] = "MeshPart",
 		RightWristRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		RightGripAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
-		RightWrist = "Motor6D";
-		OriginalSize = "Vector3Value";
-	};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
+		RightWrist = "Motor6D",
+		OriginalSize = "Vector3Value",
+	},
 	RightLowerArm = {
-		["$className"] = "MeshPart";
+		["$className"] = "MeshPart",
 		RightElbowRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		RightWristRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
-		RightElbow = "Motor6D";
-		OriginalSize = "Vector3Value";
-	};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
+		RightElbow = "Motor6D",
+		OriginalSize = "Vector3Value",
+	},
 	RightUpperArm = {
-		["$className"] = "MeshPart";
+		["$className"] = "MeshPart",
 		RightShoulderRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		RightElbowRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		RightShoulderAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
-		RightShoulder = "Motor6D";
-		OriginalSize = "Vector3Value";
-	};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
+		RightShoulder = "Motor6D",
+		OriginalSize = "Vector3Value",
+	},
 	UpperTorso = {
-		["$className"] = "MeshPart";
+		["$className"] = "MeshPart",
 		WaistRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		NeckRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		LeftShoulderRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		RightShoulderRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		BodyFrontAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		BodyBackAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		LeftCollarAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		RightCollarAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		NeckAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
-		Waist = "Motor6D";
-		OriginalSize = "Vector3Value";
-	};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
+		Waist = "Motor6D",
+		OriginalSize = "Vector3Value",
+	},
 	LeftFoot = {
-		["$className"] = "MeshPart";
+		["$className"] = "MeshPart",
 		LeftAnkleRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
-		LeftAnkle = "Motor6D";
-		OriginalSize = "Vector3Value";
-	};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
+		LeftAnkle = "Motor6D",
+		OriginalSize = "Vector3Value",
+	},
 	LeftLowerLeg = {
-		["$className"] = "MeshPart";
+		["$className"] = "MeshPart",
 		LeftKneeRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		LeftAnkleRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
-		LeftKnee = "Motor6D";
-		OriginalSize = "Vector3Value";
-	};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
+		LeftKnee = "Motor6D",
+		OriginalSize = "Vector3Value",
+	},
 	LeftUpperLeg = {
-		["$className"] = "MeshPart";
+		["$className"] = "MeshPart",
 		LeftHipRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		LeftKneeRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
-		LeftHip = "Motor6D";
-		OriginalSize = "Vector3Value";
-	};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
+		LeftHip = "Motor6D",
+		OriginalSize = "Vector3Value",
+	},
 	RightFoot = {
-		["$className"] = "MeshPart";
+		["$className"] = "MeshPart",
 		RightAnkleRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
-		RightAnkle = "Motor6D";
-		OriginalSize = "Vector3Value";
-	};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
+		RightAnkle = "Motor6D",
+		OriginalSize = "Vector3Value",
+	},
 	RightLowerLeg = {
-		["$className"] = "MeshPart";
+		["$className"] = "MeshPart",
 		RightKneeRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		RightAnkleRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
-		RightKnee = "Motor6D";
-		OriginalSize = "Vector3Value";
-	};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
+		RightKnee = "Motor6D",
+		OriginalSize = "Vector3Value",
+	},
 	RightUpperLeg = {
-		["$className"] = "MeshPart";
+		["$className"] = "MeshPart",
 		RightHipRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		RightKneeRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
-		RightHip = "Motor6D";
-		OriginalSize = "Vector3Value";
-	};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
+		RightHip = "Motor6D",
+		OriginalSize = "Vector3Value",
+	},
 	LowerTorso = {
-		["$className"] = "MeshPart";
+		["$className"] = "MeshPart",
 		RootRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		WaistRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		LeftHipRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		RightHipRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		WaistCenterAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		WaistFrontAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		WaistBackAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
-		Root = "Motor6D";
-		OriginalSize = "Vector3Value";
-	};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
+		Root = "Motor6D",
+		OriginalSize = "Vector3Value",
+	},
 	Humanoid = {
-		["$className"] = "Humanoid";
-		Animator = "Animator";
-		BodyTypeScale = "NumberValue";
-		BodyProportionScale = "NumberValue";
-		BodyWidthScale = "NumberValue";
-		BodyHeightScale = "NumberValue";
-		BodyDepthScale = "NumberValue";
-		HeadScale = "NumberValue";
-		HumanoidDescription = "HumanoidDescription";
-		Status = "Status";
-	};
+		["$className"] = "Humanoid",
+		Animator = "Animator",
+		BodyTypeScale = "NumberValue",
+		BodyProportionScale = "NumberValue",
+		BodyWidthScale = "NumberValue",
+		BodyHeightScale = "NumberValue",
+		BodyDepthScale = "NumberValue",
+		HeadScale = "NumberValue",
+		HumanoidDescription = "HumanoidDescription",
+	},
 	Head = {
-		["$className"] = "Part";
+		["$className"] = "Part",
 		Mesh = {
-			["$className"] = "SpecialMesh";
-			OriginalSize = "Vector3Value";
-		};
+			["$className"] = "SpecialMesh",
+			OriginalSize = "Vector3Value",
+		},
 		FaceCenterAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		FaceFrontAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		HairAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		HatAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
 		NeckRigAttachment = {
-			["$className"] = "Attachment";
-			OriginalPosition = "Vector3Value";
-		};
-		Neck = "Motor6D";
-		face = "Decal";
-		OriginalSize = "Vector3Value";
-	};
-	["Body Colors"] = "BodyColors";
-};
+			["$className"] = "Attachment",
+			OriginalPosition = "Vector3Value",
+		},
+		Neck = "Motor6D",
+		face = "Decal",
+		OriginalSize = "Vector3Value",
+	},
+	["Body Colors"] = "BodyColors",
+}
+-- * Yields until every member of CharacterRigR6 exists
 local function yieldForR6CharacterDescendants(character)
-	return yieldForTree(character, CharacterRigR6);
-end;
+	return yieldForTree(character, CharacterRigR6)
+end
+-- * Yields until every member of CharacterRigR15 exists
 local function yieldForR15CharacterDescendants(character)
-	return yieldForTree(character, CharacterRigR15);
-end;
-exports.default = yieldForR15CharacterDescendants;
-exports.CharacterRigR6 = CharacterRigR6;
-exports.CharacterRigR15 = CharacterRigR15;
-exports.yieldForR6CharacterDescendants = yieldForR6CharacterDescendants;
-exports.yieldForR15CharacterDescendants = yieldForR15CharacterDescendants;
-return exports;
+	return yieldForTree(character, CharacterRigR15)
+end
+local default = yieldForR15CharacterDescendants
+return {
+	yieldForR6CharacterDescendants = yieldForR6CharacterDescendants,
+	yieldForR15CharacterDescendants = yieldForR15CharacterDescendants,
+	CharacterRigR6 = CharacterRigR6,
+	CharacterRigR15 = CharacterRigR15,
+	default = default,
+}

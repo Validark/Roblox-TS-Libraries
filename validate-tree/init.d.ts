@@ -1,4 +1,5 @@
 /// <reference types="@rbxts/types" />
+/// <reference types="@rbxts/compiler-types" />
 declare type KeyExtendsPropertyName<T extends InstanceTree, K, V> = K extends "Changed" ? true : T extends {
     $className: keyof Instances;
 } ? K extends keyof Instances[T["$className"]] ? unknown : V : V;
@@ -11,15 +12,14 @@ export interface InstanceTree {
 export declare type EvaluateInstanceTree<T extends InstanceTree, D = Instance> = (T extends {
     $className: keyof Instances;
 } ? Instances[T["$className"]] : D) & {
-    [K in Exclude<keyof T, "$className">]: KeyExtendsPropertyName<T, K, T[K] extends keyof Instances ? Instances[T[K]] : T[K] extends {
-        $className: keyof Instances;
-    } ? EvaluateInstanceTree<T[K]> : never>;
+    [K in Exclude<keyof T, "$className">]: KeyExtendsPropertyName<T, K, T[K] extends keyof Instances ? Instances[T[K]] : T[K] extends InstanceTree ? EvaluateInstanceTree<T[K]> : never>;
 };
-/** Returns whether a given Instance matches a particular Rojo-eque InstanceTree.
+/** Returns whether a given Instance matches a particular Rojo-esque InstanceTree.
  * @param object The object which needs validation
  * @param tree The tree to validate
+ * @param violators
  */
-export declare function validateTree<I extends Instance, T extends InstanceTree>(object: I, tree: T): object is I & EvaluateInstanceTree<T, I>;
+export declare function validateTree<I extends Instance, T extends InstanceTree>(object: I, tree: T, violators?: Array<string>): object is I & EvaluateInstanceTree<T, I>;
 /** Yields until a given tree of objects exists within an object.
  * @param tree Must be an object tree similar to ones considered valid by Rojo.
  * Every tree must have a `$className` member, and can have any number of keys which represent

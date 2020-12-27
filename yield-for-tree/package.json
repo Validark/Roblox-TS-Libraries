@@ -1,6 +1,6 @@
 {
     "name": "@rbxts/yield-for-tree",
-    "version": "1.0.9",
+    "version": "1.1.0",
     "description": "Yield until all members of a specified tree exist, then dot access!",
     "main": "init.lua",
     "types": "init.d.ts",
@@ -29,14 +29,16 @@
     },
     "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/yield-for-tree/README.md",
     "peerDependencies": {
-        "@rbxts/types": "^1.0.227"
+		"@rbxts/compiler-types": "^1.0.0-beta.11.0",
+        "@rbxts/types": "^1.0.431"
     },
     "publishConfig": {
         "access": "public"
     },
     "dependencies": {
-        "@rbxts/types": "^1.0.227",
-        "@rbxts/validate-tree": "^1.0.0"
+		"@rbxts/compiler-types": "^1.0.0-beta.11.0",
+        "@rbxts/types": "^1.0.431",
+        "@rbxts/validate-tree": "^1.1.0"
     },
     "files": [
         "init.lua",

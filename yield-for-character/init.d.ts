@@ -1,8 +1,9 @@
 /// <reference types="@rbxts/types" />
+/// <reference types="@rbxts/compiler-types" />
 import { EvaluateInstanceTree } from "@rbxts/validate-tree";
 export declare const CharacterRigR6: {
     readonly $className: "Model";
-    Head: {
+    readonly Head: {
         readonly $className: "Part";
         readonly FaceCenterAttachment: "Attachment";
         readonly FaceFrontAttachment: "Attachment";
@@ -11,41 +12,40 @@ export declare const CharacterRigR6: {
         readonly Mesh: "SpecialMesh";
         readonly face: "Decal";
     };
-    HumanoidRootPart: {
+    readonly HumanoidRootPart: {
         readonly $className: "Part";
         readonly RootAttachment: "Attachment";
         readonly RootJoint: "Motor6D";
     };
-    Humanoid: {
+    readonly Humanoid: {
         readonly $className: "Humanoid";
         readonly Animator: "Animator";
         readonly HumanoidDescription: "HumanoidDescription";
-        readonly Status: "Status";
     };
-    "Left Arm": {
+    readonly "Left Arm": {
         readonly $className: "Part";
         readonly LeftGripAttachment: "Attachment";
         readonly LeftShoulderAttachment: "Attachment";
     };
-    "Left Leg": {
+    readonly "Left Leg": {
         readonly $className: "Part";
         readonly LeftFootAttachment: "Attachment";
     };
-    "Right Arm": {
+    readonly "Right Arm": {
         readonly $className: "Part";
         readonly RightGripAttachment: "Attachment";
         readonly RightShoulderAttachment: "Attachment";
     };
-    "Right Leg": {
+    readonly "Right Leg": {
         readonly $className: "Part";
         readonly RightFootAttachment: "Attachment";
     };
-    Torso: {
+    readonly Torso: {
         readonly $className: "Part";
-        readonly ["Left Hip"]: "Motor6D";
-        readonly ["Left Shoulder"]: "Motor6D";
-        readonly ["Right Hip"]: "Motor6D";
-        readonly ["Right Shoulder"]: "Motor6D";
+        readonly "Left Hip": "Motor6D";
+        readonly "Left Shoulder": "Motor6D";
+        readonly "Right Hip": "Motor6D";
+        readonly "Right Shoulder": "Motor6D";
         readonly Neck: "Motor6D";
         readonly BodyBackAttachment: "Attachment";
         readonly BodyFrontAttachment: "Attachment";
@@ -56,251 +56,249 @@ export declare const CharacterRigR6: {
         readonly WaistCenterAttachment: "Attachment";
         readonly WaistFrontAttachment: "Attachment";
     };
-    readonly Shirt: "Shirt";
-    readonly Pants: "Pants";
-    readonly ["Body Colors"]: "BodyColors";
+    readonly "Body Colors": "BodyColors";
 };
 export declare const CharacterRigR15: {
     readonly $className: "Model";
-    HumanoidRootPart: {
+    readonly HumanoidRootPart: {
         readonly $className: "Part";
-        RootRigAttachment: {
+        readonly RootRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
         readonly OriginalSize: "Vector3Value";
     };
-    LeftHand: {
+    readonly LeftHand: {
         readonly $className: "MeshPart";
-        LeftWristRigAttachment: {
+        readonly LeftWristRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        LeftGripAttachment: {
+        readonly LeftGripAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
         readonly LeftWrist: "Motor6D";
         readonly OriginalSize: "Vector3Value";
     };
-    LeftLowerArm: {
+    readonly LeftLowerArm: {
         readonly $className: "MeshPart";
-        LeftElbowRigAttachment: {
+        readonly LeftElbowRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        LeftWristRigAttachment: {
+        readonly LeftWristRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
         readonly LeftElbow: "Motor6D";
         readonly OriginalSize: "Vector3Value";
     };
-    LeftUpperArm: {
+    readonly LeftUpperArm: {
         readonly $className: "MeshPart";
-        LeftShoulderRigAttachment: {
+        readonly LeftShoulderRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        LeftElbowRigAttachment: {
+        readonly LeftElbowRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        LeftShoulderAttachment: {
+        readonly LeftShoulderAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
         readonly LeftShoulder: "Motor6D";
         readonly OriginalSize: "Vector3Value";
     };
-    RightHand: {
+    readonly RightHand: {
         readonly $className: "MeshPart";
-        RightWristRigAttachment: {
+        readonly RightWristRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        RightGripAttachment: {
+        readonly RightGripAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
         readonly RightWrist: "Motor6D";
         readonly OriginalSize: "Vector3Value";
     };
-    RightLowerArm: {
+    readonly RightLowerArm: {
         readonly $className: "MeshPart";
-        RightElbowRigAttachment: {
+        readonly RightElbowRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        RightWristRigAttachment: {
+        readonly RightWristRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
         readonly RightElbow: "Motor6D";
         readonly OriginalSize: "Vector3Value";
     };
-    RightUpperArm: {
+    readonly RightUpperArm: {
         readonly $className: "MeshPart";
-        RightShoulderRigAttachment: {
+        readonly RightShoulderRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        RightElbowRigAttachment: {
+        readonly RightElbowRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        RightShoulderAttachment: {
+        readonly RightShoulderAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
         readonly RightShoulder: "Motor6D";
         readonly OriginalSize: "Vector3Value";
     };
-    UpperTorso: {
+    readonly UpperTorso: {
         readonly $className: "MeshPart";
-        WaistRigAttachment: {
+        readonly WaistRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        NeckRigAttachment: {
+        readonly NeckRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        LeftShoulderRigAttachment: {
+        readonly LeftShoulderRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        RightShoulderRigAttachment: {
+        readonly RightShoulderRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        BodyFrontAttachment: {
+        readonly BodyFrontAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        BodyBackAttachment: {
+        readonly BodyBackAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        LeftCollarAttachment: {
+        readonly LeftCollarAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        RightCollarAttachment: {
+        readonly RightCollarAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        NeckAttachment: {
+        readonly NeckAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
         readonly Waist: "Motor6D";
         readonly OriginalSize: "Vector3Value";
     };
-    LeftFoot: {
+    readonly LeftFoot: {
         readonly $className: "MeshPart";
-        LeftAnkleRigAttachment: {
+        readonly LeftAnkleRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
         readonly LeftAnkle: "Motor6D";
         readonly OriginalSize: "Vector3Value";
     };
-    LeftLowerLeg: {
+    readonly LeftLowerLeg: {
         readonly $className: "MeshPart";
-        LeftKneeRigAttachment: {
+        readonly LeftKneeRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        LeftAnkleRigAttachment: {
+        readonly LeftAnkleRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
         readonly LeftKnee: "Motor6D";
         readonly OriginalSize: "Vector3Value";
     };
-    LeftUpperLeg: {
+    readonly LeftUpperLeg: {
         readonly $className: "MeshPart";
-        LeftHipRigAttachment: {
+        readonly LeftHipRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        LeftKneeRigAttachment: {
+        readonly LeftKneeRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
         readonly LeftHip: "Motor6D";
         readonly OriginalSize: "Vector3Value";
     };
-    RightFoot: {
+    readonly RightFoot: {
         readonly $className: "MeshPart";
-        RightAnkleRigAttachment: {
+        readonly RightAnkleRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
         readonly RightAnkle: "Motor6D";
         readonly OriginalSize: "Vector3Value";
     };
-    RightLowerLeg: {
+    readonly RightLowerLeg: {
         readonly $className: "MeshPart";
-        RightKneeRigAttachment: {
+        readonly RightKneeRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        RightAnkleRigAttachment: {
+        readonly RightAnkleRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
         readonly RightKnee: "Motor6D";
         readonly OriginalSize: "Vector3Value";
     };
-    RightUpperLeg: {
+    readonly RightUpperLeg: {
         readonly $className: "MeshPart";
-        RightHipRigAttachment: {
+        readonly RightHipRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        RightKneeRigAttachment: {
+        readonly RightKneeRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
         readonly RightHip: "Motor6D";
         readonly OriginalSize: "Vector3Value";
     };
-    LowerTorso: {
+    readonly LowerTorso: {
         readonly $className: "MeshPart";
-        RootRigAttachment: {
+        readonly RootRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        WaistRigAttachment: {
+        readonly WaistRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        LeftHipRigAttachment: {
+        readonly LeftHipRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        RightHipRigAttachment: {
+        readonly RightHipRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        WaistCenterAttachment: {
+        readonly WaistCenterAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        WaistFrontAttachment: {
+        readonly WaistFrontAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        WaistBackAttachment: {
+        readonly WaistBackAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
         readonly Root: "Motor6D";
         readonly OriginalSize: "Vector3Value";
     };
-    Humanoid: {
+    readonly Humanoid: {
         readonly $className: "Humanoid";
         readonly Animator: "Animator";
         readonly BodyTypeScale: "NumberValue";
@@ -310,31 +308,30 @@ export declare const CharacterRigR15: {
         readonly BodyDepthScale: "NumberValue";
         readonly HeadScale: "NumberValue";
         readonly HumanoidDescription: "HumanoidDescription";
-        readonly Status: "Status";
     };
-    Head: {
+    readonly Head: {
         readonly $className: "Part";
-        Mesh: {
+        readonly Mesh: {
             readonly $className: "SpecialMesh";
             readonly OriginalSize: "Vector3Value";
         };
-        FaceCenterAttachment: {
+        readonly FaceCenterAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        FaceFrontAttachment: {
+        readonly FaceFrontAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        HairAttachment: {
+        readonly HairAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        HatAttachment: {
+        readonly HatAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
-        NeckRigAttachment: {
+        readonly NeckRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
         };
@@ -342,9 +339,7 @@ export declare const CharacterRigR15: {
         readonly face: "Decal";
         readonly OriginalSize: "Vector3Value";
     };
-    readonly Shirt: "Shirt";
-    readonly Pants: "Pants";
-    readonly ["Body Colors"]: "BodyColors";
+    readonly "Body Colors": "BodyColors";
 };
 export declare type CharacterRigR6 = EvaluateInstanceTree<typeof CharacterRigR6>;
 export declare type CharacterRigR15 = EvaluateInstanceTree<typeof CharacterRigR15>;

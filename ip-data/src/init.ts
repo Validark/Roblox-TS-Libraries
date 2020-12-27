@@ -153,6 +153,9 @@ interface IPDataSuccess {
 	 * Example: 10
 	 */
 	accuracy: 10;
+
+	/** Hosting, colocated or data center */
+	hosting: boolean;
 }
 
 interface IPDataFail {
@@ -169,6 +172,6 @@ let ipData: IPDataSuccess | IPDataFail | undefined;
 
 export = async () =>
 	ipData ||
-	(ipData = HttpService.JSONDecode(HttpService.GetAsync("http://ip-api.com/json/?fields=" + (2 ** 24 - 1))) as
+	(ipData = HttpService.JSONDecode(HttpService.GetAsync("http://ip-api.com/json/?fields=" + (2 ** 25 - 1))) as
 		| IPDataSuccess
 		| IPDataFail);

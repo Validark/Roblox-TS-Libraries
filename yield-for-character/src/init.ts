@@ -23,7 +23,6 @@ export const CharacterRigR6 = {
 		$className: "Humanoid",
 		Animator: "Animator",
 		HumanoidDescription: "HumanoidDescription",
-		Status: "Status",
 	},
 
 	["Left Arm"]: {
@@ -215,7 +214,6 @@ export const CharacterRigR15 = {
 		BodyDepthScale: "NumberValue",
 		HeadScale: "NumberValue",
 		HumanoidDescription: "HumanoidDescription",
-		Status: "Status",
 	},
 
 	Head: {

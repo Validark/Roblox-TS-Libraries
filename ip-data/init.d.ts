@@ -1,4 +1,4 @@
-/// <reference types="@rbxts/types" />
+/// <reference types="@rbxts/compiler-types" />
 interface IPDataSuccess {
     /**
      * Whether the request was successful
@@ -131,7 +131,9 @@ interface IPDataSuccess {
      *
      * Example: 10
      */
-    accuracy: number;
+    accuracy: 10;
+    /** Hosting, colocated or data center */
+    hosting: boolean;
 }
 interface IPDataFail {
     status: "fail";
