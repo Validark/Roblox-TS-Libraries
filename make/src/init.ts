@@ -1,5 +1,17 @@
+type WritablePropertyNames<T> = {
+	readonly [K in keyof T]-?: T[K] extends Callback
+		? never
+		: (<F>() => F extends { [Q in K]: T[K] } ? 1 : 2) extends <F>() => F extends {
+				-readonly [Q in K]: T[K];
+		  }
+				? 1
+				: 2
+		? K
+		: never;
+}[keyof T];
+
 type GetBindableToRBXScriptSignal<T> = {
-	[key in ({ [k in keyof T]-?: T[k] extends RBXScriptSignal ? k : never })[keyof T]]: (T[key] extends RBXScriptSignal<
+	[key in ({ [K in keyof T]-?: T[K] extends RBXScriptSignal ? K : never })[keyof T]]: (T[key] extends RBXScriptSignal<
 		infer R
 	>
 		? R
@@ -8,10 +20,10 @@ type GetBindableToRBXScriptSignal<T> = {
 
 /**
  * Returns a table wherein an object's writable properties can be specified,
- * while also allowing functions to be passed in which can be bound to a Cue.
+ * while also allowing functions to be passed in which can be bound to a RBXScriptSignal.
  */
 type GetPartialObjectWithBindableConnectSlots<T extends Instance> = Partial<
-	Pick<T, InstanceProperties<T>> & GetBindableToRBXScriptSignal<T>
+	Pick<T, WritablePropertyNames<T>> & GetBindableToRBXScriptSignal<T>
 >;
 
 /**
@@ -24,28 +36,26 @@ type GetPartialObjectWithBindableConnectSlots<T extends Instance> = Partial<
  *
  * `settings.Parent` is always set last.
  */
-function Make<T extends keyof CreatableInstances>(
-	className: T,
-	settings: GetPartialObjectWithBindableConnectSlots<CreatableInstances[T]> & {
+function Make<T extends keyof CreatableInstances, Q extends GetPartialObjectWithBindableConnectSlots<CreatableInstances[T]> & {
 		/** The Children to place inside of this Instance. */
-		Children?: Array<Instance>;
+		Children?: ReadonlyArray<Instance>;
 		Parent?: Instance | undefined;
-	},
+	}>(
+	className: T,
+	settings: Q,
 ) {
 	const { Children: children, Parent: parent } = settings;
-
-	settings.Children = undefined;
-	settings.Parent = undefined;
-
 	const instance = new Instance(className);
 
-	for (const [setting, value] of pairs(settings as unknown as Map<WritableInstanceProperties<Instance>, unknown>)) {
-		const { [setting]: prop } = instance;
+	for (const [setting, value] of pairs(settings as unknown as Map<never, never>)) {
+		if (setting !== "Children" && setting !== "Parent") {
+			const { [setting]: prop } = instance;
 
-		if (typeIs(prop, "RBXScriptSignal")) {
-			prop.Connect(value as () => void);
-		} else {
-			instance[setting] = value as never;
+			if (typeIs(prop, "RBXScriptSignal")) {
+				(prop as RBXScriptSignal).Connect(value);
+			} else {
+				instance[setting] = value;
+			}
 		}
 	}
 
@@ -55,7 +65,13 @@ function Make<T extends keyof CreatableInstances>(
 		}
 	}
 	instance.Parent = parent;
-	return instance;
+	return instance as CreatableInstances[T] &
+		Reconstruct<{ [O in Extract<"Name", keyof Q>]: Q[O] } & { [G in "ClassName"]: T } &
+			(Q["Children"] extends never ? never :
+				{
+					[K in Exclude<keyof Q["Children"], keyof ReadonlyArray<any> | "length">]:
+						Q["Children"][K] extends infer A ? A extends { Name: string } ? string extends A["Name"] ? never : (k: { [P in A["Name"]]: A }) => void : never : never
+				}[Exclude<keyof Q["Children"], keyof ReadonlyArray<any> | "length">] extends (k: infer U) => void ? U : never)>
 }
 
 export = Make;

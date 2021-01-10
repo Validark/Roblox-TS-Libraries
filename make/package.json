@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/make",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "Shorthand for declaring Instances with properties.",
 	"main": "init.lua",
 	"types": "init.d.ts",
@@ -34,8 +34,8 @@
 		"access": "public"
 	},
 	"dependencies": {
-		"@rbxts/compiler-types": "^1.0.0-beta.11.1",
-		"@rbxts/types": "^1.0.431"
+		"@rbxts/compiler-types": "^1.0.0-beta.14.0",
+		"@rbxts/types": "^1.0.437"
 	},
 	"files": [
 		"init.lua",

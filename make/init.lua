@@ -2,7 +2,7 @@
 --[[
 	*
 	* Returns a table wherein an object's writable properties can be specified,
-	* while also allowing functions to be passed in which can be bound to a Cue.
+	* while also allowing functions to be passed in which can be bound to a RBXScriptSignal.
 ]]
 --[[
 	*
@@ -19,17 +19,17 @@ local function Make(className, settings)
 	local _0 = settings
 	local children = _0.Children
 	local parent = _0.Parent
-	settings.Children = nil
-	settings.Parent = nil
 	local instance = Instance.new(className)
 	for setting, value in pairs(settings) do
-		local _1 = instance
-		local prop = _1[setting]
-		local _2 = prop
-		if typeof(_2) == "RBXScriptSignal" then
-			prop:Connect(value)
-		else
-			instance[setting] = value
+		if setting ~= "Children" and setting ~= "Parent" then
+			local _1 = instance
+			local prop = _1[setting]
+			local _2 = prop
+			if typeof(_2) == "RBXScriptSignal" then
+				prop:Connect(value)
+			else
+				instance[setting] = value
+			end
 		end
 	end
 	if children then
