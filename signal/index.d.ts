@@ -1,7 +1,7 @@
 /**
  * BindableEvent wrapper which passes variables by reference instead of by value
  */
-interface Signal<ConnectedFunctionSignature extends () => void, Generic = false> {
+interface Signal<ConnectedFunctionSignature extends Callback, Generic = false> {
 	/**
 	 * Fires the BindableEvent with any number of arguments
 	 * @param args The arguments to pass into the connected functions
@@ -31,7 +31,7 @@ interface Signal<ConnectedFunctionSignature extends () => void, Generic = false>
 	Destroy(): void;
 }
 
-declare const Signal: new <ConnectedFunctionSignature extends () => void, Generic = false>() => Signal<
+declare const Signal: new <ConnectedFunctionSignature extends Callback, Generic = false>() => Signal<
 	ConnectedFunctionSignature,
 	Generic
 >;
