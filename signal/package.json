@@ -24,9 +24,6 @@
         "url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
     },
     "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/signal/README.md",
-    "peerDependencies": {
-        "@rbxts/types": "^1.0.194"
-    },
     "publishConfig": {
         "access": "public"
     },
@@ -34,5 +31,10 @@
         "init.lua",
         "index.d.ts",
         "README.md"
-    ]
+    ],
+    "dependencies": {},
+    "devDependencies": {
+        "@rbxts/compiler-types": "^1.0.0-beta.14.0",
+        "@rbxts/types": "^1.0.438"
+    }
 }

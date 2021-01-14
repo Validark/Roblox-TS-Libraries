@@ -1,20 +1,20 @@
 /**
  * BindableEvent wrapper which passes variables by reference instead of by value
  */
-interface Signal<ConnectedFunctionSignature = () => void, Generic = false> {
+interface Signal<ConnectedFunctionSignature extends () => void, Generic = false> {
 	/**
 	 * Fires the BindableEvent with any number of arguments
 	 * @param args The arguments to pass into the connected functions
 	 */
-	Fire(...args: FunctionArguments<ConnectedFunctionSignature>): void;
+	Fire(...args: Parameters<ConnectedFunctionSignature>): void;
 
 	/**
 	 * Connects a callback to BindableEvent.Event
 	 * @param callback The function to connect to BindableEvent.Event
 	 */
-	Connect<O extends Array<unknown> = FunctionArguments<ConnectedFunctionSignature>>(
+	Connect<O extends Array<unknown> = Parameters<ConnectedFunctionSignature>>(
 		callback: Generic extends true
-			? (FunctionArguments<ConnectedFunctionSignature> extends Array<unknown>
+			? (Parameters<ConnectedFunctionSignature> extends Array<unknown>
 					? (...args: O) => void
 					: ConnectedFunctionSignature)
 			: ConnectedFunctionSignature,
@@ -23,7 +23,7 @@ interface Signal<ConnectedFunctionSignature = () => void, Generic = false> {
 	/**
 	 * Yields the current thread until the thread is fired.
 	 */
-	Wait(): LuaTuple<FunctionArguments<ConnectedFunctionSignature>>;
+	Wait(): LuaTuple<Parameters<ConnectedFunctionSignature>>;
 
 	/**
 	 * Destroys the Signal
@@ -31,7 +31,7 @@ interface Signal<ConnectedFunctionSignature = () => void, Generic = false> {
 	Destroy(): void;
 }
 
-declare const Signal: new <ConnectedFunctionSignature = () => void, Generic = false>() => Signal<
+declare const Signal: new <ConnectedFunctionSignature extends () => void, Generic = false>() => Signal<
 	ConnectedFunctionSignature,
 	Generic
 >;
