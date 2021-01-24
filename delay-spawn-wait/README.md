@@ -23,6 +23,7 @@ This library works as a (mostly) drop-in replacement for the built-in functions 
 
 - `spawn` runs on a new thread without yielding one tick (or passing in a deltaTime parameter)
   - If you need to yield for one tick, try `delay(0, callback)` instead.
+    - Keep in mind that one tick in this library is on the Heartbeat (60hz) pipeline, and NOT on the 30hz pipeline. That means 1 tick approximately equals 1/60 of a second instead of 1/30 of a second (when running at 60fps).
 
 - `spawn` and `delay` allow you to pass in extra arguments with which to call the callback.
 	```lua
