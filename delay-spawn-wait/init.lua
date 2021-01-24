@@ -17,99 +17,113 @@ local function spawn(callback, ...)
 	bindable:Destroy()
 end
 
--- uses a sorted singly linked list (queue) to achieve O(1) remove operations and O(n) for insert
+-- uses a min-heap to achieve O(1) check operations and O(log(n)) remove/insert operations
+local queue = {}
+local len = 0
 
-local first -- the initial node in the linked list
 local connection -- the Heartbeat `RBXScriptConnection | nil`
-local MINIMUM_DELAY = 0.029 -- the minimum amount of time a callback/bindable:Fire() can be delayed
+
+local function heartbeatStep()
+	local clockTick = os.clock()
+
+	repeat
+		local current = queue[1]
+		if current == nil or current.endTime > clockTick then break end
+		local done = len == 1
+
+		if done then
+			queue[1] = nil
+			len = 0
+			connection:Disconnect()
+			connection = nil
+		else
+			local lastNode = queue[len]
+			queue[len] = nil
+			len = len - 1
+			local targetIndex = 1
+
+			while true do
+				local childIndex = 2*targetIndex -- leftChild, but this might change to rightChild below
+				if childIndex > len then break end
+				local minChild = queue[childIndex]
+				local rightChildIndex = childIndex + 1
+
+				if rightChildIndex <= len then
+					local rightChild = queue[rightChildIndex]
+					if rightChild.endTime < minChild.endTime then
+						childIndex = rightChildIndex
+						minChild = rightChild
+					end
+				end
+
+				if lastNode.endTime < minChild.endTime then break end
+				queue[targetIndex] = minChild
+				targetIndex = childIndex
+			end
+
+			queue[targetIndex] = lastNode
+		end
+
+		local args = current.args
+		local callback = current.callback
+
+		if typeof(callback) == "Instance" then
+			if args then
+				callback:Fire(os.clock() - current.startTime, table.unpack(args, 2, args[1]))
+			else
+				callback:Fire(os.clock() - current.startTime)
+			end
+		else
+			local bindable = Instance.new("BindableEvent")
+
+			if args then
+				bindable.Event:Connect(function(elapsedTime)
+					callback(elapsedTime, table.unpack(args, 2, args[1]))
+				end)
+			else
+				bindable.Event:Connect(callback)
+			end
+
+			bindable:Fire(os.clock() - current.startTime)
+			bindable:Destroy()
+		end
+	until done
+end
 
 local function delay(seconds, callback, ...)
 	-- If seconds is nil, -INF, INF, NaN, or less than MINIMUM_DELAY, assume seconds is MINIMUM_DELAY.
-	if seconds == nil or not (seconds >= MINIMUM_DELAY) or seconds == math.huge then
-		seconds = MINIMUM_DELAY
+	if seconds == nil or not (seconds > 0) or seconds == math.huge then
+		seconds = 0
 	end
 
 	local startTime = os.clock()
 	local endTime = startTime + seconds
+	local length = select("#", ...)
+
+	if connection == nil then -- first is nil when connection is nil
+		connection = RunService.Heartbeat:Connect(heartbeatStep)
+	end
 
 	local node = {
 		callback = callback,
 		startTime = startTime,
-		endTime = endTime
+		endTime = endTime,
+		args = length > 0 and { length + 1, ... }
 	}
 
-	local length = select("#", ...)
+	local targetIndex = len + 1
+	len = targetIndex
 
-	if length > 0 then
-		node.args = { length + 1, ... } -- this is an optimization
+	while true do
+		local parentIndex = (targetIndex - targetIndex % 2) / 2
+		if parentIndex < 1 then break end
+		local parentNode = queue[parentIndex]
+		if parentNode.endTime < node.endTime then break end
+		queue[targetIndex] = parentNode
+		targetIndex = parentIndex
 	end
 
-	if connection == nil then -- first is nil when connection is nil
-		first = node
-		local i = 0
-		connection = RunService.Heartbeat:Connect(function()
-			print(first, i)
-			i = i + 1
-			while first.endTime <= os.clock() do
-				local current = first
-				first = current.next
-
-				if first == nil then
-					connection:Disconnect()
-					connection = nil
-				end
-
-				local args = current.args
-				local callback = current.callback
-
-				if typeof(callback) == "Instance" then
-					if args ~= nil then
-						callback:Fire(os.clock() - current.startTime, table.unpack(args, 2, args[1]))
-					else
-						callback:Fire(os.clock() - current.startTime)
-					end
-				else
-					local bindable = Instance.new("BindableEvent")
-
-					if args ~= nil then
-						bindable.Event:Connect(function(elapsedTime)
-							callback(elapsedTime, table.unpack(args, 2, args[1]))
-						end)
-					else
-						bindable.Event:Connect(callback)
-					end
-
-					bindable:Fire(os.clock() - current.startTime)
-					bindable:Destroy()
-				end
-
-				if current.next == nil then return end
-			end
-		end)
-	else -- first is non-nil
-		if first.endTime < endTime then -- if `node` should be placed after `first`
-			-- we will insert `node` between `current` and `next`
-			-- (i.e. after `current` if `next` is nil)
-			local current = first
-			local next = current.next
-
-			while next ~= nil and next.endTime < endTime do
-				current = next
-				next = current.next
-			end
-
-			-- `current` must be non-nil, but `next` could be `nil` (i.e. last item in list)
-			current.next = node
-
-			if next ~= nil then
-				node.next = next
-			end
-		else
-			-- set `node` to `first`
-			node.next = first
-			first = node
-		end
-	end
+	queue[targetIndex] = node
 end
 
 local function wait(seconds)

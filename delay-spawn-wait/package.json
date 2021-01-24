@@ -22,14 +22,12 @@
 		"url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
 	},
 	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/delay-spawn-wait/README.md",
-	"peerDependencies": {
-		"@rbxts/types": "^1.0.235"
-	},
 	"publishConfig": {
 		"access": "public"
 	},
-	"dependencies": {
-		"@rbxts/types": "^1.0.381"
+	"peerDependencies": {
+		"@rbxts/compiler-types": "^1.0.0-beta.15.0",
+		"@rbxts/types": "^1.0.441"
 	},
 	"files": [
 		"init.lua",

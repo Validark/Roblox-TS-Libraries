@@ -1,4 +1,5 @@
 /// <reference types="@rbxts/types" />
+/// <reference types="@rbxts/compiler-types" />
 
 /**
  * Calls a given callback or fires a given BindableEvent after a given number of seconds.
@@ -32,5 +33,6 @@ export declare function spawn<T extends Callback>(callback: T, ...args: Paramete
 /**
  * Yields the current thread for a given number of seconds/
  * @param seconds The duration in seconds for how long the current thread should yield before resuming.
+ * @returns The number of seconds the thread yielded.
  */
 export declare function wait(seconds?: number): number;

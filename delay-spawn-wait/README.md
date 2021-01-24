@@ -35,7 +35,7 @@ This library works as a (mostly) drop-in replacement for the built-in functions 
 	```lua
 	local bindable = Instance.new("BindableEvent")
 	delay(5, bindable)
-	bindable:Wait() -- this is what our wait() function does internally!
+	bindable.Event:Wait() -- this is what our wait() function does internally!
 	```
 	- Note that passing in extra arguments with a BindableEvent will pass your arguments directly into `BindableEvent:Fire()`. That means [these rules](https://developer.roblox.com/en-us/api-reference/function/BindableEvent/Fire) apply.
 		```lua
