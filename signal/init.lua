@@ -1,15 +1,15 @@
 local Signal = {}
 Signal.__index = Signal
 
-function Signal.new(...)
+function Signal.new()
 	return setmetatable({
 		Bindable = Instance.new("BindableEvent");
 	}, Signal)
 end
 
 function Signal:Connect(Callback)
-	return self.Bindable.Event:Connect(function(GetArgumentStack)
-		Callback(GetArgumentStack())
+	return self.Bindable.Event:Connect(function(GetArguments)
+		Callback(GetArguments())
 	end)
 end
 
@@ -18,7 +18,7 @@ function Signal:Fire(...)
 	local n = select("#", ...)
 
 	self.Bindable:Fire(function()
-		return unpack(Arguments, 1, n)
+		return table.unpack(Arguments, 1, n)
 	end)
 end
 

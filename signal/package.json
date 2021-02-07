@@ -1,6 +1,6 @@
 {
     "name": "@rbxts/signal",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "BindableEvent wrapper which passes values by reference",
     "main": "init.lua",
     "types": "index.d.ts",
