@@ -156,6 +156,9 @@ interface IPDataSuccess {
 
 	/** Hosting, colocated or data center */
 	hosting: boolean;
+
+	/** Timezone UTC DST offset in seconds */
+	offset: number;
 }
 
 interface IPDataFail {
@@ -171,7 +174,7 @@ const HttpService = game.GetService("HttpService");
 let ipData: IPDataSuccess | IPDataFail | undefined;
 
 export = async () =>
-	ipData ||
-	(ipData = HttpService.JSONDecode(HttpService.GetAsync("http://ip-api.com/json/?fields=" + (2 ** 25 - 1))) as
+	ipData ??
+	(ipData = HttpService.JSONDecode(HttpService.GetAsync(`http://ip-api.com/json/?fields=${2 ** 26 - 1}`)) as
 		| IPDataSuccess
 		| IPDataFail);

@@ -1,12 +1,10 @@
 {
     "name": "@rbxts/ip-data",
-    "version": "1.0.7",
+    "version": "1.0.8",
     "description": "https://ip-api.com API Wrapper",
     "main": "init.lua",
     "types": "init.d.ts",
-    "scripts": {
-        "build": "rbxtsc & mv out/* . & rm -r out"
-    },
+    "scripts": {},
     "repository": {
         "type": "git",
         "url": "https://github.com/Validark/Roblox-TS-Libraries/tree/master/ip-data"
@@ -28,8 +26,8 @@
         "access": "public"
     },
     "dependencies": {
-        "@rbxts/compiler-types": "^1.0.0-beta.11.1",
-        "@rbxts/types": "^1.0.431"
+        "@rbxts/compiler-types": "^1.0.0-types.0",
+        "@rbxts/types": "^1.0.464"
     },
     "files": [
         "init.lua",

@@ -2,5 +2,6 @@
 archived
 archived2
 **/node_modules
+**/include
 boilerplate.lua
 luac.out

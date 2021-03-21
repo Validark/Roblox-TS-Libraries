@@ -134,6 +134,8 @@ interface IPDataSuccess {
     accuracy: 10;
     /** Hosting, colocated or data center */
     hosting: boolean;
+    /** Timezone UTC DST offset in seconds */
+    offset: number;
 }
 interface IPDataFail {
     status: "fail";

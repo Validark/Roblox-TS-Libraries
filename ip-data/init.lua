@@ -1,12 +1,8 @@
--- Compiled with roblox-ts v1.0.0-beta.11
-local TS = _G[script]
-local HttpService = game:GetService("HttpService")
-local ipData
-return TS.async(function()
-	local _0 = ipData
-	if not _0 then
-		ipData = HttpService:JSONDecode(HttpService:GetAsync("http://ip-api.com/json/?fields=" .. tostring((2 ^ 25 - 1))))
-		_0 = ipData
+local cache
+return _G[script].async(function()
+	if cache == nil then
+		local h = game:GetService("HttpService")
+		cache = h:JSONDecode(h:GetAsync("http://ip-api.com/json/?fields=" .. 2^26 - 1))
 	end
-	return _0
+	return cache
 end)
