@@ -1,4 +1,4 @@
--- Compiled with roblox-ts v1.0.0-beta.11
+-- Compiled with roblox-ts v1.1.1
 --[[
 	*
 	* Returns a table wherein an object's writable properties can be specified,

@@ -21,8 +21,8 @@
 		"Manager"
 	],
 	"peerDependencies": {
-		"@rbxts/compiler-types": "^1.0.0-beta.11.1",
-		"@rbxts/types": "^1.0.431"
+		"@rbxts/compiler-types": "^1.1.1-types.3",
+		"@rbxts/types": "^1.0.471"
 	},
 	"author": "Validark",
 	"license": "ISC",
@@ -34,8 +34,8 @@
 		"access": "public"
 	},
 	"dependencies": {
-		"@rbxts/compiler-types": "^1.0.0-beta.14.0",
-		"@rbxts/types": "^1.0.437"
+		"@rbxts/compiler-types": "^1.1.1-types.3",
+		"@rbxts/types": "^1.0.471"
 	},
 	"files": [
 		"init.lua",
