@@ -4,7 +4,7 @@ export const CharacterRigR6 = {
 	$className: "Model",
 
 	Head: {
-		$className: "Part",
+		$className: "BasePart",
 		FaceCenterAttachment: "Attachment",
 		FaceFrontAttachment: "Attachment",
 		HairAttachment: "Attachment",
@@ -14,7 +14,7 @@ export const CharacterRigR6 = {
 	},
 
 	HumanoidRootPart: {
-		$className: "Part",
+		$className: "BasePart",
 		RootAttachment: "Attachment",
 		RootJoint: "Motor6D",
 	},
@@ -26,29 +26,29 @@ export const CharacterRigR6 = {
 	},
 
 	["Left Arm"]: {
-		$className: "Part",
+		$className: "BasePart",
 		LeftGripAttachment: "Attachment",
 		LeftShoulderAttachment: "Attachment",
 	},
 
 	["Left Leg"]: {
-		$className: "Part",
+		$className: "BasePart",
 		LeftFootAttachment: "Attachment",
 	},
 
 	["Right Arm"]: {
-		$className: "Part",
+		$className: "BasePart",
 		RightGripAttachment: "Attachment",
 		RightShoulderAttachment: "Attachment",
 	},
 
 	["Right Leg"]: {
-		$className: "Part",
+		$className: "BasePart",
 		RightFootAttachment: "Attachment",
 	},
 
 	Torso: {
-		$className: "Part",
+		$className: "BasePart",
 		["Left Hip"]: "Motor6D",
 		["Left Shoulder"]: "Motor6D",
 		["Right Hip"]: "Motor6D",
@@ -75,7 +75,7 @@ export const CharacterRigR15 = {
 	$className: "Model",
 
 	HumanoidRootPart: {
-		$className: "Part",
+		$className: "BasePart",
 		RootRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
 		OriginalSize: "Vector3Value",
 	},
@@ -217,8 +217,7 @@ export const CharacterRigR15 = {
 	},
 
 	Head: {
-		$className: "Part",
-		Mesh: { $className: "SpecialMesh", OriginalSize: "Vector3Value" },
+		$className: "BasePart",
 		FaceCenterAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
 		FaceFrontAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
 		HairAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
