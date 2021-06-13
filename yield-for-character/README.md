@@ -28,7 +28,7 @@ import {
 } from "@rbxts/yield-for-character";
 import { Players } from "@rbxts/services";
 
-async function yieldForChildOfClass<T extends keyof StrictInstances>(
+function yieldForChildOfClass<T extends keyof StrictInstances>(
 	model: Instance,
 	className: T,
 ): Promise<StrictInstances[T]> {
@@ -38,7 +38,7 @@ async function yieldForChildOfClass<T extends keyof StrictInstances>(
 		}
 	}
 
-	return await new Promise<StrictInstances[T]>((resolve) => {
+	return new Promise<StrictInstances[T]>((resolve, reject, onCancel) => {
 		const connection = model.ChildAdded.Connect((child) => {
 			if (child.ClassName === className) {
 				connection.Disconnect();

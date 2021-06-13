@@ -1,6 +1,6 @@
 {
     "name": "@rbxts/spring",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Simulates the motion of a critically damped spring",
     "main": "init.lua",
     "types": "index.d.ts",
