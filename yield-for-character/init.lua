@@ -310,11 +310,7 @@ local CharacterRigR15 = {
 		HumanoidDescription = "HumanoidDescription",
 	},
 	Head = {
-		["$className"] = "Part",
-		Mesh = {
-			["$className"] = "SpecialMesh",
-			OriginalSize = "Vector3Value",
-		},
+		["$className"] = "MeshPart",
 		FaceCenterAttachment = {
 			["$className"] = "Attachment",
 			OriginalPosition = "Vector3Value",
