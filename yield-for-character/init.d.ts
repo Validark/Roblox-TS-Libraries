@@ -310,11 +310,7 @@ export declare const CharacterRigR15: {
         readonly HumanoidDescription: "HumanoidDescription";
     };
     readonly Head: {
-        readonly $className: "Part";
-        readonly Mesh: {
-            readonly $className: "SpecialMesh";
-            readonly OriginalSize: "Vector3Value";
-        };
+        readonly $className: "MeshPart";
         readonly FaceCenterAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
