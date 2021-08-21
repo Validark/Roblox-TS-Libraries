@@ -4,13 +4,11 @@ export const CharacterRigR6 = {
 	$className: "Model",
 
 	Head: {
-		$className: "BasePart",
+		$className: "MeshPart",
 		FaceCenterAttachment: "Attachment",
 		FaceFrontAttachment: "Attachment",
 		HairAttachment: "Attachment",
 		HatAttachment: "Attachment",
-		Mesh: "SpecialMesh",
-		face: "Decal",
 	},
 
 	HumanoidRootPart: {
@@ -217,14 +215,13 @@ export const CharacterRigR15 = {
 	},
 
 	Head: {
-		$className: "BasePart",
+		$className: "MeshPart",
 		FaceCenterAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
 		FaceFrontAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
 		HairAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
 		HatAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
 		NeckRigAttachment: { $className: "Attachment", OriginalPosition: "Vector3Value" },
 		Neck: "Motor6D",
-		face: "Decal",
 		OriginalSize: "Vector3Value",
 	},
 

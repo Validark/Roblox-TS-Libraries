@@ -4,16 +4,14 @@ import { EvaluateInstanceTree } from "@rbxts/validate-tree";
 export declare const CharacterRigR6: {
     readonly $className: "Model";
     readonly Head: {
-        readonly $className: "Part";
+        readonly $className: "MeshPart";
         readonly FaceCenterAttachment: "Attachment";
         readonly FaceFrontAttachment: "Attachment";
         readonly HairAttachment: "Attachment";
         readonly HatAttachment: "Attachment";
-        readonly Mesh: "SpecialMesh";
-        readonly face: "Decal";
     };
     readonly HumanoidRootPart: {
-        readonly $className: "Part";
+        readonly $className: "BasePart";
         readonly RootAttachment: "Attachment";
         readonly RootJoint: "Motor6D";
     };
@@ -23,25 +21,25 @@ export declare const CharacterRigR6: {
         readonly HumanoidDescription: "HumanoidDescription";
     };
     readonly "Left Arm": {
-        readonly $className: "Part";
+        readonly $className: "BasePart";
         readonly LeftGripAttachment: "Attachment";
         readonly LeftShoulderAttachment: "Attachment";
     };
     readonly "Left Leg": {
-        readonly $className: "Part";
+        readonly $className: "BasePart";
         readonly LeftFootAttachment: "Attachment";
     };
     readonly "Right Arm": {
-        readonly $className: "Part";
+        readonly $className: "BasePart";
         readonly RightGripAttachment: "Attachment";
         readonly RightShoulderAttachment: "Attachment";
     };
     readonly "Right Leg": {
-        readonly $className: "Part";
+        readonly $className: "BasePart";
         readonly RightFootAttachment: "Attachment";
     };
     readonly Torso: {
-        readonly $className: "Part";
+        readonly $className: "BasePart";
         readonly "Left Hip": "Motor6D";
         readonly "Left Shoulder": "Motor6D";
         readonly "Right Hip": "Motor6D";
@@ -61,7 +59,7 @@ export declare const CharacterRigR6: {
 export declare const CharacterRigR15: {
     readonly $className: "Model";
     readonly HumanoidRootPart: {
-        readonly $className: "Part";
+        readonly $className: "BasePart";
         readonly RootRigAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
@@ -310,11 +308,7 @@ export declare const CharacterRigR15: {
         readonly HumanoidDescription: "HumanoidDescription";
     };
     readonly Head: {
-        readonly $className: "Part";
-        readonly Mesh: {
-            readonly $className: "SpecialMesh";
-            readonly OriginalSize: "Vector3Value";
-        };
+        readonly $className: "MeshPart";
         readonly FaceCenterAttachment: {
             readonly $className: "Attachment";
             readonly OriginalPosition: "Vector3Value";
@@ -336,7 +330,6 @@ export declare const CharacterRigR15: {
             readonly OriginalPosition: "Vector3Value";
         };
         readonly Neck: "Motor6D";
-        readonly face: "Decal";
         readonly OriginalSize: "Vector3Value";
     };
     readonly "Body Colors": "BodyColors";

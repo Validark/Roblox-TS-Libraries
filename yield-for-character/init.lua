@@ -1,19 +1,17 @@
--- Compiled with roblox-ts v1.0.0-beta.11
+-- Compiled with roblox-ts v1.2.3
 local TS = _G[script]
-local yieldForTree = TS.import(script, TS.getModule(script, "validate-tree")).yieldForTree
+local yieldForTree = TS.import(script, TS.getModule(script, "@rbxts", "validate-tree")).yieldForTree
 local CharacterRigR6 = {
 	["$className"] = "Model",
 	Head = {
-		["$className"] = "Part",
+		["$className"] = "MeshPart",
 		FaceCenterAttachment = "Attachment",
 		FaceFrontAttachment = "Attachment",
 		HairAttachment = "Attachment",
 		HatAttachment = "Attachment",
-		Mesh = "SpecialMesh",
-		face = "Decal",
 	},
 	HumanoidRootPart = {
-		["$className"] = "Part",
+		["$className"] = "BasePart",
 		RootAttachment = "Attachment",
 		RootJoint = "Motor6D",
 	},
@@ -23,25 +21,25 @@ local CharacterRigR6 = {
 		HumanoidDescription = "HumanoidDescription",
 	},
 	["Left Arm"] = {
-		["$className"] = "Part",
+		["$className"] = "BasePart",
 		LeftGripAttachment = "Attachment",
 		LeftShoulderAttachment = "Attachment",
 	},
 	["Left Leg"] = {
-		["$className"] = "Part",
+		["$className"] = "BasePart",
 		LeftFootAttachment = "Attachment",
 	},
 	["Right Arm"] = {
-		["$className"] = "Part",
+		["$className"] = "BasePart",
 		RightGripAttachment = "Attachment",
 		RightShoulderAttachment = "Attachment",
 	},
 	["Right Leg"] = {
-		["$className"] = "Part",
+		["$className"] = "BasePart",
 		RightFootAttachment = "Attachment",
 	},
 	Torso = {
-		["$className"] = "Part",
+		["$className"] = "BasePart",
 		["Left Hip"] = "Motor6D",
 		["Left Shoulder"] = "Motor6D",
 		["Right Hip"] = "Motor6D",
@@ -61,7 +59,7 @@ local CharacterRigR6 = {
 local CharacterRigR15 = {
 	["$className"] = "Model",
 	HumanoidRootPart = {
-		["$className"] = "Part",
+		["$className"] = "BasePart",
 		RootRigAttachment = {
 			["$className"] = "Attachment",
 			OriginalPosition = "Vector3Value",
@@ -310,11 +308,7 @@ local CharacterRigR15 = {
 		HumanoidDescription = "HumanoidDescription",
 	},
 	Head = {
-		["$className"] = "Part",
-		Mesh = {
-			["$className"] = "SpecialMesh",
-			OriginalSize = "Vector3Value",
-		},
+		["$className"] = "MeshPart",
 		FaceCenterAttachment = {
 			["$className"] = "Attachment",
 			OriginalPosition = "Vector3Value",
@@ -336,7 +330,6 @@ local CharacterRigR15 = {
 			OriginalPosition = "Vector3Value",
 		},
 		Neck = "Motor6D",
-		face = "Decal",
 		OriginalSize = "Vector3Value",
 	},
 	["Body Colors"] = "BodyColors",
