@@ -3,7 +3,7 @@
     "version": "1.0.1",
     "description": "A Stack data structure which is formed by creating a singly linked-list on already existing objects.",
     "main": "init.lua",
-    "types": "index.d.ts",
+    "types": "init.d.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
