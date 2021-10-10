@@ -4,7 +4,7 @@ import { EvaluateInstanceTree } from "@rbxts/validate-tree";
 export declare const CharacterRigR6: {
     readonly $className: "Model";
     readonly Head: {
-        readonly $className: "MeshPart";
+        readonly $className: "Part";
         readonly FaceCenterAttachment: "Attachment";
         readonly FaceFrontAttachment: "Attachment";
         readonly HairAttachment: "Attachment";
