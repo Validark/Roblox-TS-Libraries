@@ -1,9 +1,9 @@
 {
 	"name": "@rbxts/extendable-resources",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "An extendable object retrieval system for defining folders.",
 	"main": "init.lua",
-	"types": "init.d.ts",
+	"types": "index.d.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -20,9 +20,6 @@
 		"Folder",
 		"Manager"
 	],
-	"peerDependencies": {
-		"@rbxts/types": "^1.0.194"
-	},
 	"author": "Validark",
 	"license": "ISC",
 	"bugs": {
@@ -33,11 +30,12 @@
 		"access": "public"
 	},
 	"dependencies": {
-		"@rbxts/types": "^1.0.194"
+		"@rbxts/compiler-types": "^1.2.3-types.1",
+		"@rbxts/types": "^1.0.537"
 	},
 	"files": [
 		"init.lua",
-		"init.d.ts",
+		"index.d.ts",
 		"README.md"
 	]
 }

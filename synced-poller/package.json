@@ -1,9 +1,9 @@
 {
     "name": "@rbxts/synced-poller",
-    "version": "1.0.2",
+    "version": "2.0.0",
     "description": "Calls functions on an interval along os.time (for cross-server simultaneous calls)",
     "main": "init.lua",
-    "types": "init.d.ts",
+    "types": "index.d.ts",
     "scripts": {
         "build": "rbxtsc & mv out/* . & rm -r out"
     },
@@ -24,19 +24,16 @@
         "url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
     },
     "homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/synced-poller/README.md",
-    "peerDependencies": {
-        "@rbxts/types": "^1.0.235"
-    },
     "publishConfig": {
         "access": "public"
     },
     "dependencies": {
-        "@rbxts/delay-spawn-wait": "^1.0.0",
-        "@rbxts/types": "^1.0.381"
+        "@rbxts/compiler-types": "^1.2.3-types.1",
+        "@rbxts/types": "^1.0.537"
     },
     "files": [
         "init.lua",
-        "init.d.ts",
+        "index.d.ts",
         "README.md"
     ]
 }

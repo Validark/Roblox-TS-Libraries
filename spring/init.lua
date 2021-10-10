@@ -14,8 +14,8 @@ local sqrt = math.sqrt
 local EPSILON = 1e-4
 
 function Spring.new(position, angularFrequency, goal, dampingRatio)
-	angularFrequency = angularFrequency or 10
-	dampingRatio = dampingRatio or 1
+	if angularFrequency == nil then angularFrequency = 10 end
+	if dampingRatio == nil then dampingRatio = 1 end
 
 	if dampingRatio * angularFrequency < 0 then
 		error("Spring does not converge", 2)
@@ -49,9 +49,11 @@ function Spring:update(deltaTime)
 		position = (offset * (1 + angularFrequency * deltaTime) + v0 * deltaTime) * decay + goal
 		self.velocity = (v0 * (1 - angularFrequency * deltaTime) - offset * (angularFrequency * angularFrequency * deltaTime)) * decay
 	elseif dampingRatio < 1 then -- Underdamped
-		local c = sqrt(1 - dampingRatio * dampingRatio)
-		local i = cos(angularFrequency * c * deltaTime)
-		local j = sin(angularFrequency * c * deltaTime)
+		local e = 1 - dampingRatio * dampingRatio
+		local c = sqrt(e)
+		local y = angularFrequency * c
+		local i = cos(y * deltaTime)
+		local j = sin(y * deltaTime)
 
 		-- Damping ratios approaching 1 can cause division by small numbers.
 		-- To fix that, group terms around z=j/c and find an approximation for z.
@@ -70,7 +72,8 @@ function Spring:update(deltaTime)
 			z = j / c
 		else
 			local a = deltaTime * angularFrequency
-			z = a + ((a * a) * (c * c) * (c * c) / 20 - c * c) * (a * a * a) / 6
+			local a_2 = a * a
+			z = a * (((e*e * a_2 - 20*e) / 120) * a_2 + 1)
 		end
 
 		-- Frequencies approaching 0 present a similar problem.
@@ -80,30 +83,24 @@ function Spring:update(deltaTime)
 		--    y = sin(b*c)/b
 		-- Now reapply the process from z.
 
-		local y
-		if angularFrequency * c > EPSILON then
-			y = j / (angularFrequency * c)
+		if y > EPSILON then
+			y = j / y
 		else
-			local b = angularFrequency * c
-			y = deltaTime + ((deltaTime * deltaTime) * (b * b) * (b * b) / 20 - b * b) * (deltaTime * deltaTime * deltaTime) / 6
+			local b = y * y
+			local dd = deltaTime * deltaTime
+			y = deltaTime * (dd * (b*b*dd / 20 - b) / 6 + 1)
 		end
 
-		position = (offset * (i + dampingRatio * z) + v0 * y) * decay + goal
-		self.velocity = (v0 * (i - z * dampingRatio) - offset * (z * angularFrequency)) * decay
+		local ze = z * dampingRatio
+		position = (offset * (i + ze) + v0 * y) * decay + goal
+		self.velocity = (v0 * (i - ze) - offset * (z * angularFrequency)) * decay
 	else -- Overdamped
-		local c = sqrt(dampingRatio * dampingRatio - 1)
+		local x = -angularFrequency * dampingRatio
+		local y = angularFrequency * sqrt(dampingRatio * dampingRatio - 1)
+		local r1 = x + y
+		local r2 = x - y
 
-		local r1 = -angularFrequency * (dampingRatio - c)
-		local r2 = -angularFrequency * (dampingRatio + c)
-
-		-- local x = -angularFrequency * dampingRatio
-		-- local y = angularFrequency * c
-		-- local r1 = x + y
-		-- local r2 = x - y
-
-		-- TODO: verify math transformations are sound
-
-		local co2 = (v0 - offset * r1) / (2 * angularFrequency * c)
+		local co2 = (v0 - offset * r1) / (2 * y)
 		local co1 = offset - co2
 
 		local e1 = co1 * exp(r1 * deltaTime)

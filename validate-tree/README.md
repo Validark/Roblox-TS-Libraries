@@ -24,6 +24,10 @@ function f(o: Instance) {
 	}
 	o.NumItems.Data.GetFullName(); // error!
 	g(o); // error!
+
+	promiseTree(o, projectTree).then(project => {
+		print(project.NumItems.Value)
+	})
 }
 ```
 
@@ -32,5 +36,3 @@ The first parameter must be an Instance (or extend from it). The second paramete
 ###### Note: Currently, the `as const` may be necessary to preserve the true type of the object tree. Your types will not work if you do not use the tree object in-line or declare it with `as const` after it.
 
 This library also exports `EvaluateInstanceTree` if you want to use it for your own nefarious purposes.
-
-Also see [yield-for-tree](https://www.npmjs.com/package/@rbxts/yield-for-tree)

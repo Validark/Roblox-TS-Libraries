@@ -3,7 +3,7 @@
     "version": "1.0.4",
     "description": "A simple, light-weight multiple inheritance object composition library",
     "main": "init.lua",
-    "types": "init.d.ts",
+    "types": "index.d.ts",
     "scripts": {},
     "repository": {
         "type": "git",
@@ -35,7 +35,7 @@
     },
     "files": [
         "init.lua",
-        "init.d.ts",
+        "index.d.ts",
         "README.md"
     ]
 }

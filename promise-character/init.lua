@@ -1,10 +1,10 @@
 -- Compiled with roblox-ts v1.2.3
 local TS = _G[script]
-local yieldForTree = TS.import(script, TS.getModule(script, "@rbxts", "validate-tree")).yieldForTree
+local promiseTree = TS.import(script, TS.getModule(script, "@rbxts", "validate-tree")).promiseTree
 local CharacterRigR6 = {
 	["$className"] = "Model",
 	Head = {
-		["$className"] = "MeshPart",
+		["$className"] = "Part",
 		FaceCenterAttachment = "Attachment",
 		FaceFrontAttachment = "Attachment",
 		HairAttachment = "Attachment",
@@ -335,17 +335,17 @@ local CharacterRigR15 = {
 	["Body Colors"] = "BodyColors",
 }
 -- * Yields until every member of CharacterRigR6 exists
-local function yieldForR6CharacterDescendants(character)
-	return yieldForTree(character, CharacterRigR6)
+local function promiseR6(character)
+	return promiseTree(character, CharacterRigR6)
 end
 -- * Yields until every member of CharacterRigR15 exists
-local function yieldForR15CharacterDescendants(character)
-	return yieldForTree(character, CharacterRigR15)
+local function promiseR15(character)
+	return promiseTree(character, CharacterRigR15)
 end
-local default = yieldForR15CharacterDescendants
+local default = promiseR15
 return {
-	yieldForR6CharacterDescendants = yieldForR6CharacterDescendants,
-	yieldForR15CharacterDescendants = yieldForR15CharacterDescendants,
+	promiseR6 = promiseR6,
+	promiseR15 = promiseR15,
 	CharacterRigR6 = CharacterRigR6,
 	CharacterRigR15 = CharacterRigR15,
 	default = default,

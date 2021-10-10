@@ -33,7 +33,7 @@
     },
     "files": [
         "init.lua",
-        "init.d.ts",
+        "index.d.ts",
         "README.md"
     ]
 }

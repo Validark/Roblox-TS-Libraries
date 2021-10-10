@@ -20,12 +20,12 @@ export declare type EvaluateInstanceTree<T extends InstanceTree, D = Instance> =
  * @param violators
  */
 export declare function validateTree<I extends Instance, T extends InstanceTree>(object: I, tree: T, violators?: Array<string>): object is I & EvaluateInstanceTree<T, I>;
-/** Yields until a given tree of objects exists within an object.
+/** Promises a given tree of objects exists within an object.
  * @param tree Must be an object tree similar to ones considered valid by Rojo.
  * Every tree must have a `$className` member, and can have any number of keys which represent
  * the name of a child instance, which should have a corresponding value which is this same kind of tree.
  * There is also a shorthand syntax available, where setting a key equal to a className is equivalent
  * to an object with `$className` defined. Hence `Things: "Folder"` is equivalent to `Things: { $className: "Folder" }`
  */
-export declare function yieldForTree<I extends Instance, T extends InstanceTree>(object: I, tree: T): Promise<I & EvaluateInstanceTree<T, I>>;
+export declare function promiseTree<I extends Instance, T extends InstanceTree>(object: I, tree: T): Promise<I & EvaluateInstanceTree<T, I>>;
 export {};

@@ -33,11 +33,11 @@ declare function Make<T extends keyof CreatableInstances, Q extends GetPartialOb
     Parent?: Instance | undefined;
 }>(className: T, settings: Q): CreatableInstances[T] & { [K_1 in keyof ({ [O in Extract<"Name", keyof Q>]: Q[O]; } & {
     ClassName: T;
-} & (Q["Children"] extends never ? never : { [K in Exclude<keyof Q["Children"], number | "find" | "size" | "isEmpty" | "join" | "move" | "includes" | "indexOf" | "every" | "some" | "forEach" | "map" | "mapFiltered" | "filterUndefined" | "filter" | "reduce" | "findIndex" | "_nominal_Array" | "length">]: Q["Children"][K] extends infer A ? A extends {
+} & (Q["Children"] extends never ? never : { [K in Exclude<keyof Q["Children"], number | keyof readonly any[] | "length">]: Q["Children"][K] extends infer A ? A extends {
     Name: string;
-} ? string extends A["Name"] ? never : (k: { [P in A["Name"]]: A; }) => void : never : never; }[Exclude<keyof Q["Children"], number | "find" | "size" | "isEmpty" | "join" | "move" | "includes" | "indexOf" | "every" | "some" | "forEach" | "map" | "mapFiltered" | "filterUndefined" | "filter" | "reduce" | "findIndex" | "_nominal_Array" | "length">] extends (k: infer U) => void ? U : never))]: ({ [O in Extract<"Name", keyof Q>]: Q[O]; } & {
+} ? string extends A["Name"] ? never : (k: { [P in A["Name"]]: A; }) => void : never : never; }[Exclude<keyof Q["Children"], number | keyof readonly any[] | "length">] extends (k: infer U) => void ? U : never))]: ({ [O in Extract<"Name", keyof Q>]: Q[O]; } & {
     ClassName: T;
-} & (Q["Children"] extends never ? never : { [K in Exclude<keyof Q["Children"], number | "find" | "size" | "isEmpty" | "join" | "move" | "includes" | "indexOf" | "every" | "some" | "forEach" | "map" | "mapFiltered" | "filterUndefined" | "filter" | "reduce" | "findIndex" | "_nominal_Array" | "length">]: Q["Children"][K] extends infer A ? A extends {
+} & (Q["Children"] extends never ? never : { [K in Exclude<keyof Q["Children"], number | keyof readonly any[] | "length">]: Q["Children"][K] extends infer A ? A extends {
     Name: string;
-} ? string extends A["Name"] ? never : (k: { [P in A["Name"]]: A; }) => void : never : never; }[Exclude<keyof Q["Children"], number | "find" | "size" | "isEmpty" | "join" | "move" | "includes" | "indexOf" | "every" | "some" | "forEach" | "map" | "mapFiltered" | "filterUndefined" | "filter" | "reduce" | "findIndex" | "_nominal_Array" | "length">] extends (k: infer U) => void ? U : never))[K_1]; };
+} ? string extends A["Name"] ? never : (k: { [P in A["Name"]]: A; }) => void : never : never; }[Exclude<keyof Q["Children"], number | keyof readonly any[] | "length">] extends (k: infer U) => void ? U : never))[K_1]; };
 export = Make;

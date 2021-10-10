@@ -3,7 +3,7 @@
 	"version": "0.0.0",
 	"description": "An extendable date formatting object. In development",
 	"main": "init.lua",
-	"types": "init.d.ts",
+	"types": "index.d.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},

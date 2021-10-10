@@ -1,4 +1,4 @@
--- Compiled with roblox-ts v1.1.1
+-- Compiled with roblox-ts v1.2.3
 --[[
 	*
 	* Returns a table wherein an object's writable properties can be specified,
@@ -16,16 +16,15 @@
 	* `settings.Parent` is always set last.
 ]]
 local function Make(className, settings)
-	local _0 = settings
-	local children = _0.Children
-	local parent = _0.Parent
+	local _binding = settings
+	local children = _binding.Children
+	local parent = _binding.Parent
 	local instance = Instance.new(className)
 	for setting, value in pairs(settings) do
 		if setting ~= "Children" and setting ~= "Parent" then
-			local _1 = instance
-			local prop = _1[setting]
-			local _2 = prop
-			if typeof(_2) == "RBXScriptSignal" then
+			local _binding_1 = instance
+			local prop = _binding_1[setting]
+			if typeof(prop) == "RBXScriptSignal" then
 				prop:Connect(value)
 			else
 				instance[setting] = value

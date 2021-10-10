@@ -8,7 +8,7 @@ declare class SyncedPoller {
      * @param callback The callback to call.
      * @param condition If provided, will call this on every poll, and will cancel the synced-poller if it returns false.
      */
-    constructor(interval: number, callback: (timeElapsed: number) => void, condition?: () => boolean);
+    constructor(interval: number, callback: () => void, condition?: () => boolean);
     cancel(): void;
 }
 export = SyncedPoller;

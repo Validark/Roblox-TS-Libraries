@@ -1,45 +1,63 @@
--- Compiled with https://roblox-ts.github.io v0.1.2
--- June 1, 2019, 9:28 PM Central Daylight Time
-
-local _exports;
-local isServer = game:GetService("RunService"):IsServer();
-local cacheSingleArgFunc = function(func)
-	local cache = {};
+-- Compiled with roblox-ts v1.2.3
+-- @author Validark
+local isServer = game:GetService("RunService"):IsServer()
+--[[
+	*
+	* Wraps a function which takes a single argument as a parameter, and makes it idempotent.
+	* The new function will return the value in the cache, else it will call the wrapped function and cache the result
+	* @param func The function to wrap
+]]
+local function cacheSingleArgFunc(func)
+	local cache = {}
 	return function(arg)
-		local value = cache[arg];
+		local value = cache[arg]
 		if value == nil then
-			value = func(arg);
-			cache[arg] = value;
-		end;
-		return value;
-	end;
-end;
-local constructManager = function(folder, optionalInstanceType)
+			value = func(arg)
+			local _value = value
+			-- ▼ Map.set ▼
+			cache[arg] = _value
+			-- ▲ Map.set ▲
+		end
+		return value
+	end
+end
+local function constructManager(folder, optionalInstanceType)
 	if isServer then
 		return function(instanceName)
-			local target = folder:FindFirstChild(instanceName);
+			local target = folder:FindFirstChild(instanceName)
 			if target == nil then
 				if optionalInstanceType then
-					target = Instance.new(optionalInstanceType);
-					target.Name = instanceName;
-					target.Parent = folder;
+					target = Instance.new(optionalInstanceType)
+					target.Name = instanceName
+					target.Parent = folder
 				else
-					return error("Failed to find " .. instanceName .. " in " .. folder.Name);
-				end;
-			end;
-			return target;
-		end;
+					return error("Failed to find " .. instanceName .. " in " .. folder.Name)
+				end
+			end
+			return target
+		end
 	else
 		return function(instanceName)
-			return folder:WaitForChild(instanceName);
-		end;
-	end;
-end;
+			return folder:WaitForChild(instanceName)
+		end
+	end
+end
 local getFolderGetter = cacheSingleArgFunc(function(folderParent)
-	return constructManager(folderParent, "Folder");
-end);
-local makeFolderManager = function(folderParent, folderName, optionalInstanceType)
-	return constructManager(getFolderGetter(folderParent)(folderName), optionalInstanceType);
-end;
-_exports = makeFolderManager;
-return _exports;
+	return constructManager(folderParent, "Folder")
+end)
+--[[
+	*
+	* Finds a folder called folderName in folderParent,
+	* and returns a function which searches this folder for an instance with a given name.
+	* If this instance does not exist on the client, the function will yield.
+	* If it does not exist on the server, it will generate an instance of type optionalInstanceType or error.
+	*
+	* @param folderParent The parent to search for the folder in
+	* @param folderName  The name of the folder to search for
+	* @param optionalInstanceType The instance type which can be generated if the instance does not
+	* exist and is on the server
+]]
+local function makeFolderManager(folderParent, folderName, optionalInstanceType)
+	return constructManager(getFolderGetter(folderParent)(folderName), optionalInstanceType)
+end
+return makeFolderManager

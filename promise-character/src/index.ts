@@ -1,10 +1,10 @@
-import { EvaluateInstanceTree, yieldForTree } from "@rbxts/validate-tree";
+import { EvaluateInstanceTree, promiseTree } from "@rbxts/validate-tree";
 
 export const CharacterRigR6 = {
 	$className: "Model",
 
 	Head: {
-		$className: "MeshPart",
+		$className: "Part",
 		FaceCenterAttachment: "Attachment",
 		FaceFrontAttachment: "Attachment",
 		HairAttachment: "Attachment",
@@ -235,13 +235,13 @@ export type CharacterRigR6 = EvaluateInstanceTree<typeof CharacterRigR6>;
 export type CharacterRigR15 = EvaluateInstanceTree<typeof CharacterRigR15>;
 
 /** Yields until every member of CharacterRigR6 exists */
-export function yieldForR6CharacterDescendants(character: Model): Promise<CharacterRigR6> {
-	return yieldForTree(character, CharacterRigR6);
+export function promiseR6(character: Model): Promise<CharacterRigR6> {
+	return promiseTree(character, CharacterRigR6);
 }
 
 /** Yields until every member of CharacterRigR15 exists */
-export function yieldForR15CharacterDescendants(character: Model): Promise<CharacterRigR15> {
-	return yieldForTree(character, CharacterRigR15);
+export function promiseR15(character: Model): Promise<CharacterRigR15> {
+	return promiseTree(character, CharacterRigR15);
 }
 
-export default yieldForR15CharacterDescendants;
+export default promiseR15;

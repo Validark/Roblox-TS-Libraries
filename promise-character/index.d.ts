@@ -337,7 +337,7 @@ export declare const CharacterRigR15: {
 export declare type CharacterRigR6 = EvaluateInstanceTree<typeof CharacterRigR6>;
 export declare type CharacterRigR15 = EvaluateInstanceTree<typeof CharacterRigR15>;
 /** Yields until every member of CharacterRigR6 exists */
-export declare function yieldForR6CharacterDescendants(character: Model): Promise<CharacterRigR6>;
+export declare function promiseR6(character: Model): Promise<CharacterRigR6>;
 /** Yields until every member of CharacterRigR15 exists */
-export declare function yieldForR15CharacterDescendants(character: Model): Promise<CharacterRigR15>;
-export default yieldForR15CharacterDescendants;
+export declare function promiseR15(character: Model): Promise<CharacterRigR15>;
+export default promiseR15;

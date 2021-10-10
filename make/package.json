@@ -1,9 +1,9 @@
 {
 	"name": "@rbxts/make",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "Shorthand for declaring Instances with properties.",
 	"main": "init.lua",
-	"types": "init.d.ts",
+	"types": "index.d.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -20,10 +20,6 @@
 		"Folder",
 		"Manager"
 	],
-	"peerDependencies": {
-		"@rbxts/compiler-types": "^1.1.1-types.3",
-		"@rbxts/types": "^1.0.471"
-	},
 	"author": "Validark",
 	"license": "ISC",
 	"bugs": {
@@ -34,12 +30,12 @@
 		"access": "public"
 	},
 	"dependencies": {
-		"@rbxts/compiler-types": "^1.1.1-types.3",
-		"@rbxts/types": "^1.0.471"
+		"@rbxts/compiler-types": "^1.2.3-types.1",
+		"@rbxts/types": "^1.0.537"
 	},
 	"files": [
 		"init.lua",
-		"init.d.ts",
+		"index.d.ts",
 		"README.md"
 	]
 }

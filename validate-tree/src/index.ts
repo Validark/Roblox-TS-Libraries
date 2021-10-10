@@ -33,8 +33,7 @@ export declare type EvaluateInstanceTree<T extends InstanceTree, D = Instance> =
 	};
 
 function getService(serviceName: string) {
-	// @ts-expect-error
-	return game.GetService(serviceName);
+	return game.GetService(serviceName as keyof Services);
 }
 
 /** Returns whether a given Instance matches a particular Rojo-esque InstanceTree.
@@ -53,7 +52,7 @@ export function validateTree<T extends InstanceTree>(object: Instance, tree: T, 
 	let matches = true;
 
 	if (classIs(object, "DataModel")) {
-		for (const [serviceName, classOrTree] of pairs(tree as unknown as Map<string, keyof Instances | InstanceTree>)) {
+		for (const [serviceName, classOrTree] of (tree as unknown as Map<string, keyof Instances | InstanceTree>)) {
 			if (serviceName !== "$className") {
 				const result = pcall(getService, serviceName);
 
@@ -95,7 +94,7 @@ export function validateTree<T extends InstanceTree>(object: Instance, tree: T, 
 			}
 		}
 
-		for (const [key] of pairs(tree as unknown as Map<string, keyof Instances | InstanceTree>)) {
+		for (const [key] of (tree as unknown as Map<string, keyof Instances | InstanceTree>)) {
 			if (!whitelistedKeys.has(key)) {
 				if (violators) {
 					matches = false;
@@ -108,54 +107,51 @@ export function validateTree<T extends InstanceTree>(object: Instance, tree: T, 
 	return matches;
 }
 
-/** Yields until a given tree of objects exists within an object.
+/** Promises a given tree of objects exists within an object.
  * @param tree Must be an object tree similar to ones considered valid by Rojo.
  * Every tree must have a `$className` member, and can have any number of keys which represent
  * the name of a child instance, which should have a corresponding value which is this same kind of tree.
  * There is also a shorthand syntax available, where setting a key equal to a className is equivalent
  * to an object with `$className` defined. Hence `Things: "Folder"` is equivalent to `Things: { $className: "Folder" }`
  */
-export async function yieldForTree<I extends Instance, T extends InstanceTree>(
+export function promiseTree<I extends Instance, T extends InstanceTree>(
 	object: I,
 	tree: T,
 ): Promise<I & EvaluateInstanceTree<T, I>> {
 	if (validateTree(object, tree)) {
-		return object as I & EvaluateInstanceTree<T, I>;
-	} else {
-		return await new Promise((resolve, _, onCancel) => {
-			const connections = new Array<RBXScriptConnection>();
-			const warner = Promise.delay(5)
-
-			function cleanup() {
-				for (const connection of connections) connection.Disconnect();
-				warner.cancel();
-			}
-
-			onCancel(cleanup)
-
-			function updateTreeForDescendant(violators?: Array<string>) {
-				if (validateTree(object, tree, violators)) {
-					cleanup()
-					resolve(object as I & EvaluateInstanceTree<T, I>);
-					return true;
-				}
-			};
-
-			for (const descendant of object.GetDescendants())
-				connections.push(descendant.GetPropertyChangedSignal("Name").Connect(updateTreeForDescendant));
-
-			connections.push(
-				object.DescendantAdded.Connect(descendant => {
-					connections.push(descendant.GetPropertyChangedSignal("Name").Connect(updateTreeForDescendant));
-					updateTreeForDescendant();
-				}),
-			);
-
-			warner.then(() => {
-				const violators = new Array<string>();
-				if (!updateTreeForDescendant(violators))
-					warn(`[yieldForTree] Infinite yield possible. Waiting for: ${violators.join(", ")}`);
-			})
-		});
+		return Promise.resolve(object as I & EvaluateInstanceTree<T, I>);
 	}
+
+	const connections = new Array<RBXScriptConnection>()
+	const warner = Promise.delay(5)
+
+	warner.then(() => {
+		const violators = new Array<string>()
+		if (!validateTree(object, tree, violators))
+			warn(`[promiseTree] Infinite wait possible. Waiting for: ${violators.join(", ")}`)
+	})
+
+	const promise = new Promise<I & EvaluateInstanceTree<T, I>>((resolve) => {
+		function updateTree(violators?: Array<string>) {
+			if (validateTree(object, tree, violators))
+				resolve(object as I & EvaluateInstanceTree<T, I>)
+		}
+
+		for (const d of object.GetDescendants())
+			connections.push(d.GetPropertyChangedSignal("Name").Connect(updateTree))
+
+		connections.push(
+			object.DescendantAdded.Connect(descendant => {
+				connections.push(descendant.GetPropertyChangedSignal("Name").Connect(updateTree))
+				updateTree()
+			}),
+		)
+	})
+
+	promise.finally(() => {
+		for (const connection of connections) connection.Disconnect()
+		warner.cancel()
+	})
+
+	return promise
 }
