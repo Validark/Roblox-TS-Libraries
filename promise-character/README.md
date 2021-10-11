@@ -25,7 +25,7 @@ import {
 	promiseR15,
 	CharacterRigR15,
 	CharacterRigR6,
-} from "@rbxts/yield-for-character";
+} from "@rbxts/promise-character";
 
 import { Players } from "@rbxts/services";
 import { promiseChildOfClass } from "@rbxts/promise-child";
