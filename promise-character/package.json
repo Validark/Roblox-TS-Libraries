@@ -1,6 +1,6 @@
 {
     "name": "@rbxts/promise-character",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Promise all members of a character rig exist, then dot access!",
     "main": "init.lua",
     "types": "index.d.ts",
