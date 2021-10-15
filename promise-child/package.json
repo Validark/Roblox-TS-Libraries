@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/promise-child",
-	"version": "1.0.0",
+	"version": "1.2.0",
 	"description": "Helper functions that promise a child appears within an Instance.",
 	"main": "init.lua",
 	"types": "index.d.ts",
