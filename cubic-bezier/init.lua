@@ -1,6 +1,7 @@
 -- Smooth Interpolation Curve Generator
 -- @author Validark
--- @original by Gaëtan Renaudeau 2014 - 2015 – MIT License https://github.com/gre/bezier-easing
+-- @original https://github.com/gre/bezier-easing
+-- 		Copyright (c) 2014 Gaëtan Renaudeau, MIT License (see bottom for full license)
 -- @testsite http://cubic-bezier.com/
 -- @testsite http://greweb.me/bezier-easing-editor/example/
 
@@ -22,7 +23,8 @@ local K_SPLINE_TABLE_SIZE = 11
 local K_SAMPLE_STEP_SIZE = 1 / (K_SPLINE_TABLE_SIZE - 1)
 
 local function Linear(t, b, c, d)
-	return (c or 1)*t / (d or 1) + (b or 0)
+	if d ~= nil then t = t / d end
+	return (c or 1)*math.clamp(t, 0, 1) + (b or 0)
 end
 
 local Bezier = {}
@@ -49,11 +51,8 @@ function Bezier.new(x1, y1, x2, y2)
 	end
 
 	return function(t, b, c, d)
-		t = (c or 1)*t / (d or 1) + (b or 0)
-
-		if t == 0 or t == 1 then -- Make sure the endpoints are correct
-			return t
-		end
+		if d ~= nil then t = t / d end
+		t = math.clamp(t, 0, 1) -- Make sure the endpoints are correct
 
 		local CurrentSample = K_SPLINE_TABLE_SIZE - 2
 
@@ -93,8 +92,31 @@ function Bezier.new(x1, y1, x2, y2)
 			end
 		end
 
-		return ((l*GuessForT + m)*GuessForT + k)*GuessForT
+		t = ((l*GuessForT + m)*GuessForT + k)*GuessForT
+		return (c or 1)*t + (b or 0)
 	end
 end
 
 return Bezier
+
+--[[
+Copyright (c) 2014 Gaëtan Renaudeau
+Permission is hereby granted, free of charge, to any person
+obtaining a copy of this software and associated documentation
+files (the "Software"), to deal in the Software without
+restriction, including without limitation the rights to use,
+copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the
+Software is furnished to do so, subject to the following
+conditions:
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+OTHER DEALINGS IN THE SOFTWARE.
+--]]
