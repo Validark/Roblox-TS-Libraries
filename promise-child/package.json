@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/promise-child",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "Helper functions that promise a child appears within an Instance.",
 	"main": "init.lua",
 	"types": "index.d.ts",
@@ -23,16 +23,12 @@
 		"url": "https://github.com/Validark/Roblox-TS-Libraries/issues"
 	},
 	"homepage": "https://github.com/Validark/Roblox-TS-Libraries/blob/master/promise-child/README.md",
-	"peerDependencies": {
-		"@rbxts/compiler-types": "^1.2.3-types.1",
-		"@rbxts/types": "^1.0.537"
-	},
 	"publishConfig": {
 		"access": "public"
 	},
 	"devDependencies": {
-		"@rbxts/compiler-types": "^1.2.3-types.1",
-		"@rbxts/types": "^1.0.537",
+		"@rbxts/compiler-types": "^1.3.3",
+		"@rbxts/types": "^1.0.637",
 		"@typescript-eslint/eslint-plugin": "^4.33.0",
 		"@typescript-eslint/parser": "^4.33.0",
 		"eslint": "^7.32.0",
