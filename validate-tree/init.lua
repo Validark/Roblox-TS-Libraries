@@ -1,4 +1,4 @@
--- Compiled with roblox-ts v1.2.3
+-- Compiled with roblox-ts v1.3.3
 local TS = _G[script]
 -- * Defines a Rojo-esque tree type which defines an abstract object tree.
 -- * Evaluates a Rojo-esque tree and transforms it into an indexable type.
@@ -19,33 +19,25 @@ local function validateTree(object, tree, violators)
 	if object.ClassName == "DataModel" then
 		for serviceName, classOrTree in pairs(tree) do
 			if serviceName ~= "$className" then
-				local result = { pcall(getService, serviceName) }
-				if not result[1] then
-					if violators then
-						matches = false
-						local _arg0 = 'game.GetService("' .. serviceName .. '")'
-						-- ▼ Array.push ▼
-						violators[#violators + 1] = _arg0
-						-- ▲ Array.push ▲
+				local success, value = pcall(getService, serviceName)
+				if not success then
+					if violators ~= nil then
+						local _arg0 = 'game.GetService("' .. (serviceName .. '")')
+						table.insert(violators, _arg0)
 					end
 					return false
 				end
-				local _binding = result
-				local value = _binding[2]
 				if value and (type(classOrTree) == "string" or validateTree(value, classOrTree, violators)) then
 					if value.Name ~= serviceName then
 						value.Name = serviceName
 					end
 				else
-					if violators then
-						matches = false
-						local _arg0 = 'game.GetService("' .. serviceName .. '")'
-						-- ▼ Array.push ▼
-						violators[#violators + 1] = _arg0
-						-- ▲ Array.push ▲
-					else
+					if violators == nil then
 						return false
 					end
+					matches = false
+					local _arg0 = 'game.GetService("' .. (serviceName .. '")')
+					table.insert(violators, _arg0)
 				end
 			end
 		end
@@ -57,30 +49,19 @@ local function validateTree(object, tree, violators)
 			local childName = child.Name
 			if childName ~= "$className" then
 				local classOrTree = tree[childName]
-				local _result
-				if type(classOrTree) == "string" then
-					_result = child:IsA(classOrTree)
-				else
-					_result = classOrTree and validateTree(child, classOrTree, violators)
-				end
-				if _result then
-					-- ▼ Set.add ▼
+				if if type(classOrTree) == "string" then child:IsA(classOrTree) else classOrTree and validateTree(child, classOrTree, violators) then
 					whitelistedKeys[childName] = true
-					-- ▲ Set.add ▲
 				end
 			end
 		end
 		for key in pairs(tree) do
 			if not (whitelistedKeys[key] ~= nil) then
-				if violators then
-					matches = false
-					local _arg0 = object:GetFullName() .. "." .. key
-					-- ▼ Array.push ▼
-					violators[#violators + 1] = _arg0
-					-- ▲ Array.push ▲
-				else
+				if violators == nil then
 					return false
 				end
+				matches = false
+				local _arg0 = object:GetFullName() .. "." .. key
+				table.insert(violators, _arg0)
 			end
 		end
 	end
@@ -103,13 +84,7 @@ local function promiseTree(object, tree)
 	local _arg0 = function()
 		local violators = {}
 		if not validateTree(object, tree, violators) then
-			-- ▼ ReadonlyArray.join ▼
-			local _arg0_1 = ", "
-			if _arg0_1 == nil then
-				_arg0_1 = ", "
-			end
-			-- ▲ ReadonlyArray.join ▲
-			warn("[promiseTree] Infinite wait possible. Waiting for: " .. table.concat(violators, _arg0_1))
+			warn("[promiseTree] Infinite wait possible. Waiting for: " .. table.concat(violators, ", "))
 		end
 	end
 	warner:andThen(_arg0)
@@ -121,20 +96,14 @@ local function promiseTree(object, tree)
 		end
 		for _, d in ipairs(object:GetDescendants()) do
 			local _arg0_1 = d:GetPropertyChangedSignal("Name"):Connect(updateTree)
-			-- ▼ Array.push ▼
-			connections[#connections + 1] = _arg0_1
-			-- ▲ Array.push ▲
+			table.insert(connections, _arg0_1)
 		end
 		local _arg0_1 = object.DescendantAdded:Connect(function(descendant)
 			local _arg0_2 = descendant:GetPropertyChangedSignal("Name"):Connect(updateTree)
-			-- ▼ Array.push ▼
-			connections[#connections + 1] = _arg0_2
-			-- ▲ Array.push ▲
+			table.insert(connections, _arg0_2)
 			updateTree()
 		end)
-		-- ▼ Array.push ▼
-		connections[#connections + 1] = _arg0_1
-		-- ▲ Array.push ▲
+		table.insert(connections, _arg0_1)
 	end)
 	promise:finally(function()
 		for _, connection in ipairs(connections) do

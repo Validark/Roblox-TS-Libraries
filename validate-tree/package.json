@@ -1,6 +1,6 @@
 {
     "name": "@rbxts/validate-tree",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "description": "Validates whether a given instance matches a given instance tree",
     "main": "init.lua",
     "types": "index.d.ts",
@@ -30,8 +30,8 @@
     "publishConfig": {
         "access": "public"
     },
-    "dependencies": {
-        "@rbxts/compiler-types": "^1.2.3-types.1",
+    "devDependencies": {
+        "@rbxts/compiler-types": "^1.2.3",
         "@rbxts/types": "^1.0.537"
     },
     "files": [
