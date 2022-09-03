@@ -2,13 +2,23 @@ local Signal = {}
 Signal.__index = Signal
 
 function Signal.new()
-	return setmetatable({
-		Bindable = Instance.new("BindableEvent");
-	}, Signal)
+	return setmetatable({ Bindable = Instance.new("BindableEvent") }, Signal)
 end
 
 function Signal:Connect(Callback)
 	return self.Bindable.Event:Connect(function(GetArguments)
+		Callback(GetArguments())
+	end)
+end
+
+function Signal:Once(Callback)
+	return self.Bindable.Event:Once(function(GetArguments)
+		Callback(GetArguments())
+	end)
+end
+
+function Signal:ConnectParallel(Callback)
+	return self.Bindable.Event:ConnectParallel(function(GetArguments)
 		Callback(GetArguments())
 	end)
 end
