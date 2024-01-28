@@ -83,21 +83,24 @@ export function validateTree<I extends Instance, T extends InstanceTree>(
  * the name of a child instance, which should have a corresponding value which is this same kind of tree.
  * There is also a shorthand syntax available, where setting a key equal to a className is equivalent
  * to an object with `$className` defined. Hence `Things: "Folder"` is equivalent to `Things: { $className: "Folder" }`
+ * @param warnAfter How long to wait before warning about the tree not being found.
+ * If the value is 0 then no warning will be given.
  */
 export function promiseTree<I extends Instance, T extends InstanceTree>(
 	object: I,
 	tree: T,
+	warnAfter: number = 5,
 ): Promise<EvaluateInstanceTree<T, I>> {
 	if (validateTree(object, tree)) {
 		return Promise.resolve(object as I & EvaluateInstanceTree<T, I>);
 	}
 
 	const connections = new Array<RBXScriptConnection>()
-	const warner = Promise.delay(5)
+	const warner = Promise.delay(warnAfter)
 
 	warner.then(() => {
 		const violators = new Array<string>()
-		if (!validateTree(object, tree, violators))
+		if (warnAfter !== 0 && !validateTree(object, tree, violators))
 			warn(`[promiseTree] Infinite wait possible. Waiting for: ${violators.join(", ")}`)
 	})
 
