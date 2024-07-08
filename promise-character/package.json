@@ -20,7 +20,7 @@
         "wait",
         "members",
         "parts",
-		"promise"
+        "promise"
     ],
     "author": "Validark",
     "license": "ISC",
@@ -31,10 +31,13 @@
     "publishConfig": {
         "access": "public"
     },
+	"devDependencies": {
+        "roblox-ts": "^2.3.0"
+    },
     "dependencies": {
-        "@rbxts/compiler-types": "^1.2.3-types.1",
-        "@rbxts/types": "^1.0.537",
-        "@rbxts/validate-tree": "^2.0.1"
+        "@rbxts/compiler-types": "^2.3.0-types.1",
+        "@rbxts/types": "^1.0.788",
+        "@rbxts/validate-tree": "^2.0.2"
     },
     "files": [
         "init.lua",

@@ -5,6 +5,7 @@
 		"allowSyntheticDefaultImports": true,
 		"downlevelIteration": true,
 		"module": "commonjs",
+		"moduleDetection": "force",
 		"noLib": true,
 		"strict": true,
 		"target": "es6",
