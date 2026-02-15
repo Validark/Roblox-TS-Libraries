@@ -3,6 +3,50 @@
 import { EvaluateInstanceTree } from "@rbxts/validate-tree";
 export declare const CharacterRigR6: {
     readonly $className: "Model";
+    readonly Animate: {
+        readonly $className: "LocalScript";
+        readonly climb: {
+            readonly $className: "StringValue";
+            readonly ClimbAnim: "Animation";
+        };
+        readonly fall: {
+            readonly $className: "StringValue";
+            readonly FallAnim: "Animation";
+        };
+        readonly idle: {
+            readonly $className: "StringValue";
+            readonly Animation1: {
+                readonly $className: "Animation";
+                readonly Weight: "NumberValue";
+            };
+            readonly Animation2: {
+                readonly $className: "Animation";
+                readonly Weight: "NumberValue";
+            };
+        };
+        readonly jump: {
+            readonly $className: "StringValue";
+            readonly JumpAnim: "Animation";
+        };
+        readonly PlayEmote: "BindableFunction";
+        readonly run: {
+            readonly $className: "StringValue";
+            readonly RunAnim: "Animation";
+        };
+        readonly ScaleDampeningPercent: "NumberValue";
+        readonly sit: {
+            readonly $className: "StringValue";
+            readonly SitAnim: "Animation";
+        };
+        readonly toolnone: {
+            readonly $className: "StringValue";
+            readonly ToolNoneAnim: "Animation";
+        };
+        readonly walk: {
+            readonly $className: "StringValue";
+            readonly WalkAnim: "Animation";
+        };
+    };
     readonly Head: {
         readonly $className: "Part";
         readonly FaceCenterAttachment: "Attachment";
@@ -58,6 +102,141 @@ export declare const CharacterRigR6: {
 };
 export declare const CharacterRigR15: {
     readonly $className: "Model";
+    readonly Animate: {
+        readonly $className: "LocalScript";
+        readonly cheer: {
+            readonly $className: "StringValue";
+            readonly CheerAnim: "Animation";
+        };
+        readonly climb: {
+            readonly $className: "StringValue";
+            readonly ClimbAnim: "Animation";
+        };
+        readonly dance: {
+            readonly $className: "StringValue";
+            readonly Animation1: {
+                readonly $className: "Animation";
+                readonly Weight: "NumberValue";
+            };
+            readonly Animation2: {
+                readonly $className: "Animation";
+                readonly Weight: "NumberValue";
+            };
+            readonly Animation3: {
+                readonly $className: "Animation";
+                readonly Weight: "NumberValue";
+            };
+        };
+        readonly dance2: {
+            readonly $className: "StringValue";
+            readonly Animation1: {
+                readonly $className: "Animation";
+                readonly Weight: "NumberValue";
+            };
+            readonly Animation2: {
+                readonly $className: "Animation";
+                readonly Weight: "NumberValue";
+            };
+            readonly Animation3: {
+                readonly $className: "Animation";
+                readonly Weight: "NumberValue";
+            };
+        };
+        readonly dance3: {
+            readonly $className: "StringValue";
+            readonly Animation1: {
+                readonly $className: "Animation";
+                readonly Weight: "NumberValue";
+            };
+            readonly Animation2: {
+                readonly $className: "Animation";
+                readonly Weight: "NumberValue";
+            };
+            readonly Animation3: {
+                readonly $className: "Animation";
+                readonly Weight: "NumberValue";
+            };
+        };
+        readonly fall: {
+            readonly $className: "StringValue";
+            readonly FallAnim: "Animation";
+        };
+        readonly idle: {
+            readonly $className: "StringValue";
+            readonly Animation1: {
+                readonly $className: "Animation";
+                readonly Weight: "NumberValue";
+            };
+            readonly Animation2: {
+                readonly $className: "Animation";
+                readonly Weight: "NumberValue";
+            };
+        };
+        readonly jump: {
+            readonly $className: "StringValue";
+            readonly JumpAnim: "Animation";
+        };
+        readonly laugh: {
+            readonly $className: "StringValue";
+            readonly LaughAnim: "Animation";
+        };
+        readonly mood: {
+            readonly $className: "StringValue";
+            readonly Animation1: "Animation";
+        };
+        readonly PlayEmote: "BindableFunction";
+        readonly point: {
+            readonly $className: "StringValue";
+            readonly PointAnim: "Animation";
+        };
+        readonly pose: {
+            readonly $className: "StringValue";
+            readonly StylishPose: {
+                readonly $className: "Animation";
+                readonly Weight: "NumberValue";
+            };
+        };
+        readonly run: {
+            readonly $className: "StringValue";
+            readonly run: {
+                readonly $className: "Animation",
+                readonly Weight: "NumberValue"
+            }
+        };
+        readonly ScaleDampeningPercent: "NumberValue";
+        readonly sit: {
+            readonly $className: "StringValue";
+            readonly SitAnim: "Animation";
+        };
+        readonly swim: {
+            readonly $className: "StringValue";
+            readonly Swim: "Animation";
+        };
+        readonly swimidle: {
+            readonly $className: "StringValue";
+            readonly SwimIdle: "Animation";
+        };
+        readonly toollunge: {
+            readonly $className: "StringValue";
+            readonly ToolLungeAnim: "Animation";
+        };
+        readonly toolnone: {
+            readonly $className: "StringValue";
+            readonly ToolNoneAnim: "Animation";
+        };
+        readonly toolslash: {
+            readonly $className: "StringValue";
+            readonly ToolSlashAnim: "Animation";
+        };
+        readonly walk: {
+            readonly $className: "StringValue";
+            readonly WalkAnim: "Animation";
+        };
+        readonly wave: {
+            readonly $className: "StringValue";
+            readonly WaveAnim: "Animation";
+        };
+    };
     readonly HumanoidRootPart: {
         readonly $className: "BasePart";
         readonly RootRigAttachment: {
