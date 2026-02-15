@@ -3,6 +3,45 @@ import { EvaluateInstanceTree, promiseTree } from "@rbxts/validate-tree";
 export const CharacterRigR6 = {
 	$className: "Model",
 
+	Animate: {
+        $className: "LocalScript",
+		climb: {
+			$className: "StringValue",
+			ClimbAnim: "Animation"
+		},
+		fall: {
+			$className: "StringValue",
+			FallAnim: "Animation"
+		},
+		idle: {
+			$className: "StringValue",
+			Animation1: { $className: "Animation", Weight: "NumberValue" },
+			Animation2: { $className: "Animation", Weight: "NumberValue" }
+		},
+        jump: {
+            $className: "StringValue",
+            JumpAnim: "Animation"
+        },
+        PlayEmote: "BindableFunction",
+        run: {
+            $className: "StringValue",
+            RunAnim: "Animation"
+        },
+        ScaleDampeningPercent: "NumberValue",
+        sit: {
+            $className: "StringValue",
+            SitAnim: "Animation"
+        },
+		toolnone: {
+			$className: "StringValue",
+			ToolNoneAnim: "Animation"
+		},
+		walk: {
+			$className: "StringValue",
+			WalkAnim: "Animation"
+		}
+    },
+
 	Head: {
 		$className: "Part",
 		FaceCenterAttachment: "Attachment",
@@ -71,6 +110,142 @@ export const CharacterRigR6 = {
 
 export const CharacterRigR15 = {
 	$className: "Model",
+
+	Animate: {
+        $className: "LocalScript",
+        cheer: {
+            $className: "StringValue",
+            CheerAnim: "Animation",
+        },
+        climb: {
+            $className: "StringValue",
+            ClimbAnim: "Animation",
+        },
+        dance: {
+            $className: "StringValue",
+            Animation1: {
+                $className: "Animation",
+                Weight: "NumberValue",
+            },
+            Animation2: {
+                $className: "Animation",
+                Weight: "NumberValue",
+            },
+            Animation3: {
+                $className: "Animation",
+                Weight: "NumberValue",
+            },
+        },
+        dance2: {
+            $className: "StringValue",
+            Animation1: {
+                $className: "Animation",
+                Weight: "NumberValue",
+            },
+            Animation2: {
+                $className: "Animation",
+                Weight: "NumberValue",
+            },
+            Animation3: {
+                $className: "Animation",
+                Weight: "NumberValue",
+            },
+        },
+        dance3: {
+            $className: "StringValue",
+            Animation1: {
+                $className: "Animation",
+                Weight: "NumberValue",
+            },
+            Animation2: {
+                $className: "Animation",
+                Weight: "NumberValue",
+            },
+            Animation3: {
+                $className: "Animation",
+                Weight: "NumberValue",
+            },
+        },
+        fall: {
+            $className: "StringValue",
+            FallAnim: "Animation",
+        },
+        idle: {
+            $className: "StringValue",
+            Animation1: {
+                $className: "Animation",
+                Weight: "NumberValue",
+            },
+            Animation2: {
+                $className: "Animation",
+                Weight: "NumberValue",
+            },
+        },
+        jump: {
+            $className: "StringValue",
+            JumpAnim: "Animation",
+        },
+        laugh: {
+            $className: "StringValue",
+            LaughAnim: "Animation",
+        },
+        mood: {
+            $className: "StringValue",
+            Animation1: "Animation",
+        },
+        PlayEmote: "BindableFunction",
+        point: {
+            $className: "StringValue",
+            PointAnim: "Animation",
+        },
+        pose: {
+            $className: "StringValue",
+            StylishPose: {
+                $className: "Animation",
+                Weight: "NumberValue",
+            },
+        },
+        run: {
+            $className: "StringValue",
+            run: {
+                $className: "Animation",
+                Weight: "NumberValue"
+            }
+        },
+        ScaleDampeningPercent: "NumberValue",
+        sit: {
+            $className: "StringValue",
+            SitAnim: "Animation",
+        },
+        swim: {
+            $className: "StringValue",
+            Swim: "Animation",
+        },
+        swimidle: {
+            $className: "StringValue",
+            SwimIdle: "Animation",
+        },
+        toollunge: {
+            $className: "StringValue",
+            ToolLungeAnim: "Animation",
+        },
+        toolnone: {
+            $className: "StringValue",
+            ToolNoneAnim: "Animation",
+        },
+        toolslash: {
+            $className: "StringValue",
+            ToolSlashAnim: "Animation",
+        },
+        walk: {
+            $className: "StringValue",
+            WalkAnim: "Animation",
+        },
+        wave: {
+            $className: "StringValue",
+            WaveAnim: "Animation",
+        },
+    },
 
 	HumanoidRootPart: {
 		$className: "BasePart",
